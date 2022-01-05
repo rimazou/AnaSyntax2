@@ -134,20 +134,22 @@ commentaire:    TOKEN_COMMENT{
                 };                
 
 instruction:    affectation{
-			printf("\tInstruction type Affectation\n");
+			printf("\tInstruction Affectation\n");
 
                 }
                 |
                 lecture{
+			printf("\tInstruction Lecture\n");
 
                 }
                 |
                 ecriture{
+			printf("\tInstruction ecriture\n");
 
                 }
                 |
                 conditionnel{
-                    printf("conditionnel\n");
+                    printf(" instruction conditionnel\n");
                 }
                 |
                 while{
@@ -263,7 +265,7 @@ expression : 	expression_arithmetique{
 		}; 
 
 expression_arithmetique: TOKEN_NUMBER{
-                                        printf("\t\t\tNombre : %ld\n",$1);
+                                        //printf("\t\t\tNombre : %ld\n",$1);
  /* Comme le token TOK_NOMBRE est de type entier et que on a type expression_arithmetique comme du texte, il nous faut convertir la valeur en texte. */
                                       /*  int length=snprintf(NULL,0,"%ld",$1);
                                         char* str=malloc(length+1);
@@ -289,31 +291,31 @@ expression_arithmetique: TOKEN_NUMBER{
                                 }
                                 |
                                 PARENTHESE_G expression_arithmetique PARENTHESE_D{
-                                        printf("\t\t\tCest une expression artihmetique entre parentheses\n");
+                                       // printf("\t\t\tCest une expression artihmetique entre parentheses\n");
                                         //$$=strcat(strcat(strdup("("),strdup($2)),strdup(")"));
                                         $$=$2;
                                 };
 addition:	
     expression_arithmetique TOKEN_ADD expression_arithmetique{
-        printf("\t\t\tAddition\n");
+        //printf("\t\t\tAddition\n");
         //$$=strcat(strcat(strdup($1),strdup("+")),strdup($3));
         $$=$1+$3;
     };
 soustraction:	
     expression_arithmetique TOKEN_SOUSTR expression_arithmetique{
-        printf("\t\t\tSoustraction\n");
+       // printf("\t\t\tSoustraction\n");
         //$$=strcat(strcat(strdup($1),strdup("-")),strdup($3));
         $$=$1-$3;
     };
 multiplication:	
     expression_arithmetique TOKEN_MULT expression_arithmetique{
-        printf("\t\t\tMultiplication\n");
+        //printf("\t\t\tMultiplication\n");
         //$$=strcat(strcat(strdup($1),strdup("*")),strdup($3));
         $$=$1*$3;
     };
 division:	
     expression_arithmetique TOKEN_DIVIS expression_arithmetique{
-        printf("\t\t\tDivision\n");
+       // printf("\t\t\tDivision\n");
         //$$=strcat(strcat(strdup($1),strdup("/")),strdup($3));
         $$=$1/$3;
     };
@@ -325,13 +327,13 @@ modulo:
     };
 
 ecriture:	TOKEN_WRITE variable_name FININSTR{
-		//printf("\t\t\t Affichage de variable %s \n",$2);
+	//	printf("ecriture");
 		}
         |TOKEN_WRITE TOKEN_TEXT FININSTR {}
         ;
 
 lecture:	TOKEN_READ variable_name FININSTR{
-	//	printf("\t\t\t Lecture variable %s\n ",$2);
+	//	printf("lecture");
 		};		
 while :         TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code END{
                     
@@ -351,7 +353,7 @@ conditionnel :  TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code END {
                 }
 
 ExpBool:
-                 variable_name { printf("ana machi variable ana expression_booleenne"); } //verifier si la variable est une variable booleen dans l'analyse semantique
+                 variable_name {  } //verifier si la variable est une variable booleen dans l'analyse semantique
                 | Comparaison {//$$ = $1;
                 }
                 | TOKEN_FALSE { //$$=0; 
