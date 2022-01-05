@@ -112,6 +112,7 @@ Grammar
    79            | comparable TOKEN_INFEGAL comparable
 
    80 comparable: TOKEN_NUMBER
+   81           | variable_name
 
 
 Terminals, with rules where they appear
@@ -195,7 +196,7 @@ Nonterminals, with rules where they appear
         on right: 11
     variable_name <text> (61)
         on left: 19 20 21
-        on right: 17 18 58 60 66
+        on right: 17 18 58 60 66 81
     DECLARE <text> (62)
         on left: 22 23 24 25 26 27 28 29 30 31 32 33 34
         on right: 6
@@ -248,7 +249,7 @@ Nonterminals, with rules where they appear
         on left: 74 75 76 77 78 79
         on right: 67
     comparable <num> (79)
-        on left: 80
+        on left: 80 81
         on right: 74 75 76 77 78 79
 
 
@@ -947,8 +948,14 @@ State 68
 State 69
 
    66 ExpBool: variable_name .
+   81 comparable: variable_name .
 
-    $default  reduce using rule 66 (ExpBool)
+    TOKEN_OR      reduce using rule 66 (ExpBool)
+    TOKEN_AND     reduce using rule 66 (ExpBool)
+    PARENTHESE_D  reduce using rule 66 (ExpBool)
+    FININSTR      reduce using rule 66 (ExpBool)
+    TOKEN_BEGIN   reduce using rule 66 (ExpBool)
+    $default      reduce using rule 81 (comparable)
 
 
 State 70
@@ -1244,8 +1251,10 @@ State 96
    78 Comparaison: comparable TOKEN_INF . comparable
 
     TOKEN_NUMBER  shift, and go to state 66
+    TOKEN_ID      shift, and go to state 40
 
-    comparable  go to state 133
+    variable_name  go to state 133
+    comparable     go to state 134
 
 
 State 97
@@ -1253,8 +1262,10 @@ State 97
    76 Comparaison: comparable TOKEN_SUP . comparable
 
     TOKEN_NUMBER  shift, and go to state 66
+    TOKEN_ID      shift, and go to state 40
 
-    comparable  go to state 134
+    variable_name  go to state 133
+    comparable     go to state 135
 
 
 State 98
@@ -1262,8 +1273,10 @@ State 98
    79 Comparaison: comparable TOKEN_INFEGAL . comparable
 
     TOKEN_NUMBER  shift, and go to state 66
+    TOKEN_ID      shift, and go to state 40
 
-    comparable  go to state 135
+    variable_name  go to state 133
+    comparable     go to state 136
 
 
 State 99
@@ -1271,8 +1284,10 @@ State 99
    77 Comparaison: comparable TOKEN_SUPEGAL . comparable
 
     TOKEN_NUMBER  shift, and go to state 66
+    TOKEN_ID      shift, and go to state 40
 
-    comparable  go to state 136
+    variable_name  go to state 133
+    comparable     go to state 137
 
 
 State 100
@@ -1280,8 +1295,10 @@ State 100
    74 Comparaison: comparable TOKEN_EGAL . comparable
 
     TOKEN_NUMBER  shift, and go to state 66
+    TOKEN_ID      shift, and go to state 40
 
-    comparable  go to state 137
+    variable_name  go to state 133
+    comparable     go to state 138
 
 
 State 101
@@ -1289,22 +1306,24 @@ State 101
    75 Comparaison: comparable TOKEN_DIFF . comparable
 
     TOKEN_NUMBER  shift, and go to state 66
+    TOKEN_ID      shift, and go to state 40
 
-    comparable  go to state 138
+    variable_name  go to state 133
+    comparable     go to state 139
 
 
 State 102
 
    63 for: TOKEN_FOR TOKEN_ID TOKEN_IN . TOKEN_ID TOKEN_BEGIN bloc_code END
 
-    TOKEN_ID  shift, and go to state 139
+    TOKEN_ID  shift, and go to state 140
 
 
 State 103
 
    62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM . TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END
 
-    TOKEN_NUMBER  shift, and go to state 140
+    TOKEN_NUMBER  shift, and go to state 141
 
 
 State 104
@@ -1323,7 +1342,7 @@ State 104
 
     END  reduce using rule 4 (bloc_code)
 
-    bloc_code      go to state 141
+    bloc_code      go to state 142
     commentaire    go to state 42
     instruction    go to state 43
     affectation    go to state 44
@@ -1349,7 +1368,7 @@ State 106
     PARENTHESE_G  shift, and go to state 106
     TOKEN_NUMBER  shift, and go to state 107
 
-    expression_arithmetique  go to state 142
+    expression_arithmetique  go to state 143
     addition                 go to state 109
     soustraction             go to state 110
     multiplication           go to state 111
@@ -1373,12 +1392,12 @@ State 108
    56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
    57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
 
-    TOKEN_ADD     shift, and go to state 143
-    TOKEN_SOUSTR  shift, and go to state 144
-    TOKEN_MULT    shift, and go to state 145
-    TOKEN_DIVIS   shift, and go to state 146
-    TOKEN_MOD     shift, and go to state 147
-    CROCHET_D     shift, and go to state 148
+    TOKEN_ADD     shift, and go to state 144
+    TOKEN_SOUSTR  shift, and go to state 145
+    TOKEN_MULT    shift, and go to state 146
+    TOKEN_DIVIS   shift, and go to state 147
+    TOKEN_MOD     shift, and go to state 148
+    CROCHET_D     shift, and go to state 149
 
 
 State 109
@@ -1429,7 +1448,7 @@ State 114
     TOKEN_ID      shift, and go to state 40
 
     variable_name            go to state 69
-    expression_arithmetique  go to state 142
+    expression_arithmetique  go to state 143
     addition                 go to state 109
     soustraction             go to state 110
     multiplication           go to state 111
@@ -1444,7 +1463,7 @@ State 115
 
    18 affectation: variable_name TOKEN_ASSIGN TOKEN_CHAR . FININSTR
 
-    FININSTR  shift, and go to state 149
+    FININSTR  shift, and go to state 150
 
 
 State 116
@@ -1465,7 +1484,7 @@ State 117
 
    17 affectation: variable_name TOKEN_ASSIGN expression . FININSTR
 
-    FININSTR  shift, and go to state 150
+    FININSTR  shift, and go to state 151
 
 
 State 118
@@ -1477,11 +1496,11 @@ State 118
    56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
    57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
 
-    TOKEN_ADD     shift, and go to state 143
-    TOKEN_SOUSTR  shift, and go to state 144
-    TOKEN_MULT    shift, and go to state 145
-    TOKEN_DIVIS   shift, and go to state 146
-    TOKEN_MOD     shift, and go to state 147
+    TOKEN_ADD     shift, and go to state 144
+    TOKEN_SOUSTR  shift, and go to state 145
+    TOKEN_MULT    shift, and go to state 146
+    TOKEN_DIVIS   shift, and go to state 147
+    TOKEN_MOD     shift, and go to state 148
 
     $default  reduce using rule 44 (expression)
 
@@ -1510,8 +1529,8 @@ State 121
    37 CHAMP: TOKEN_ID NUM . FININSTR
    40      | TOKEN_ID NUM . CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR
 
-    FININSTR   shift, and go to state 151
-    CROCHET_G  shift, and go to state 152
+    FININSTR   shift, and go to state 152
+    CROCHET_G  shift, and go to state 153
 
 
 State 122
@@ -1519,8 +1538,8 @@ State 122
    38 CHAMP: TOKEN_ID BOOL . FININSTR
    41      | TOKEN_ID BOOL . CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR
 
-    FININSTR   shift, and go to state 153
-    CROCHET_G  shift, and go to state 154
+    FININSTR   shift, and go to state 154
+    CROCHET_G  shift, and go to state 155
 
 
 State 123
@@ -1528,15 +1547,15 @@ State 123
    39 CHAMP: TOKEN_ID CHAR . FININSTR
    42      | TOKEN_ID CHAR . CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR
 
-    FININSTR   shift, and go to state 155
-    CROCHET_G  shift, and go to state 156
+    FININSTR   shift, and go to state 156
+    CROCHET_G  shift, and go to state 157
 
 
 State 124
 
    43 CHAMP: TOKEN_ID TOKEN_ID . FININSTR
 
-    FININSTR  shift, and go to state 157
+    FININSTR  shift, and go to state 158
 
 
 State 125
@@ -1599,74 +1618,81 @@ State 132
    64 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code . END
    65             | TOKEN_IF ExpBool TOKEN_BEGIN bloc_code . TOKEN_ELSE bloc_code END
 
-    TOKEN_ELSE  shift, and go to state 158
-    END         shift, and go to state 159
+    TOKEN_ELSE  shift, and go to state 159
+    END         shift, and go to state 160
 
 
 State 133
+
+   81 comparable: variable_name .
+
+    $default  reduce using rule 81 (comparable)
+
+
+State 134
 
    78 Comparaison: comparable TOKEN_INF comparable .
 
     $default  reduce using rule 78 (Comparaison)
 
 
-State 134
+State 135
 
    76 Comparaison: comparable TOKEN_SUP comparable .
 
     $default  reduce using rule 76 (Comparaison)
 
 
-State 135
+State 136
 
    79 Comparaison: comparable TOKEN_INFEGAL comparable .
 
     $default  reduce using rule 79 (Comparaison)
 
 
-State 136
+State 137
 
    77 Comparaison: comparable TOKEN_SUPEGAL comparable .
 
     $default  reduce using rule 77 (Comparaison)
 
 
-State 137
+State 138
 
    74 Comparaison: comparable TOKEN_EGAL comparable .
 
     $default  reduce using rule 74 (Comparaison)
 
 
-State 138
+State 139
 
    75 Comparaison: comparable TOKEN_DIFF comparable .
 
     $default  reduce using rule 75 (Comparaison)
 
 
-State 139
+State 140
 
    63 for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID . TOKEN_BEGIN bloc_code END
 
-    TOKEN_BEGIN  shift, and go to state 160
-
-
-State 140
-
-   62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER . TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END
-
-    TOKEN_COMMA  shift, and go to state 161
+    TOKEN_BEGIN  shift, and go to state 161
 
 
 State 141
 
-   61 while: TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code . END
+   62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER . TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END
 
-    END  shift, and go to state 162
+    TOKEN_COMMA  shift, and go to state 162
 
 
 State 142
+
+   61 while: TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code . END
+
+    END  shift, and go to state 163
+
+
+State 143
 
    52 expression_arithmetique: PARENTHESE_G expression_arithmetique . PARENTHESE_D
    53 addition: expression_arithmetique . TOKEN_ADD expression_arithmetique
@@ -1675,32 +1701,17 @@ State 142
    56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
    57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
 
-    TOKEN_ADD     shift, and go to state 143
-    TOKEN_SOUSTR  shift, and go to state 144
-    TOKEN_MULT    shift, and go to state 145
-    TOKEN_DIVIS   shift, and go to state 146
-    TOKEN_MOD     shift, and go to state 147
-    PARENTHESE_D  shift, and go to state 163
-
-
-State 143
-
-   53 addition: expression_arithmetique TOKEN_ADD . expression_arithmetique
-
-    PARENTHESE_G  shift, and go to state 106
-    TOKEN_NUMBER  shift, and go to state 107
-
-    expression_arithmetique  go to state 164
-    addition                 go to state 109
-    soustraction             go to state 110
-    multiplication           go to state 111
-    division                 go to state 112
-    modulo                   go to state 113
+    TOKEN_ADD     shift, and go to state 144
+    TOKEN_SOUSTR  shift, and go to state 145
+    TOKEN_MULT    shift, and go to state 146
+    TOKEN_DIVIS   shift, and go to state 147
+    TOKEN_MOD     shift, and go to state 148
+    PARENTHESE_D  shift, and go to state 164
 
 
 State 144
 
-   54 soustraction: expression_arithmetique TOKEN_SOUSTR . expression_arithmetique
+   53 addition: expression_arithmetique TOKEN_ADD . expression_arithmetique
 
     PARENTHESE_G  shift, and go to state 106
     TOKEN_NUMBER  shift, and go to state 107
@@ -1715,7 +1726,7 @@ State 144
 
 State 145
 
-   55 multiplication: expression_arithmetique TOKEN_MULT . expression_arithmetique
+   54 soustraction: expression_arithmetique TOKEN_SOUSTR . expression_arithmetique
 
     PARENTHESE_G  shift, and go to state 106
     TOKEN_NUMBER  shift, and go to state 107
@@ -1730,7 +1741,7 @@ State 145
 
 State 146
 
-   56 division: expression_arithmetique TOKEN_DIVIS . expression_arithmetique
+   55 multiplication: expression_arithmetique TOKEN_MULT . expression_arithmetique
 
     PARENTHESE_G  shift, and go to state 106
     TOKEN_NUMBER  shift, and go to state 107
@@ -1745,7 +1756,7 @@ State 146
 
 State 147
 
-   57 modulo: expression_arithmetique TOKEN_MOD . expression_arithmetique
+   56 division: expression_arithmetique TOKEN_DIVIS . expression_arithmetique
 
     PARENTHESE_G  shift, and go to state 106
     TOKEN_NUMBER  shift, and go to state 107
@@ -1760,112 +1771,92 @@ State 147
 
 State 148
 
+   57 modulo: expression_arithmetique TOKEN_MOD . expression_arithmetique
+
+    PARENTHESE_G  shift, and go to state 106
+    TOKEN_NUMBER  shift, and go to state 107
+
+    expression_arithmetique  go to state 169
+    addition                 go to state 109
+    soustraction             go to state 110
+    multiplication           go to state 111
+    division                 go to state 112
+    modulo                   go to state 113
+
+
+State 149
+
    20 variable_name: TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D .
 
     $default  reduce using rule 20 (variable_name)
 
 
-State 149
+State 150
 
    18 affectation: variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR .
 
     $default  reduce using rule 18 (affectation)
 
 
-State 150
+State 151
 
    17 affectation: variable_name TOKEN_ASSIGN expression FININSTR .
 
     $default  reduce using rule 17 (affectation)
 
 
-State 151
+State 152
 
    37 CHAMP: TOKEN_ID NUM FININSTR .
 
     $default  reduce using rule 37 (CHAMP)
 
 
-State 152
+State 153
 
    40 CHAMP: TOKEN_ID NUM CROCHET_G . TOKEN_NUMBER CROCHET_D FININSTR
 
-    TOKEN_NUMBER  shift, and go to state 169
+    TOKEN_NUMBER  shift, and go to state 170
 
 
-State 153
+State 154
 
    38 CHAMP: TOKEN_ID BOOL FININSTR .
 
     $default  reduce using rule 38 (CHAMP)
 
 
-State 154
+State 155
 
    41 CHAMP: TOKEN_ID BOOL CROCHET_G . TOKEN_NUMBER CROCHET_D FININSTR
 
-    TOKEN_NUMBER  shift, and go to state 170
+    TOKEN_NUMBER  shift, and go to state 171
 
 
-State 155
+State 156
 
    39 CHAMP: TOKEN_ID CHAR FININSTR .
 
     $default  reduce using rule 39 (CHAMP)
 
 
-State 156
+State 157
 
    42 CHAMP: TOKEN_ID CHAR CROCHET_G . TOKEN_NUMBER CROCHET_D FININSTR
 
-    TOKEN_NUMBER  shift, and go to state 171
+    TOKEN_NUMBER  shift, and go to state 172
 
 
-State 157
+State 158
 
    43 CHAMP: TOKEN_ID TOKEN_ID FININSTR .
 
     $default  reduce using rule 43 (CHAMP)
 
 
-State 158
-
-   65 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code TOKEN_ELSE . bloc_code END
-
-    error           shift, and go to state 34
-    TOKEN_MULTICOM  shift, and go to state 3
-    TOKEN_COMMENT   shift, and go to state 4
-    TOKEN_READ      shift, and go to state 35
-    TOKEN_WRITE     shift, and go to state 36
-    TOKEN_IF        shift, and go to state 37
-    TOKEN_FOR       shift, and go to state 38
-    TOKEN_WHILE     shift, and go to state 39
-    TOKEN_ID        shift, and go to state 40
-
-    END  reduce using rule 4 (bloc_code)
-
-    bloc_code      go to state 172
-    commentaire    go to state 42
-    instruction    go to state 43
-    affectation    go to state 44
-    variable_name  go to state 45
-    ecriture       go to state 46
-    lecture        go to state 47
-    while          go to state 48
-    for            go to state 49
-    conditionnel   go to state 50
-
-
 State 159
 
-   64 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code END .
-
-    $default  reduce using rule 64 (conditionnel)
-
-
-State 160
-
-   63 for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN . bloc_code END
+   65 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code TOKEN_ELSE . bloc_code END
 
     error           shift, and go to state 34
     TOKEN_MULTICOM  shift, and go to state 3
@@ -1891,28 +1882,63 @@ State 160
     conditionnel   go to state 50
 
 
+State 160
+
+   64 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code END .
+
+    $default  reduce using rule 64 (conditionnel)
+
+
 State 161
 
-   62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA . TOKEN_NUMBER TOKEN_BEGIN bloc_code END
+   63 for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN . bloc_code END
 
-    TOKEN_NUMBER  shift, and go to state 174
+    error           shift, and go to state 34
+    TOKEN_MULTICOM  shift, and go to state 3
+    TOKEN_COMMENT   shift, and go to state 4
+    TOKEN_READ      shift, and go to state 35
+    TOKEN_WRITE     shift, and go to state 36
+    TOKEN_IF        shift, and go to state 37
+    TOKEN_FOR       shift, and go to state 38
+    TOKEN_WHILE     shift, and go to state 39
+    TOKEN_ID        shift, and go to state 40
+
+    END  reduce using rule 4 (bloc_code)
+
+    bloc_code      go to state 174
+    commentaire    go to state 42
+    instruction    go to state 43
+    affectation    go to state 44
+    variable_name  go to state 45
+    ecriture       go to state 46
+    lecture        go to state 47
+    while          go to state 48
+    for            go to state 49
+    conditionnel   go to state 50
 
 
 State 162
+
+   62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA . TOKEN_NUMBER TOKEN_BEGIN bloc_code END
+
+    TOKEN_NUMBER  shift, and go to state 175
+
+
+State 163
 
    61 while: TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code END .
 
     $default  reduce using rule 61 (while)
 
 
-State 163
+State 164
 
    52 expression_arithmetique: PARENTHESE_G expression_arithmetique PARENTHESE_D .
 
     $default  reduce using rule 52 (expression_arithmetique)
 
 
-State 164
+State 165
 
    53 addition: expression_arithmetique . TOKEN_ADD expression_arithmetique
    53         | expression_arithmetique TOKEN_ADD expression_arithmetique .
@@ -1921,14 +1947,14 @@ State 164
    56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
    57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
 
-    TOKEN_MULT   shift, and go to state 145
-    TOKEN_DIVIS  shift, and go to state 146
-    TOKEN_MOD    shift, and go to state 147
+    TOKEN_MULT   shift, and go to state 146
+    TOKEN_DIVIS  shift, and go to state 147
+    TOKEN_MOD    shift, and go to state 148
 
     $default  reduce using rule 53 (addition)
 
 
-State 165
+State 166
 
    53 addition: expression_arithmetique . TOKEN_ADD expression_arithmetique
    54 soustraction: expression_arithmetique . TOKEN_SOUSTR expression_arithmetique
@@ -1937,14 +1963,14 @@ State 165
    56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
    57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
 
-    TOKEN_MULT   shift, and go to state 145
-    TOKEN_DIVIS  shift, and go to state 146
-    TOKEN_MOD    shift, and go to state 147
+    TOKEN_MULT   shift, and go to state 146
+    TOKEN_DIVIS  shift, and go to state 147
+    TOKEN_MOD    shift, and go to state 148
 
     $default  reduce using rule 54 (soustraction)
 
 
-State 166
+State 167
 
    53 addition: expression_arithmetique . TOKEN_ADD expression_arithmetique
    54 soustraction: expression_arithmetique . TOKEN_SOUSTR expression_arithmetique
@@ -1953,23 +1979,9 @@ State 166
    56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
    57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
 
-    TOKEN_MOD  shift, and go to state 147
+    TOKEN_MOD  shift, and go to state 148
 
     $default  reduce using rule 55 (multiplication)
-
-
-State 167
-
-   53 addition: expression_arithmetique . TOKEN_ADD expression_arithmetique
-   54 soustraction: expression_arithmetique . TOKEN_SOUSTR expression_arithmetique
-   55 multiplication: expression_arithmetique . TOKEN_MULT expression_arithmetique
-   56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
-   56         | expression_arithmetique TOKEN_DIVIS expression_arithmetique .
-   57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
-
-    TOKEN_MOD  shift, and go to state 147
-
-    $default  reduce using rule 56 (division)
 
 
 State 168
@@ -1978,92 +1990,106 @@ State 168
    54 soustraction: expression_arithmetique . TOKEN_SOUSTR expression_arithmetique
    55 multiplication: expression_arithmetique . TOKEN_MULT expression_arithmetique
    56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
+   56         | expression_arithmetique TOKEN_DIVIS expression_arithmetique .
    57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
-   57       | expression_arithmetique TOKEN_MOD expression_arithmetique .
 
-    TOKEN_MOD  shift, and go to state 147
+    TOKEN_MOD  shift, and go to state 148
 
-    $default  reduce using rule 57 (modulo)
+    $default  reduce using rule 56 (division)
 
 
 State 169
 
-   40 CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER . CROCHET_D FININSTR
+   53 addition: expression_arithmetique . TOKEN_ADD expression_arithmetique
+   54 soustraction: expression_arithmetique . TOKEN_SOUSTR expression_arithmetique
+   55 multiplication: expression_arithmetique . TOKEN_MULT expression_arithmetique
+   56 division: expression_arithmetique . TOKEN_DIVIS expression_arithmetique
+   57 modulo: expression_arithmetique . TOKEN_MOD expression_arithmetique
+   57       | expression_arithmetique TOKEN_MOD expression_arithmetique .
 
-    CROCHET_D  shift, and go to state 175
+    TOKEN_MOD  shift, and go to state 148
+
+    $default  reduce using rule 57 (modulo)
 
 
 State 170
 
-   41 CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER . CROCHET_D FININSTR
+   40 CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER . CROCHET_D FININSTR
 
     CROCHET_D  shift, and go to state 176
 
 
 State 171
 
-   42 CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER . CROCHET_D FININSTR
+   41 CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER . CROCHET_D FININSTR
 
     CROCHET_D  shift, and go to state 177
 
 
 State 172
 
-   65 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code TOKEN_ELSE bloc_code . END
+   42 CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER . CROCHET_D FININSTR
 
-    END  shift, and go to state 178
+    CROCHET_D  shift, and go to state 178
 
 
 State 173
 
-   63 for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code . END
+   65 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code TOKEN_ELSE bloc_code . END
 
     END  shift, and go to state 179
 
 
 State 174
 
-   62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER . TOKEN_BEGIN bloc_code END
+   63 for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code . END
 
-    TOKEN_BEGIN  shift, and go to state 180
+    END  shift, and go to state 180
 
 
 State 175
 
-   40 CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D . FININSTR
+   62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER . TOKEN_BEGIN bloc_code END
 
-    FININSTR  shift, and go to state 181
+    TOKEN_BEGIN  shift, and go to state 181
 
 
 State 176
 
-   41 CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D . FININSTR
+   40 CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D . FININSTR
 
     FININSTR  shift, and go to state 182
 
 
 State 177
 
-   42 CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D . FININSTR
+   41 CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D . FININSTR
 
     FININSTR  shift, and go to state 183
 
 
 State 178
 
+   42 CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D . FININSTR
+
+    FININSTR  shift, and go to state 184
+
+
+State 179
+
    65 conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code TOKEN_ELSE bloc_code END .
 
     $default  reduce using rule 65 (conditionnel)
 
 
-State 179
+State 180
 
    63 for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code END .
 
     $default  reduce using rule 63 (for)
 
 
-State 180
+State 181
 
    62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN . bloc_code END
 
@@ -2079,7 +2105,7 @@ State 180
 
     END  reduce using rule 4 (bloc_code)
 
-    bloc_code      go to state 184
+    bloc_code      go to state 185
     commentaire    go to state 42
     instruction    go to state 43
     affectation    go to state 44
@@ -2091,35 +2117,35 @@ State 180
     conditionnel   go to state 50
 
 
-State 181
+State 182
 
    40 CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR .
 
     $default  reduce using rule 40 (CHAMP)
 
 
-State 182
+State 183
 
    41 CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR .
 
     $default  reduce using rule 41 (CHAMP)
 
 
-State 183
+State 184
 
    42 CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR .
 
     $default  reduce using rule 42 (CHAMP)
 
 
-State 184
+State 185
 
    62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code . END
 
-    END  shift, and go to state 185
+    END  shift, and go to state 186
 
 
-State 185
+State 186
 
    62 for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END .
 

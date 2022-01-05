@@ -6,6 +6,7 @@ bool erreurSyntax = false;
 extern unsigned int linenbr;
 extern bool erreurLexical;
 
+extern FILE * yyin ;
 int yylex(void);
 void yyerror (char const *s);
 
@@ -375,13 +376,14 @@ Comparaison:
                 | comparable TOKEN_INFEGAL comparable { $$=($1 <= $3); }
                 ;
 comparable:
-                 TOKEN_NUMBER
+                 TOKEN_NUMBER | variable_name
                  ;
                               
                 
 %%
 
-int main(void) {
+int main(int argc , char** argv) {
+    yyin= fopen (argv[1], "r");
   yyparse();
   
 }
