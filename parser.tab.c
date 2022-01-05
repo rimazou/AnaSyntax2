@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.7.6.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -34,10 +34,6 @@
 /* C LALR(1) parser skeleton written by Richard Stallman, by
    simplifying the original so-called "semantic" parser.  */
 
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
-
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
    variables, as they might otherwise be expanded by user macros.
@@ -45,11 +41,14 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Identify Bison output, and Bison version.  */
-#define YYBISON 30706
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
 
-/* Bison version string.  */
-#define YYBISON_VERSION "3.7.6"
+/* Identify Bison output.  */
+#define YYBISON 1
+
+/* Bison version.  */
+#define YYBISON_VERSION "3.5.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -72,7 +71,7 @@
 #include "global.h"
 #include <string.h>
 
-//bool erreurSyntax = false;
+bool erreurSyntax = false;
 extern unsigned int linenbr;
 extern bool erreurLexical;
 
@@ -80,7 +79,7 @@ int yylex(void);
 void yyerror (char const *s);
 
 
-#line 84 "parser.tab.c"
+#line 83 "parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -103,95 +102,110 @@ void yyerror (char const *s);
 #  endif
 # endif
 
-#include "parser.tab.h"
-/* Symbol kind.  */
-enum yysymbol_kind_t
-{
-  YYSYMBOL_YYEMPTY = -2,
-  YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
-  YYSYMBOL_YYerror = 1,                    /* error  */
-  YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_TOKEN_MULTICOM = 3,             /* TOKEN_MULTICOM  */
-  YYSYMBOL_TOKEN_COMMENT = 4,              /* TOKEN_COMMENT  */
-  YYSYMBOL_TOKEN_CHAR = 5,                 /* TOKEN_CHAR  */
-  YYSYMBOL_TOKEN_TEXT = 6,                 /* TOKEN_TEXT  */
-  YYSYMBOL_TOKEN_NUMBER = 7,               /* TOKEN_NUMBER  */
-  YYSYMBOL_TOKEN_FALSE = 8,                /* TOKEN_FALSE  */
-  YYSYMBOL_TOKEN_TRUE = 9,                 /* TOKEN_TRUE  */
-  YYSYMBOL_TOKEN_DECLARE = 10,             /* TOKEN_DECLARE  */
-  YYSYMBOL_TOKEN_CONST = 11,               /* TOKEN_CONST  */
-  YYSYMBOL_TOKEN_START = 12,               /* TOKEN_START  */
-  YYSYMBOL_TOKEN_STOP = 13,                /* TOKEN_STOP  */
-  YYSYMBOL_TOKEN_STRUCT = 14,              /* TOKEN_STRUCT  */
-  YYSYMBOL_TOKEN_READ = 15,                /* TOKEN_READ  */
-  YYSYMBOL_TOKEN_WRITE = 16,               /* TOKEN_WRITE  */
-  YYSYMBOL_TOKEN_IF = 17,                  /* TOKEN_IF  */
-  YYSYMBOL_TOKEN_ELSE = 18,                /* TOKEN_ELSE  */
-  YYSYMBOL_TOKEN_FOR = 19,                 /* TOKEN_FOR  */
-  YYSYMBOL_TOKEN_IN = 20,                  /* TOKEN_IN  */
-  YYSYMBOL_TOKEN_FROM = 21,                /* TOKEN_FROM  */
-  YYSYMBOL_TOKEN_WHILE = 22,               /* TOKEN_WHILE  */
-  YYSYMBOL_TOKEN_ASSIGN = 23,              /* TOKEN_ASSIGN  */
-  YYSYMBOL_NUM = 24,                       /* NUM  */
-  YYSYMBOL_BOOL = 25,                      /* BOOL  */
-  YYSYMBOL_CHAR = 26,                      /* CHAR  */
-  YYSYMBOL_FININSTR = 27,                  /* FININSTR  */
-  YYSYMBOL_ACCOLAD_G = 28,                 /* ACCOLAD_G  */
-  YYSYMBOL_ACCOLAD_D = 29,                 /* ACCOLAD_D  */
-  YYSYMBOL_TOKEN_BEGIN = 30,               /* TOKEN_BEGIN  */
-  YYSYMBOL_END = 31,                       /* END  */
-  YYSYMBOL_PARENTHESE_G = 32,              /* PARENTHESE_G  */
-  YYSYMBOL_PARENTHESE_D = 33,              /* PARENTHESE_D  */
-  YYSYMBOL_TOKEN_INF = 34,                 /* TOKEN_INF  */
-  YYSYMBOL_TOKEN_SUP = 35,                 /* TOKEN_SUP  */
-  YYSYMBOL_TOKEN_INFEGAL = 36,             /* TOKEN_INFEGAL  */
-  YYSYMBOL_TOKEN_SUPEGAL = 37,             /* TOKEN_SUPEGAL  */
-  YYSYMBOL_TOKEN_EGAL = 38,                /* TOKEN_EGAL  */
-  YYSYMBOL_TOKEN_DIFF = 39,                /* TOKEN_DIFF  */
-  YYSYMBOL_TOKEN_ADD = 40,                 /* TOKEN_ADD  */
-  YYSYMBOL_TOKEN_SOUSTR = 41,              /* TOKEN_SOUSTR  */
-  YYSYMBOL_TOKEN_MULT = 42,                /* TOKEN_MULT  */
-  YYSYMBOL_TOKEN_DIVIS = 43,               /* TOKEN_DIVIS  */
-  YYSYMBOL_TOKEN_MOD = 44,                 /* TOKEN_MOD  */
-  YYSYMBOL_TOKEN_NOT = 45,                 /* TOKEN_NOT  */
-  YYSYMBOL_TOKEN_AND = 46,                 /* TOKEN_AND  */
-  YYSYMBOL_TOKEN_OR = 47,                  /* TOKEN_OR  */
-  YYSYMBOL_TOKEN_COMMA = 48,               /* TOKEN_COMMA  */
-  YYSYMBOL_TOKEN_ACSTRUCT = 49,            /* TOKEN_ACSTRUCT  */
-  YYSYMBOL_TOKEN_ID = 50,                  /* TOKEN_ID  */
-  YYSYMBOL_TOKEN_FININPUT = 51,            /* TOKEN_FININPUT  */
-  YYSYMBOL_CROCHET_G = 52,                 /* CROCHET_G  */
-  YYSYMBOL_CROCHET_D = 53,                 /* CROCHET_D  */
-  YYSYMBOL_YYACCEPT = 54,                  /* $accept  */
-  YYSYMBOL_program = 55,                   /* program  */
-  YYSYMBOL_bloc_code = 56,                 /* bloc_code  */
-  YYSYMBOL_bloc_declaration = 57,          /* bloc_declaration  */
-  YYSYMBOL_commentaire = 58,               /* commentaire  */
-  YYSYMBOL_instruction = 59,               /* instruction  */
-  YYSYMBOL_affectation = 60,               /* affectation  */
-  YYSYMBOL_variable = 61,                  /* variable  */
-  YYSYMBOL_DECLARE = 62,                   /* DECLARE  */
-  YYSYMBOL_LISTE = 63,                     /* LISTE  */
-  YYSYMBOL_CHAMP = 64,                     /* CHAMP  */
-  YYSYMBOL_expression = 65,                /* expression  */
-  YYSYMBOL_expression_arithmetique = 66,   /* expression_arithmetique  */
-  YYSYMBOL_addition = 67,                  /* addition  */
-  YYSYMBOL_soustraction = 68,              /* soustraction  */
-  YYSYMBOL_multiplication = 69,            /* multiplication  */
-  YYSYMBOL_division = 70,                  /* division  */
-  YYSYMBOL_modulo = 71,                    /* modulo  */
-  YYSYMBOL_ecriture = 72,                  /* ecriture  */
-  YYSYMBOL_lecture = 73,                   /* lecture  */
-  YYSYMBOL_while = 74,                     /* while  */
-  YYSYMBOL_for = 75,                       /* for  */
-  YYSYMBOL_conditionnel = 76,              /* conditionnel  */
-  YYSYMBOL_expression_booleenne = 77,      /* expression_booleenne  */
-  YYSYMBOL_ExpBool = 78,                   /* ExpBool  */
-  YYSYMBOL_Comparaison = 79,               /* Comparaison  */
-  YYSYMBOL_comparable = 80                 /* comparable  */
-};
-typedef enum yysymbol_kind_t yysymbol_kind_t;
+/* Enabling verbose error messages.  */
+#ifdef YYERROR_VERBOSE
+# undef YYERROR_VERBOSE
+# define YYERROR_VERBOSE 1
+#else
+# define YYERROR_VERBOSE 0
+#endif
 
+/* Use api.header.include to #include this header
+   instead of duplicating it here.  */
+#ifndef YY_YY_PARSER_TAB_H_INCLUDED
+# define YY_YY_PARSER_TAB_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    TOKEN_ADD = 258,
+    TOKEN_SOUSTR = 259,
+    TOKEN_OR = 260,
+    TOKEN_MULT = 261,
+    TOKEN_DIVIS = 262,
+    TOKEN_AND = 263,
+    TOKEN_NOT = 264,
+    TOKEN_MOD = 265,
+    PARENTHESE_G = 266,
+    PARENTHESE_D = 267,
+    TOKEN_MULTICOM = 268,
+    TOKEN_COMMENT = 269,
+    TOKEN_CHAR = 270,
+    TOKEN_TEXT = 271,
+    TOKEN_NUMBER = 272,
+    TOKEN_FALSE = 273,
+    TOKEN_TRUE = 274,
+    TOKEN_DECLARE = 275,
+    TOKEN_CONST = 276,
+    TOKEN_START = 277,
+    TOKEN_STOP = 278,
+    TOKEN_STRUCT = 279,
+    TOKEN_READ = 280,
+    TOKEN_WRITE = 281,
+    TOKEN_IF = 282,
+    TOKEN_ELSE = 283,
+    TOKEN_FOR = 284,
+    TOKEN_IN = 285,
+    TOKEN_FROM = 286,
+    TOKEN_WHILE = 287,
+    TOKEN_ASSIGN = 288,
+    NUM = 289,
+    BOOL = 290,
+    CHAR = 291,
+    FININSTR = 292,
+    ACCOLAD_G = 293,
+    ACCOLAD_D = 294,
+    TOKEN_BEGIN = 295,
+    END = 296,
+    TOKEN_INF = 297,
+    TOKEN_SUP = 298,
+    TOKEN_INFEGAL = 299,
+    TOKEN_SUPEGAL = 300,
+    TOKEN_EGAL = 301,
+    TOKEN_DIFF = 302,
+    TOKEN_COMMA = 303,
+    TOKEN_ACSTRUCT = 304,
+    TOKEN_ID = 305,
+    TOKEN_FININPUT = 306,
+    CROCHET_G = 307,
+    CROCHET_D = 308
+  };
+#endif
+
+/* Value type.  */
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+union YYSTYPE
+{
+#line 18 "parser.y"
+
+    long num;
+    char* text;
+    char CHARACTER;
+    int BOOLEAN;
+
+#line 196 "parser.tab.c"
+
+};
+typedef union YYSTYPE YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
+#endif
+
+
+extern YYSTYPE yylval;
+
+int yyparse (void);
+
+#endif /* !YY_YY_PARSER_TAB_H_INCLUDED  */
 
 
 
@@ -230,18 +244,6 @@ typedef __INT_LEAST16_TYPE__ yytype_int16;
 typedef int_least16_t yytype_int16;
 #else
 typedef short yytype_int16;
-#endif
-
-/* Work around bug in HP-UX 11.23, which defines these macros
-   incorrectly for preprocessor constants.  This workaround can likely
-   be removed in 2023, as HPE has promised support for HP-UX 11.23
-   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
-   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
-#ifdef __hpux
-# undef UINT_LEAST8_MAX
-# undef UINT_LEAST16_MAX
-# define UINT_LEAST8_MAX 255
-# define UINT_LEAST16_MAX 65535
 #endif
 
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
@@ -303,7 +305,6 @@ typedef int yytype_uint16;
 
 #define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
 
-
 /* Stored state numbers (used for stacks). */
 typedef yytype_uint8 yy_state_t;
 
@@ -321,7 +322,6 @@ typedef int yy_state_fast_t;
 #  define YY_(Msgid) Msgid
 # endif
 #endif
-
 
 #ifndef YY_ATTRIBUTE_PURE
 # if defined __GNUC__ && 2 < __GNUC__ + (96 <= __GNUC_MINOR__)
@@ -341,9 +341,9 @@ typedef int yy_state_fast_t;
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YY_USE(E) ((void) (E))
+# define YYUSE(E) ((void) (E))
 #else
-# define YY_USE(E) /* empty */
+# define YYUSE(E) /* empty */
 #endif
 
 #if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
@@ -380,7 +380,7 @@ typedef int yy_state_fast_t;
 
 #define YY_ASSERT(E) ((void) (0 && (E)))
 
-#if !defined yyoverflow
+#if ! defined yyoverflow || YYERROR_VERBOSE
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
@@ -445,7 +445,8 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 # endif
-#endif /* !defined yyoverflow */
+#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
+
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
@@ -508,29 +509,27 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  25
+#define YYFINAL  11
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   241
+#define YYLAST   246
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  54
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  27
+#define YYNNTS  26
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  87
+#define YYNRULES  81
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  188
+#define YYNSTATES  186
 
-/* YYMAXUTOK -- Last valid token kind.  */
+#define YYUNDEFTOK  2
 #define YYMAXUTOK   308
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, with out-of-bounds checking.  */
-#define YYTRANSLATE(YYX)                                \
-  (0 <= (YYX) && (YYX) <= YYMAXUTOK                     \
-   ? YY_CAST (yysymbol_kind_t, yytranslate[YYX])        \
-   : YYSYMBOL_YYUNDEF)
+#define YYTRANSLATE(YYX)                                                \
+  (0 <= (YYX) && (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex.  */
@@ -573,58 +572,44 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   122,   122,   124,   124,   124,   124,   127,   127,   127,
-     127,   127,   128,   132,   136,   141,   145,   149,   153,   158,
-     162,   168,   173,   181,   186,   191,   195,   199,   203,   207,
-     211,   215,   219,   223,   227,   231,   235,   239,   242,   244,
-     247,   249,   251,   253,   255,   257,   259,   261,   266,   270,
-     281,   284,   287,   290,   293,   296,   299,   305,   311,   317,
-     323,   329,   335,   339,   342,   345,   349,   352,   355,   358,
-     362,   366,   371,   378,   379,   380,   381,   382,   383,   384,
-     385,   388,   389,   390,   391,   392,   393,   396
+       0,   121,   121,   123,   123,   123,   123,   126,   126,   126,
+     127,   131,   135,   140,   144,   148,   152,   157,   161,   165,
+     169,   175,   180,   185,   189,   193,   197,   201,   205,   209,
+     213,   217,   221,   225,   229,   233,   236,   238,   241,   243,
+     245,   247,   249,   251,   253,   255,   260,   264,   275,   278,
+     281,   284,   287,   290,   296,   302,   308,   314,   320,   326,
+     329,   332,   335,   338,   342,   345,   348,   353,   354,   356,
+     358,   360,   362,   364,   366,   370,   371,   372,   373,   374,
+     375,   378
 };
 #endif
 
-/** Accessing symbol of state STATE.  */
-#define YY_ACCESSING_SYMBOL(State) YY_CAST (yysymbol_kind_t, yystos[State])
-
-#if YYDEBUG || 0
-/* The user-facing name of the symbol whose (internal) number is
-   YYSYMBOL.  No bounds checking.  */
-static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
-
+#if YYDEBUG || YYERROR_VERBOSE || 0
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "TOKEN_MULTICOM",
-  "TOKEN_COMMENT", "TOKEN_CHAR", "TOKEN_TEXT", "TOKEN_NUMBER",
-  "TOKEN_FALSE", "TOKEN_TRUE", "TOKEN_DECLARE", "TOKEN_CONST",
-  "TOKEN_START", "TOKEN_STOP", "TOKEN_STRUCT", "TOKEN_READ", "TOKEN_WRITE",
-  "TOKEN_IF", "TOKEN_ELSE", "TOKEN_FOR", "TOKEN_IN", "TOKEN_FROM",
-  "TOKEN_WHILE", "TOKEN_ASSIGN", "NUM", "BOOL", "CHAR", "FININSTR",
-  "ACCOLAD_G", "ACCOLAD_D", "TOKEN_BEGIN", "END", "PARENTHESE_G",
-  "PARENTHESE_D", "TOKEN_INF", "TOKEN_SUP", "TOKEN_INFEGAL",
-  "TOKEN_SUPEGAL", "TOKEN_EGAL", "TOKEN_DIFF", "TOKEN_ADD", "TOKEN_SOUSTR",
-  "TOKEN_MULT", "TOKEN_DIVIS", "TOKEN_MOD", "TOKEN_NOT", "TOKEN_AND",
-  "TOKEN_OR", "TOKEN_COMMA", "TOKEN_ACSTRUCT", "TOKEN_ID",
-  "TOKEN_FININPUT", "CROCHET_G", "CROCHET_D", "$accept", "program",
-  "bloc_code", "bloc_declaration", "commentaire", "instruction",
-  "affectation", "variable", "DECLARE", "LISTE", "CHAMP", "expression",
-  "expression_arithmetique", "addition", "soustraction", "multiplication",
-  "division", "modulo", "ecriture", "lecture", "while", "for",
-  "conditionnel", "expression_booleenne", "ExpBool", "Comparaison",
+  "$end", "error", "$undefined", "TOKEN_ADD", "TOKEN_SOUSTR", "TOKEN_OR",
+  "TOKEN_MULT", "TOKEN_DIVIS", "TOKEN_AND", "TOKEN_NOT", "TOKEN_MOD",
+  "PARENTHESE_G", "PARENTHESE_D", "TOKEN_MULTICOM", "TOKEN_COMMENT",
+  "TOKEN_CHAR", "TOKEN_TEXT", "TOKEN_NUMBER", "TOKEN_FALSE", "TOKEN_TRUE",
+  "TOKEN_DECLARE", "TOKEN_CONST", "TOKEN_START", "TOKEN_STOP",
+  "TOKEN_STRUCT", "TOKEN_READ", "TOKEN_WRITE", "TOKEN_IF", "TOKEN_ELSE",
+  "TOKEN_FOR", "TOKEN_IN", "TOKEN_FROM", "TOKEN_WHILE", "TOKEN_ASSIGN",
+  "NUM", "BOOL", "CHAR", "FININSTR", "ACCOLAD_G", "ACCOLAD_D",
+  "TOKEN_BEGIN", "END", "TOKEN_INF", "TOKEN_SUP", "TOKEN_INFEGAL",
+  "TOKEN_SUPEGAL", "TOKEN_EGAL", "TOKEN_DIFF", "TOKEN_COMMA",
+  "TOKEN_ACSTRUCT", "TOKEN_ID", "TOKEN_FININPUT", "CROCHET_G", "CROCHET_D",
+  "$accept", "program", "bloc_code", "bloc_declaration", "commentaire",
+  "instruction", "affectation", "variable_name", "DECLARE", "LISTE",
+  "CHAMP", "expression", "expression_arithmetique", "addition",
+  "soustraction", "multiplication", "division", "modulo", "ecriture",
+  "lecture", "while", "for", "conditionnel", "ExpBool", "Comparaison",
   "comparable", YY_NULLPTR
 };
-
-static const char *
-yysymbol_name (yysymbol_kind_t yysymbol)
-{
-  return yytname[yysymbol];
-}
 #endif
 
-#ifdef YYPRINT
+# ifdef YYPRINT
 /* YYTOKNUM[NUM] -- (External) token number corresponding to the
    (internal) symbol number NUM (which must be that of a token).  */
 static const yytype_int16 yytoknum[] =
@@ -636,14 +621,14 @@ static const yytype_int16 yytoknum[] =
      295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
      305,   306,   307,   308
 };
-#endif
+# endif
 
-#define YYPACT_NINF (-61)
+#define YYPACT_NINF (-64)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-88)
+#define YYTABLE_NINF (-82)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -652,25 +637,25 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      22,    34,    14,   -61,   -61,   -61,   -29,   -10,     7,     7,
-       2,    16,    10,    94,    81,    34,   -61,   -61,   116,    34,
-     -61,   -61,   -61,   -61,   -61,   -61,   160,    76,    48,   115,
-     118,   -61,   -61,   -61,     2,     2,   -61,    24,   -61,   125,
-     117,    68,   104,   122,   143,   145,   -19,     9,    17,   120,
-      46,   188,    91,   -61,    67,   -61,   169,   170,   171,   172,
-     -61,   -61,   -61,   102,   143,    91,     2,     2,   193,   193,
-     193,   193,   193,   193,   151,   195,    91,   -61,   196,   -61,
-     197,   -61,   198,   -61,   -61,   199,   154,   200,    91,    91,
-     138,   121,   147,   181,   144,   -61,   -61,   -61,   -61,   -61,
-     -61,   -61,   -61,   -61,   -61,   -25,   -61,     4,   143,   143,
-     -61,   -61,   -61,   -61,   -61,   -61,   179,   162,   180,   159,
-     161,   163,   164,   -61,   -61,   -61,   -61,   114,   -61,    36,
-      36,    36,    36,    36,   191,    77,   -61,    91,   -61,    91,
-     208,   -61,   192,   194,   201,   202,   -61,   -61,    36,   -61,
-      89,    89,   176,   176,   144,   -61,    53,    82,    84,   203,
-     204,   205,   207,   -61,   -61,   -61,   -61,   -61,   215,   -61,
-     216,   -61,   217,   -61,   -61,   -61,    91,   173,   174,   178,
-     209,   206,   211,   212,   -61,   -61,   -61,   -61
+     -16,    17,     6,   -64,   -64,   -18,    -7,    84,    42,    17,
+      17,   -64,   186,    33,   -10,    23,    25,    36,    73,   -64,
+     -64,    39,    48,    58,    88,   -64,   -64,   131,   -64,   142,
+     -64,   150,   -64,   152,    22,   121,     9,   122,   125,   122,
+     114,   164,    22,    22,   -64,   169,   -64,   -64,   -64,   -64,
+     -64,   -64,   -64,   -64,   -64,    -4,   154,   155,   157,   159,
+     -64,   174,   176,   177,   122,   122,   -64,   -64,   -64,   -64,
+      -3,   -64,   139,   148,    16,   165,    97,   -64,   -64,   -64,
+      92,   179,   102,   -64,   180,   181,   182,   183,   -64,   -64,
+     -64,   -64,    21,   122,   122,    65,   204,   204,   204,   204,
+     204,   204,   172,   206,   103,   -64,    97,   -64,    12,   -64,
+     -64,   -64,   -64,   -64,   138,   187,   147,   188,   170,   201,
+     -64,    75,   106,   108,   189,   -64,   -64,   -64,   -64,   -64,
+     219,   -64,   -21,   -64,   -64,   -64,   -64,   -64,   -64,   190,
+     184,   192,   158,    97,    97,    97,    97,    97,   -64,   -64,
+     -64,   -64,   211,   -64,   212,   -64,   214,   -64,   103,   -64,
+     103,   217,   -64,   -64,   144,   144,   225,   225,   225,   185,
+     191,   193,   195,   196,   199,   203,   205,   208,   -64,   -64,
+     103,   -64,   -64,   -64,   200,   -64
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -678,41 +663,41 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,    11,     0,    13,    12,    22,     0,     0,     0,     0,
-       0,     0,     0,    21,     0,     9,    10,    14,     0,    11,
-      16,    15,    18,    19,    17,     1,     0,     0,    21,     0,
-       0,    87,    75,    76,     0,     0,    73,     0,    74,     0,
-       0,    72,    71,     0,    69,    70,     0,     0,     0,     0,
-       0,     0,     0,     8,     0,     7,     0,     0,     0,     0,
-      38,    63,    62,     0,    78,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,    25,     0,    26,
-       0,    27,     0,    24,    36,     0,     0,     0,     5,     6,
-      49,     0,    50,     0,    47,    51,    52,    53,    54,    55,
-      48,    31,    28,    30,    29,     0,    77,     0,    79,    80,
-      85,    83,    86,    84,    81,    82,     0,     0,     0,     0,
-       0,     0,     0,    23,     2,     4,     3,     0,    20,     0,
-       0,     0,     0,     0,     0,     0,    39,     0,    67,     0,
-       0,    64,     0,     0,     0,     0,    56,    49,     0,    50,
-      57,    58,    59,    60,    61,    37,     0,     0,     0,     0,
-       0,     0,     0,    32,    33,    34,    35,    40,     0,    41,
-       0,    42,     0,    46,    68,    66,     0,     0,     0,     0,
-       0,     0,     0,     0,    65,    43,    44,    45
+       0,     9,     0,    11,    10,     0,     0,     0,     0,     9,
+       9,     1,     0,     0,     0,     0,     0,     0,     0,     8,
+       7,     0,     0,     0,     0,    36,    23,     0,    24,     0,
+      25,     0,    34,     0,     0,     0,     0,     0,     0,     0,
+      20,     0,     0,     0,    12,     0,    14,    13,    16,    17,
+      15,    29,    26,    28,    27,     0,     0,     0,     0,     0,
+       6,     0,     0,     0,     0,     0,    81,    69,    70,    67,
+       0,    68,     0,     0,     0,     0,     0,     2,     4,     3,
+       0,     0,     0,    37,     0,     0,     0,     0,    61,    60,
+      59,    72,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    22,     0,    47,     0,    48,
+      49,    50,    51,    52,     0,     0,    47,     0,    45,    46,
+      35,     0,     0,     0,     0,    30,    31,    32,    33,    71,
+      74,    73,     0,    79,    77,    80,    78,    75,    76,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    21,    19,
+      18,    38,     0,    39,     0,    40,     0,    44,     0,    65,
+       0,     0,    62,    53,    54,    55,    56,    57,    58,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    66,    64,
+       0,    41,    42,    43,     0,    63
 };
 
   /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int16 yypgoto[] =
+static const yytype_int8 yypgoto[] =
 {
-     -61,   -61,   -60,     5,    63,    66,   -61,    -8,   -61,   -61,
-     -61,   -61,   -41,   -61,   -61,   -61,   -61,   -61,   -61,   -61,
-     -61,   -61,   -61,   187,    -4,    11,   110
+     -64,   -64,   -34,    43,   112,   -64,   -64,   -25,   -64,   -64,
+     -64,   -64,   -63,   -64,   -64,   -64,   -64,   -64,   -64,   -64,
+     -64,   -64,   -64,   -36,   -64,    99
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_uint8 yydefgoto[] =
+static const yytype_int16 yydefgoto[] =
 {
-       0,     2,    87,    14,    88,    89,    17,    18,    19,   105,
-     136,    93,   127,    95,    96,    97,    98,    99,    20,    21,
-      22,    23,    24,    43,    44,    38,    39
+      -1,     2,    41,     8,    42,    43,    44,    45,    10,    55,
+      83,   117,   142,   109,   110,   111,   112,   113,    46,    47,
+      48,    49,    50,    92,    71,    72
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -720,120 +705,120 @@ static const yytype_uint8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      29,    30,    36,   134,    36,   107,    37,     5,    77,    31,
-      32,    33,     5,    94,    25,     5,   118,    31,    41,    42,
-      53,    26,   137,    45,    55,   135,    36,    36,   125,   126,
-      63,    64,     1,    78,    34,   138,    79,     3,     4,     5,
-      27,     5,    34,   147,    81,     6,    92,    35,     7,     8,
-       9,    10,    28,    11,    65,    35,    12,    28,    36,    36,
-      28,    80,   108,   109,    15,    45,    40,    16,   148,    82,
-      66,    67,     5,    84,    90,    41,    42,   160,    15,   161,
-     167,    16,    15,    92,    13,    16,    28,    63,   150,   151,
-     152,   153,   154,    52,     3,     4,     5,    49,    85,    91,
-      51,   156,   157,   158,    60,   168,     8,     9,    10,   169,
-      11,   171,    35,    12,   -75,   -75,   180,    28,    46,    47,
-      48,   149,   149,   149,   149,   149,     5,   159,    90,    32,
-      33,   131,   132,   133,   170,   106,   172,    74,    75,    54,
-     149,    28,    61,    49,    50,    62,    51,   146,    66,    67,
-     -76,   -76,    76,    91,   129,   130,   131,   132,   133,    68,
-      69,    70,    71,    72,    73,    56,    35,    57,    58,    59,
-      83,    28,   -87,   -87,   -87,   -87,   -87,   -87,   110,   111,
-     112,   113,   114,   115,   129,   130,   131,   132,   133,    66,
-      67,   -74,   -74,   -73,   -73,    86,   101,   102,   103,   104,
-      31,   116,   117,   119,   120,   121,   122,   123,   128,   139,
-     140,   141,   142,   124,   143,   162,   144,   145,   155,   163,
-     133,   164,   177,   178,   179,     0,   181,   182,   165,   166,
-     173,   183,     0,   185,     0,   174,   175,   176,   186,   187,
-     184,   100
+      60,    70,    93,    74,     1,    94,    11,   158,    78,    79,
+      61,    63,    69,   108,    69,   143,   144,   118,   145,   146,
+     159,    93,   147,    34,    94,    62,    93,    26,    91,    94,
+       3,     4,    12,   129,    81,     3,     4,    95,     5,    69,
+      69,     6,    27,    13,   119,    -5,    82,    35,    36,    37,
+      -5,    38,    19,    20,    39,    69,   104,   130,   131,    40,
+      28,   132,    30,    -5,    18,   148,    34,     7,    69,    69,
+     141,    25,    40,    32,    34,    29,    51,    31,     3,     4,
+     164,   165,   166,   167,   168,    52,     3,     4,    33,    69,
+      35,    36,    37,    -5,    38,    53,    -5,    39,    35,    36,
+      37,    64,    38,   114,    34,    39,    -5,   115,   106,   116,
+      67,    68,   151,     9,   107,    40,     3,     4,    14,    15,
+      16,     9,     9,    40,   172,    54,   173,   152,    35,    36,
+      37,    64,    38,    65,    17,    39,   121,   122,   123,    66,
+      67,    68,    40,   153,    -5,   155,   184,    64,    56,   114,
+     145,   146,   124,    40,   147,   116,    67,    68,   154,    57,
+     156,   143,   144,    75,   145,   146,    76,    58,   147,    59,
+     163,    40,    40,   143,   144,    73,   145,   146,   102,   103,
+     147,    96,    97,    98,    99,   100,   101,    77,    40,   -81,
+     -81,   -81,   -81,   -81,   -81,   133,   134,   135,   136,   137,
+     138,    21,    80,    22,    23,    24,    93,    84,    85,    94,
+      86,    88,    87,    89,    90,   105,   120,   125,   126,   127,
+     128,    66,   139,   140,   149,   150,   157,    94,   169,   170,
+     160,   171,   161,   162,   174,   147,   178,   179,   175,   180,
+     181,   185,   182,     0,   176,   183,   177
 };
 
 static const yytype_int16 yycheck[] =
 {
-       8,     9,    10,    28,    12,    65,    10,     5,    27,     7,
-       8,     9,     5,    54,     0,     5,    76,     7,     8,     9,
-      15,    50,    18,    12,    19,    50,    34,    35,    88,    89,
-      34,    35,    10,    52,    32,    31,    27,     3,     4,     5,
-      50,     5,    32,     7,    27,    11,    54,    45,    14,    15,
-      16,    17,    50,    19,    30,    45,    22,    50,    66,    67,
-      50,    52,    66,    67,     1,    54,    50,     1,    32,    52,
-      46,    47,     5,    27,     7,     8,     9,   137,    15,   139,
-      27,    15,    19,    91,    50,    19,    50,    91,   129,   130,
-     131,   132,   133,    12,     3,     4,     5,    49,    52,    32,
-      52,    24,    25,    26,    28,    52,    15,    16,    17,    27,
-      19,    27,    45,    22,    46,    47,   176,    50,    24,    25,
-      26,   129,   130,   131,   132,   133,     5,    50,     7,     8,
-       9,    42,    43,    44,    52,    33,    52,    20,    21,    23,
-     148,    50,    27,    49,    50,    27,    52,    33,    46,    47,
-      46,    47,    30,    32,    40,    41,    42,    43,    44,    34,
-      35,    36,    37,    38,    39,     5,    45,     7,     8,     9,
-      50,    50,    34,    35,    36,    37,    38,    39,    68,    69,
-      70,    71,    72,    73,    40,    41,    42,    43,    44,    46,
-      47,    46,    47,    46,    47,     7,    27,    27,    27,    27,
-       7,    50,     7,     7,     7,     7,     7,    53,    27,    30,
-      48,    31,    53,    13,    53,     7,    53,    53,    27,    27,
-      44,    27,     7,     7,     7,    -1,    53,    53,    27,    27,
-      27,    53,    -1,    27,    -1,    31,    31,    30,    27,    27,
-      31,    54
+      34,    37,     5,    39,    20,     8,     0,    28,    42,    43,
+      35,    36,    37,    76,    39,     3,     4,    80,     6,     7,
+      41,     5,    10,     1,     8,    16,     5,    37,    64,     8,
+      13,    14,    50,    12,    38,    13,    14,    40,    21,    64,
+      65,    24,    52,    50,    80,    23,    50,    25,    26,    27,
+      28,    29,     9,    10,    32,    80,    40,    93,    94,    50,
+      37,    95,    37,    41,    22,    53,     1,    50,    93,    94,
+     104,    38,    50,    37,     1,    52,    37,    52,    13,    14,
+     143,   144,   145,   146,   147,    37,    13,    14,    52,   114,
+      25,    26,    27,    28,    29,    37,    23,    32,    25,    26,
+      27,     9,    29,    11,     1,    32,    41,    15,    11,    17,
+      18,    19,    37,     1,    17,    50,    13,    14,    34,    35,
+      36,     9,    10,    50,   158,    37,   160,    52,    25,    26,
+      27,     9,    29,    11,    50,    32,    34,    35,    36,    17,
+      18,    19,    50,    37,    41,    37,   180,     9,    17,    11,
+       6,     7,    50,    50,    10,    17,    18,    19,    52,    17,
+      52,     3,     4,    49,     6,     7,    52,    17,    10,    17,
+      12,    50,    50,     3,     4,    50,     6,     7,    30,    31,
+      10,    42,    43,    44,    45,    46,    47,    23,    50,    42,
+      43,    44,    45,    46,    47,    96,    97,    98,    99,   100,
+     101,    15,    33,    17,    18,    19,     5,    53,    53,     8,
+      53,    37,    53,    37,    37,    50,    37,    37,    37,    37,
+      37,    17,    50,    17,    37,    37,    37,     8,    17,    17,
+      40,    17,    48,    41,    17,    10,    41,    41,    53,    40,
+      37,    41,    37,    -1,    53,    37,    53
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    10,    55,     3,     4,     5,    11,    14,    15,    16,
-      17,    19,    22,    50,    57,    58,    59,    60,    61,    62,
-      72,    73,    74,    75,    76,     0,    50,    50,    50,    61,
-      61,     7,     8,     9,    32,    45,    61,    78,    79,    80,
-      50,     8,     9,    77,    78,    79,    24,    25,    26,    49,
-      50,    52,    12,    57,    23,    57,     5,     7,     8,     9,
-      28,    27,    27,    78,    78,    30,    46,    47,    34,    35,
-      36,    37,    38,    39,    20,    21,    30,    27,    52,    27,
-      52,    27,    52,    50,    27,    52,     7,    56,    58,    59,
-       7,    32,    61,    65,    66,    67,    68,    69,    70,    71,
-      77,    27,    27,    27,    27,    63,    33,    56,    78,    78,
-      80,    80,    80,    80,    80,    80,    50,     7,    56,     7,
-       7,     7,     7,    53,    13,    56,    56,    66,    27,    40,
-      41,    42,    43,    44,    28,    50,    64,    18,    31,    30,
-      48,    31,    53,    53,    53,    53,    33,     7,    32,    61,
-      66,    66,    66,    66,    66,    27,    24,    25,    26,    50,
-      56,    56,     7,    27,    27,    27,    27,    27,    52,    27,
-      52,    27,    52,    27,    31,    31,    30,     7,     7,     7,
-      56,    53,    53,    53,    31,    27,    27,    27
+       0,    20,    55,    13,    14,    21,    24,    50,    57,    58,
+      62,     0,    50,    50,    34,    35,    36,    50,    22,    57,
+      57,    15,    17,    18,    19,    38,    37,    52,    37,    52,
+      37,    52,    37,    52,     1,    25,    26,    27,    29,    32,
+      50,    56,    58,    59,    60,    61,    72,    73,    74,    75,
+      76,    37,    37,    37,    37,    63,    17,    17,    17,    17,
+      56,    61,    16,    61,     9,    11,    17,    18,    19,    61,
+      77,    78,    79,    50,    77,    49,    52,    23,    56,    56,
+      33,    38,    50,    64,    53,    53,    53,    53,    37,    37,
+      37,    77,    77,     5,     8,    40,    42,    43,    44,    45,
+      46,    47,    30,    31,    40,    50,    11,    17,    66,    67,
+      68,    69,    70,    71,    11,    15,    17,    65,    66,    77,
+      37,    34,    35,    36,    50,    37,    37,    37,    37,    12,
+      77,    77,    56,    79,    79,    79,    79,    79,    79,    50,
+      17,    56,    66,     3,     4,     6,     7,    10,    53,    37,
+      37,    37,    52,    37,    52,    37,    52,    37,    28,    41,
+      40,    48,    41,    12,    66,    66,    66,    66,    66,    17,
+      17,    17,    56,    56,    17,    53,    53,    53,    41,    41,
+      40,    37,    37,    37,    56,    41
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
        0,    54,    55,    56,    56,    56,    56,    57,    57,    57,
-      57,    57,    58,    58,    59,    59,    59,    59,    59,    59,
-      60,    61,    61,    61,    61,    62,    62,    62,    62,    62,
-      62,    62,    62,    62,    62,    62,    62,    62,    63,    63,
-      64,    64,    64,    64,    64,    64,    64,    65,    65,    66,
-      66,    66,    66,    66,    66,    66,    66,    67,    68,    69,
-      70,    71,    72,    73,    74,    75,    75,    76,    76,    77,
-      77,    77,    77,    78,    78,    78,    78,    78,    78,    78,
-      78,    79,    79,    79,    79,    79,    79,    80
+      58,    58,    59,    59,    59,    59,    59,    59,    60,    60,
+      61,    61,    61,    62,    62,    62,    62,    62,    62,    62,
+      62,    62,    62,    62,    62,    62,    63,    63,    64,    64,
+      64,    64,    64,    64,    64,    65,    65,    66,    66,    66,
+      66,    66,    66,    66,    67,    68,    69,    70,    71,    72,
+      72,    73,    74,    75,    75,    76,    76,    77,    77,    77,
+      77,    77,    77,    77,    77,    78,    78,    78,    78,    78,
+      78,    79
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     5,     2,     2,     1,     1,     2,     2,     1,
-       1,     0,     1,     1,     1,     1,     1,     1,     1,     1,
-       4,     1,     1,     4,     3,     3,     3,     3,     4,     4,
-       4,     4,     6,     6,     6,     6,     3,     6,     0,     2,
-       3,     3,     3,     6,     6,     6,     3,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     3,     3,     3,     3,
-       3,     3,     3,     3,     5,     9,     7,     5,     7,     1,
-       1,     1,     1,     1,     1,     1,     1,     3,     2,     3,
-       3,     3,     3,     3,     3,     3,     3,     1
+       0,     2,     5,     2,     2,     0,     2,     2,     2,     0,
+       1,     1,     1,     1,     1,     1,     1,     1,     4,     4,
+       1,     4,     3,     3,     3,     3,     4,     4,     4,     4,
+       6,     6,     6,     6,     3,     6,     0,     2,     3,     3,
+       3,     6,     6,     6,     3,     1,     1,     1,     1,     1,
+       1,     1,     1,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     5,     9,     7,     5,     7,     1,     1,     1,
+       1,     3,     2,     3,     3,     3,     3,     3,     3,     3,
+       3,     1
 };
 
 
-enum { YYENOMEM = -2 };
-
 #define yyerrok         (yyerrstatus = 0)
 #define yyclearin       (yychar = YYEMPTY)
+#define YYEMPTY         (-2)
+#define YYEOF           0
 
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
@@ -859,9 +844,10 @@ enum { YYENOMEM = -2 };
       }                                                           \
   while (0)
 
-/* Backward compatibility with an undocumented macro.
-   Use YYerror or YYUNDEF. */
-#define YYERRCODE YYUNDEF
+/* Error token number */
+#define YYTERROR        1
+#define YYERRCODE       256
+
 
 
 /* Enable debugging if requested.  */
@@ -879,18 +865,18 @@ do {                                            \
 } while (0)
 
 /* This macro is provided for backward compatibility. */
-# ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+#ifndef YY_LOCATION_PRINT
+# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+#endif
 
 
-# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
 do {                                                                      \
   if (yydebug)                                                            \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Kind, Value); \
+                  Type, Value); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -901,19 +887,18 @@ do {                                                                      \
 `-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyo,
-                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
+yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 {
   FILE *yyoutput = yyo;
-  YY_USE (yyoutput);
+  YYUSE (yyoutput);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
-  if (yykind < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
+  if (yytype < YYNTOKENS)
+    YYPRINT (yyo, yytoknum[yytype], *yyvaluep);
 # endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YY_USE (yykind);
+  YYUSE (yytype);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -923,13 +908,12 @@ yy_symbol_value_print (FILE *yyo,
 `---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyo,
-                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
+yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 {
   YYFPRINTF (yyo, "%s %s (",
-             yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
+             yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
 
-  yy_symbol_value_print (yyo, yykind, yyvaluep);
+  yy_symbol_value_print (yyo, yytype, yyvaluep);
   YYFPRINTF (yyo, ")");
 }
 
@@ -962,8 +946,7 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
-                 int yyrule)
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, int yyrule)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -975,8 +958,9 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
     {
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
-                       YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
-                       &yyvsp[(yyi + 1) - (yynrhs)]);
+                       yystos[+yyssp[yyi + 1 - yynrhs]],
+                       &yyvsp[(yyi + 1) - (yynrhs)]
+                                              );
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -991,8 +975,8 @@ do {                                    \
    multiple parsers can coexist.  */
 int yydebug;
 #else /* !YYDEBUG */
-# define YYDPRINTF(Args) ((void) 0)
-# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)
+# define YYDPRINTF(Args)
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
 # define YY_STACK_PRINT(Bottom, Top)
 # define YY_REDUCE_PRINT(Rule)
 #endif /* !YYDEBUG */
@@ -1015,38 +999,265 @@ int yydebug;
 #endif
 
 
+#if YYERROR_VERBOSE
 
+# ifndef yystrlen
+#  if defined __GLIBC__ && defined _STRING_H
+#   define yystrlen(S) (YY_CAST (YYPTRDIFF_T, strlen (S)))
+#  else
+/* Return the length of YYSTR.  */
+static YYPTRDIFF_T
+yystrlen (const char *yystr)
+{
+  YYPTRDIFF_T yylen;
+  for (yylen = 0; yystr[yylen]; yylen++)
+    continue;
+  return yylen;
+}
+#  endif
+# endif
 
+# ifndef yystpcpy
+#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
+#   define yystpcpy stpcpy
+#  else
+/* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
+   YYDEST.  */
+static char *
+yystpcpy (char *yydest, const char *yysrc)
+{
+  char *yyd = yydest;
+  const char *yys = yysrc;
 
+  while ((*yyd++ = *yys++) != '\0')
+    continue;
+
+  return yyd - 1;
+}
+#  endif
+# endif
+
+# ifndef yytnamerr
+/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
+   quotes and backslashes, so that it's suitable for yyerror.  The
+   heuristic is that double-quoting is unnecessary unless the string
+   contains an apostrophe, a comma, or backslash (other than
+   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
+   null, do not copy; instead, return the length of what the result
+   would have been.  */
+static YYPTRDIFF_T
+yytnamerr (char *yyres, const char *yystr)
+{
+  if (*yystr == '"')
+    {
+      YYPTRDIFF_T yyn = 0;
+      char const *yyp = yystr;
+
+      for (;;)
+        switch (*++yyp)
+          {
+          case '\'':
+          case ',':
+            goto do_not_strip_quotes;
+
+          case '\\':
+            if (*++yyp != '\\')
+              goto do_not_strip_quotes;
+            else
+              goto append;
+
+          append:
+          default:
+            if (yyres)
+              yyres[yyn] = *yyp;
+            yyn++;
+            break;
+
+          case '"':
+            if (yyres)
+              yyres[yyn] = '\0';
+            return yyn;
+          }
+    do_not_strip_quotes: ;
+    }
+
+  if (yyres)
+    return yystpcpy (yyres, yystr) - yyres;
+  else
+    return yystrlen (yystr);
+}
+# endif
+
+/* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
+   about the unexpected token YYTOKEN for the state stack whose top is
+   YYSSP.
+
+   Return 0 if *YYMSG was successfully written.  Return 1 if *YYMSG is
+   not large enough to hold the message.  In that case, also set
+   *YYMSG_ALLOC to the required number of bytes.  Return 2 if the
+   required number of bytes is too large to store.  */
+static int
+yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
+                yy_state_t *yyssp, int yytoken)
+{
+  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
+  /* Internationalized format string. */
+  const char *yyformat = YY_NULLPTR;
+  /* Arguments of yyformat: reported tokens (one for the "unexpected",
+     one per "expected"). */
+  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
+  /* Actual size of YYARG. */
+  int yycount = 0;
+  /* Cumulated lengths of YYARG.  */
+  YYPTRDIFF_T yysize = 0;
+
+  /* There are many possibilities here to consider:
+     - If this state is a consistent state with a default action, then
+       the only way this function was invoked is if the default action
+       is an error action.  In that case, don't check for expected
+       tokens because there are none.
+     - The only way there can be no lookahead present (in yychar) is if
+       this state is a consistent state with a default action.  Thus,
+       detecting the absence of a lookahead is sufficient to determine
+       that there is no unexpected or expected token to report.  In that
+       case, just report a simple "syntax error".
+     - Don't assume there isn't a lookahead just because this state is a
+       consistent state with a default action.  There might have been a
+       previous inconsistent state, consistent state with a non-default
+       action, or user semantic action that manipulated yychar.
+     - Of course, the expected token list depends on states to have
+       correct lookahead information, and it depends on the parser not
+       to perform extra reductions after fetching a lookahead from the
+       scanner and before detecting a syntax error.  Thus, state merging
+       (from LALR or IELR) and default reductions corrupt the expected
+       token list.  However, the list is correct for canonical LR with
+       one exception: it will still contain any token that will not be
+       accepted due to an error action in a later state.
+  */
+  if (yytoken != YYEMPTY)
+    {
+      int yyn = yypact[+*yyssp];
+      YYPTRDIFF_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
+      yysize = yysize0;
+      yyarg[yycount++] = yytname[yytoken];
+      if (!yypact_value_is_default (yyn))
+        {
+          /* Start YYX at -YYN if negative to avoid negative indexes in
+             YYCHECK.  In other words, skip the first -YYN actions for
+             this state because they are default actions.  */
+          int yyxbegin = yyn < 0 ? -yyn : 0;
+          /* Stay within bounds of both yycheck and yytname.  */
+          int yychecklim = YYLAST - yyn + 1;
+          int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
+          int yyx;
+
+          for (yyx = yyxbegin; yyx < yyxend; ++yyx)
+            if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR
+                && !yytable_value_is_error (yytable[yyx + yyn]))
+              {
+                if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
+                  {
+                    yycount = 1;
+                    yysize = yysize0;
+                    break;
+                  }
+                yyarg[yycount++] = yytname[yyx];
+                {
+                  YYPTRDIFF_T yysize1
+                    = yysize + yytnamerr (YY_NULLPTR, yytname[yyx]);
+                  if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
+                    yysize = yysize1;
+                  else
+                    return 2;
+                }
+              }
+        }
+    }
+
+  switch (yycount)
+    {
+# define YYCASE_(N, S)                      \
+      case N:                               \
+        yyformat = S;                       \
+      break
+    default: /* Avoid compiler warnings. */
+      YYCASE_(0, YY_("syntax error"));
+      YYCASE_(1, YY_("syntax error, unexpected %s"));
+      YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
+      YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
+      YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
+      YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
+# undef YYCASE_
+    }
+
+  {
+    /* Don't count the "%s"s in the final size, but reserve room for
+       the terminator.  */
+    YYPTRDIFF_T yysize1 = yysize + (yystrlen (yyformat) - 2 * yycount) + 1;
+    if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
+      yysize = yysize1;
+    else
+      return 2;
+  }
+
+  if (*yymsg_alloc < yysize)
+    {
+      *yymsg_alloc = 2 * yysize;
+      if (! (yysize <= *yymsg_alloc
+             && *yymsg_alloc <= YYSTACK_ALLOC_MAXIMUM))
+        *yymsg_alloc = YYSTACK_ALLOC_MAXIMUM;
+      return 1;
+    }
+
+  /* Avoid sprintf, as that infringes on the user's name space.
+     Don't have undefined behavior even if the translation
+     produced a string with the wrong number of "%s"s.  */
+  {
+    char *yyp = *yymsg;
+    int yyi = 0;
+    while ((*yyp = *yyformat) != '\0')
+      if (*yyp == '%' && yyformat[1] == 's' && yyi < yycount)
+        {
+          yyp += yytnamerr (yyp, yyarg[yyi++]);
+          yyformat += 2;
+        }
+      else
+        {
+          ++yyp;
+          ++yyformat;
+        }
+  }
+  return 0;
+}
+#endif /* YYERROR_VERBOSE */
 
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
 static void
-yydestruct (const char *yymsg,
-            yysymbol_kind_t yykind, YYSTYPE *yyvaluep)
+yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
 {
-  YY_USE (yyvaluep);
+  YYUSE (yyvaluep);
   if (!yymsg)
     yymsg = "Deleting";
-  YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
+  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YY_USE (yykind);
+  YYUSE (yytype);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
 
-/* Lookahead token kind.  */
+
+
+/* The lookahead symbol.  */
 int yychar;
 
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
 /* Number of syntax errors so far.  */
 int yynerrs;
-
-
 
 
 /*----------.
@@ -1056,36 +1267,43 @@ int yynerrs;
 int
 yyparse (void)
 {
-    yy_state_fast_t yystate = 0;
+    yy_state_fast_t yystate;
     /* Number of tokens to shift before error messages enabled.  */
-    int yyerrstatus = 0;
+    int yyerrstatus;
 
-    /* Refer to the stacks through separate pointers, to allow yyoverflow
+    /* The stacks and their tools:
+       'yyss': related to states.
+       'yyvs': related to semantic values.
+
+       Refer to the stacks through separate pointers, to allow yyoverflow
        to reallocate them elsewhere.  */
 
-    /* Their size.  */
-    YYPTRDIFF_T yystacksize = YYINITDEPTH;
-
-    /* The state stack: array, bottom, top.  */
+    /* The state stack.  */
     yy_state_t yyssa[YYINITDEPTH];
-    yy_state_t *yyss = yyssa;
-    yy_state_t *yyssp = yyss;
+    yy_state_t *yyss;
+    yy_state_t *yyssp;
 
-    /* The semantic value stack: array, bottom, top.  */
+    /* The semantic value stack.  */
     YYSTYPE yyvsa[YYINITDEPTH];
-    YYSTYPE *yyvs = yyvsa;
-    YYSTYPE *yyvsp = yyvs;
+    YYSTYPE *yyvs;
+    YYSTYPE *yyvsp;
+
+    YYPTRDIFF_T yystacksize;
 
   int yyn;
-  /* The return value of yyparse.  */
   int yyresult;
-  /* Lookahead symbol kind.  */
-  yysymbol_kind_t yytoken = YYSYMBOL_YYEMPTY;
+  /* Lookahead token as an internal (translated) token number.  */
+  int yytoken = 0;
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
 
-
+#if YYERROR_VERBOSE
+  /* Buffer for error messages, and its allocated size.  */
+  char yymsgbuf[128];
+  char *yymsg = yymsgbuf;
+  YYPTRDIFF_T yymsg_alloc = sizeof yymsgbuf;
+#endif
 
 #define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
 
@@ -1093,8 +1311,15 @@ yyparse (void)
      Keep to zero when no symbol should be popped.  */
   int yylen = 0;
 
+  yyssp = yyss = yyssa;
+  yyvsp = yyvs = yyvsa;
+  yystacksize = YYINITDEPTH;
+
   YYDPRINTF ((stderr, "Starting parse\n"));
 
+  yystate = 0;
+  yyerrstatus = 0;
+  yynerrs = 0;
   yychar = YYEMPTY; /* Cause a token to be read.  */
   goto yysetstate;
 
@@ -1117,7 +1342,6 @@ yysetstate:
   YY_IGNORE_USELESS_CAST_BEGIN
   *yyssp = YY_CAST (yy_state_t, yystate);
   YY_IGNORE_USELESS_CAST_END
-  YY_STACK_PRINT (yyss, yyssp);
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
@@ -1163,7 +1387,7 @@ yysetstate:
           goto yyexhaustedlab;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
-#  undef YYSTACK_RELOCATE
+# undef YYSTACK_RELOCATE
         if (yyss1 != yyssa)
           YYSTACK_FREE (yyss1);
       }
@@ -1202,28 +1426,17 @@ yybackup:
 
   /* Not known => get a lookahead token if don't already have one.  */
 
-  /* YYCHAR is either empty, or end-of-input, or a valid lookahead.  */
+  /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token\n"));
+      YYDPRINTF ((stderr, "Reading a token: "));
       yychar = yylex ();
     }
 
   if (yychar <= YYEOF)
     {
-      yychar = YYEOF;
-      yytoken = YYSYMBOL_YYEOF;
+      yychar = yytoken = YYEOF;
       YYDPRINTF ((stderr, "Now at end of input.\n"));
-    }
-  else if (yychar == YYerror)
-    {
-      /* The scanner already issued an error message, process directly
-         to error recovery.  But do not keep the error token as
-         lookahead, it is too special and may lead us to an endless
-         loop in error recovery. */
-      yychar = YYUNDEF;
-      yytoken = YYSYMBOL_YYerror;
-      goto yyerrlab1;
     }
   else
     {
@@ -1293,590 +1506,557 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 12: /* commentaire: TOKEN_COMMENT  */
-#line 128 "parser.y"
+  case 6:
+#line 123 "parser.y"
+                                                                                         {printf("erreur syntaxique a la ligne %d",linenbr);erreurSyntax=true;}
+#line 1513 "parser.tab.c"
+    break;
+
+  case 10:
+#line 127 "parser.y"
                              {
                     printf("commentaire ");
                 }
-#line 1302 "parser.tab.c"
+#line 1521 "parser.tab.c"
     break;
 
-  case 13: /* commentaire: TOKEN_MULTICOM  */
-#line 132 "parser.y"
+  case 11:
+#line 131 "parser.y"
                               {
                     printf("commentaire de multiples lignes");
                 }
-#line 1310 "parser.tab.c"
+#line 1529 "parser.tab.c"
     break;
 
-  case 14: /* instruction: affectation  */
-#line 136 "parser.y"
+  case 12:
+#line 135 "parser.y"
                            {
 			printf("\tInstruction type Affectation\n");
 
                 }
-#line 1319 "parser.tab.c"
+#line 1538 "parser.tab.c"
     break;
 
-  case 15: /* instruction: lecture  */
-#line 141 "parser.y"
+  case 13:
+#line 140 "parser.y"
                        {
 
                 }
-#line 1327 "parser.tab.c"
+#line 1546 "parser.tab.c"
     break;
 
-  case 16: /* instruction: ecriture  */
-#line 145 "parser.y"
+  case 14:
+#line 144 "parser.y"
                         {
 
                 }
-#line 1335 "parser.tab.c"
+#line 1554 "parser.tab.c"
     break;
 
-  case 17: /* instruction: conditionnel  */
-#line 149 "parser.y"
+  case 15:
+#line 148 "parser.y"
                             {
                     printf("conditionnel\n");
                 }
-#line 1343 "parser.tab.c"
+#line 1562 "parser.tab.c"
     break;
 
-  case 18: /* instruction: while  */
-#line 153 "parser.y"
+  case 16:
+#line 152 "parser.y"
                      {
                     printf("Boucle Tant que\n");
                     
                 }
-#line 1352 "parser.tab.c"
+#line 1571 "parser.tab.c"
     break;
 
-  case 19: /* instruction: for  */
-#line 158 "parser.y"
+  case 17:
+#line 157 "parser.y"
                    {
                     printf("Boucle Pour\n");
                     
                 }
-#line 1361 "parser.tab.c"
+#line 1580 "parser.tab.c"
     break;
 
-  case 20: /* affectation: variable TOKEN_ASSIGN expression FININSTR  */
-#line 162 "parser.y"
-                                                       {
+  case 18:
+#line 161 "parser.y"
+                                                            {
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
-                        printf("\t\tAffectation sur la variable %s\n",(yyvsp[-3].text));
+                        printf("\t\tAffectation sur la variable \n");
                 }
-#line 1370 "parser.tab.c"
+#line 1589 "parser.tab.c"
     break;
 
-  case 21: /* variable: TOKEN_ID  */
-#line 168 "parser.y"
+  case 20:
+#line 169 "parser.y"
                 {
-                        printf("Variable %s\n",(yyvsp[0].text));
-                        (yyval.text)=strdup((yyvsp[0].text));
+            printf("hadi variabl");
+                       // $$=$1;
+                        //$$=strdup($1);
                 }
-#line 1379 "parser.tab.c"
+#line 1599 "parser.tab.c"
     break;
 
-  case 22: /* variable: TOKEN_CHAR  */
-#line 173 "parser.y"
-                          {
-			printf("Caractere: %c\n",(yyvsp[0].CHARACTER));
-            char buffer[2];
-            buffer[1] = '\0';
-            buffer[0] = (yyvsp[0].CHARACTER);
-			(yyval.text)=strdup(buffer);
-		}
-#line 1391 "parser.tab.c"
-    break;
-
-  case 23: /* variable: TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D  */
-#line 181 "parser.y"
-                                                         {
-			printf("Acces a lelement %d du tableau %s\n",(yyvsp[-1].num),(yyvsp[-3].text));
+  case 21:
+#line 175 "parser.y"
+                                                                    {
+			printf("Acces a lelement  du tableau \n");
 			//$$=strdup($1[$3]);	
 		}
-#line 1400 "parser.tab.c"
+#line 1608 "parser.tab.c"
     break;
 
-  case 24: /* variable: TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID  */
-#line 186 "parser.y"
+  case 22:
+#line 180 "parser.y"
                                                 {
-			printf("Acces au champs %s de la structure %s\n",(yyvsp[0].text),(yyvsp[-2].text));
+			printf("Acces au champss de la structure \n");
 			//$$=strdup($1.$3);	
 		}
-#line 1409 "parser.tab.c"
+#line 1617 "parser.tab.c"
     break;
 
-  case 25: /* DECLARE: TOKEN_ID NUM FININSTR  */
-#line 191 "parser.y"
+  case 23:
+#line 185 "parser.y"
                                      {
 			printf("Declaration dun entier\n");
 		}
-#line 1417 "parser.tab.c"
+#line 1625 "parser.tab.c"
     break;
 
-  case 26: /* DECLARE: TOKEN_ID BOOL FININSTR  */
-#line 195 "parser.y"
+  case 24:
+#line 189 "parser.y"
                                       {
 			printf("Declaration dun booleen\n");
 		}
-#line 1425 "parser.tab.c"
+#line 1633 "parser.tab.c"
     break;
 
-  case 27: /* DECLARE: TOKEN_ID CHAR FININSTR  */
-#line 199 "parser.y"
+  case 25:
+#line 193 "parser.y"
                                       {
 			printf("Declaration dun caractere\n");
 		}
-#line 1433 "parser.tab.c"
+#line 1641 "parser.tab.c"
     break;
 
-  case 28: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_NUMBER FININSTR  */
-#line 203 "parser.y"
+  case 26:
+#line 197 "parser.y"
                                                           {
 			printf("Declaration dune constante de type entier\n");
 		}
-#line 1441 "parser.tab.c"
+#line 1649 "parser.tab.c"
     break;
 
-  case 29: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_TRUE FININSTR  */
-#line 207 "parser.y"
+  case 27:
+#line 201 "parser.y"
                                                         {
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1449 "parser.tab.c"
+#line 1657 "parser.tab.c"
     break;
 
-  case 30: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_FALSE FININSTR  */
-#line 211 "parser.y"
+  case 28:
+#line 205 "parser.y"
                                                          {
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1457 "parser.tab.c"
+#line 1665 "parser.tab.c"
     break;
 
-  case 31: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_CHAR FININSTR  */
-#line 215 "parser.y"
+  case 29:
+#line 209 "parser.y"
                                                         {
 			printf("Declaration dune constante de type caractere\n");
 		}
-#line 1465 "parser.tab.c"
+#line 1673 "parser.tab.c"
     break;
 
-  case 32: /* DECLARE: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 219 "parser.y"
+  case 30:
+#line 213 "parser.y"
                                                                       {
 			printf("Declaration dun tableau de type entier et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1473 "parser.tab.c"
+#line 1681 "parser.tab.c"
     break;
 
-  case 33: /* DECLARE: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 223 "parser.y"
+  case 31:
+#line 217 "parser.y"
                                                                        {
 			printf("Declaration dun tableau de type booleen et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1481 "parser.tab.c"
+#line 1689 "parser.tab.c"
     break;
 
-  case 34: /* DECLARE: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 227 "parser.y"
+  case 32:
+#line 221 "parser.y"
                                                                        {
 			printf("Declaration dun tableau de type caractere et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1489 "parser.tab.c"
+#line 1697 "parser.tab.c"
     break;
 
-  case 35: /* DECLARE: TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 231 "parser.y"
+  case 33:
+#line 225 "parser.y"
                                                                            {
 			printf("Declaration dun tableau de type structure %s et de taille %d\n",(yyvsp[-4].text),(yyvsp[-2].num));
 		}
-#line 1497 "parser.tab.c"
+#line 1705 "parser.tab.c"
     break;
 
-  case 36: /* DECLARE: TOKEN_ID TOKEN_ID FININSTR  */
-#line 235 "parser.y"
+  case 34:
+#line 229 "parser.y"
                                           {
 			printf("Declaration dune structure");
 		}
-#line 1505 "parser.tab.c"
+#line 1713 "parser.tab.c"
     break;
 
-  case 37: /* DECLARE: TOKEN_STRUCT TOKEN_ID ACCOLAD_G LISTE ACCOLAD_G FININSTR  */
-#line 239 "parser.y"
+  case 35:
+#line 233 "parser.y"
                                                                         {
 			printf("Creation dune structure");
 		}
-#line 1513 "parser.tab.c"
+#line 1721 "parser.tab.c"
     break;
 
-  case 38: /* LISTE: %empty  */
-#line 242 "parser.y"
+  case 36:
+#line 236 "parser.y"
                       {}
-#line 1519 "parser.tab.c"
+#line 1727 "parser.tab.c"
     break;
 
-  case 39: /* LISTE: LISTE CHAMP  */
-#line 244 "parser.y"
+  case 37:
+#line 238 "parser.y"
                            {
 		}
-#line 1526 "parser.tab.c"
+#line 1734 "parser.tab.c"
     break;
 
-  case 40: /* CHAMP: TOKEN_ID NUM FININSTR  */
-#line 247 "parser.y"
+  case 38:
+#line 241 "parser.y"
                                      {}
-#line 1532 "parser.tab.c"
+#line 1740 "parser.tab.c"
     break;
 
-  case 41: /* CHAMP: TOKEN_ID BOOL FININSTR  */
-#line 249 "parser.y"
+  case 39:
+#line 243 "parser.y"
                                       {}
-#line 1538 "parser.tab.c"
+#line 1746 "parser.tab.c"
     break;
 
-  case 42: /* CHAMP: TOKEN_ID CHAR FININSTR  */
-#line 251 "parser.y"
+  case 40:
+#line 245 "parser.y"
                                       {}
-#line 1544 "parser.tab.c"
+#line 1752 "parser.tab.c"
     break;
 
-  case 43: /* CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 253 "parser.y"
+  case 41:
+#line 247 "parser.y"
                                                                       {}
-#line 1550 "parser.tab.c"
+#line 1758 "parser.tab.c"
     break;
 
-  case 44: /* CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 255 "parser.y"
+  case 42:
+#line 249 "parser.y"
                                                                        {}
-#line 1556 "parser.tab.c"
+#line 1764 "parser.tab.c"
     break;
 
-  case 45: /* CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 257 "parser.y"
+  case 43:
+#line 251 "parser.y"
                                                                        {}
-#line 1562 "parser.tab.c"
+#line 1770 "parser.tab.c"
     break;
 
-  case 46: /* CHAMP: TOKEN_ID TOKEN_ID FININSTR  */
-#line 259 "parser.y"
+  case 44:
+#line 253 "parser.y"
                                           {}
-#line 1568 "parser.tab.c"
+#line 1776 "parser.tab.c"
     break;
 
-  case 47: /* expression: expression_arithmetique  */
-#line 261 "parser.y"
+  case 45:
+#line 255 "parser.y"
                                        {
 
 		
 		}
-#line 1577 "parser.tab.c"
+#line 1785 "parser.tab.c"
     break;
 
-  case 48: /* expression: expression_booleenne  */
-#line 266 "parser.y"
-                                    {
+  case 46:
+#line 260 "parser.y"
+                       {
 		
 		}
-#line 1585 "parser.tab.c"
+#line 1793 "parser.tab.c"
     break;
 
-  case 49: /* expression_arithmetique: TOKEN_NUMBER  */
-#line 270 "parser.y"
+  case 47:
+#line 264 "parser.y"
                                      {
                                         printf("\t\t\tNombre : %ld\n",(yyvsp[0].num));
  /* Comme le token TOK_NOMBRE est de type entier et que on a type expression_arithmetique comme du texte, il nous faut convertir la valeur en texte. */
-                                        int length=snprintf(NULL,0,"%ld",(yyvsp[0].num));
+                                      /*  int length=snprintf(NULL,0,"%ld",$1);
                                         char* str=malloc(length+1);
-                                        snprintf(str,length+1,"%ld",(yyvsp[0].num));
+                                        snprintf(str,length+1,"%ld",$1);*/
                                         //$$=strdup(str);
                                         (yyval.num)=(yyvsp[0].num);
-                                        free(str);
+                                       // free(str);
                                 }
-#line 1600 "parser.tab.c"
+#line 1808 "parser.tab.c"
     break;
 
-  case 50: /* expression_arithmetique: variable  */
-#line 281 "parser.y"
+  case 48:
+#line 275 "parser.y"
                                         {
                                 }
-#line 1607 "parser.tab.c"
+#line 1815 "parser.tab.c"
     break;
 
-  case 51: /* expression_arithmetique: addition  */
+  case 49:
+#line 278 "parser.y"
+                                            {
+                                }
+#line 1822 "parser.tab.c"
+    break;
+
+  case 50:
+#line 281 "parser.y"
+                                              {
+                                }
+#line 1829 "parser.tab.c"
+    break;
+
+  case 51:
 #line 284 "parser.y"
                                         {
                                 }
-#line 1614 "parser.tab.c"
+#line 1836 "parser.tab.c"
     break;
 
-  case 52: /* expression_arithmetique: soustraction  */
+  case 52:
 #line 287 "parser.y"
-                                            {
-                                }
-#line 1621 "parser.tab.c"
-    break;
-
-  case 53: /* expression_arithmetique: multiplication  */
-#line 290 "parser.y"
-                                              {
-                                }
-#line 1628 "parser.tab.c"
-    break;
-
-  case 54: /* expression_arithmetique: division  */
-#line 293 "parser.y"
-                                        {
-                                }
-#line 1635 "parser.tab.c"
-    break;
-
-  case 55: /* expression_arithmetique: modulo  */
-#line 296 "parser.y"
                                       {
                                 }
-#line 1642 "parser.tab.c"
+#line 1843 "parser.tab.c"
     break;
 
-  case 56: /* expression_arithmetique: PARENTHESE_G expression_arithmetique PARENTHESE_D  */
-#line 299 "parser.y"
+  case 53:
+#line 290 "parser.y"
                                                                                  {
                                         printf("\t\t\tCest une expression artihmetique entre parentheses\n");
                                         //$$=strcat(strcat(strdup("("),strdup($2)),strdup(")"));
                                         (yyval.num)=(yyvsp[-1].num);
                                 }
-#line 1652 "parser.tab.c"
+#line 1853 "parser.tab.c"
     break;
 
-  case 57: /* addition: expression_arithmetique TOKEN_ADD expression_arithmetique  */
-#line 305 "parser.y"
+  case 54:
+#line 296 "parser.y"
                                                              {
         printf("\t\t\tAddition\n");
         //$$=strcat(strcat(strdup($1),strdup("+")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)+(yyvsp[0].num);
     }
-#line 1662 "parser.tab.c"
+#line 1863 "parser.tab.c"
     break;
 
-  case 58: /* soustraction: expression_arithmetique TOKEN_SOUSTR expression_arithmetique  */
-#line 311 "parser.y"
+  case 55:
+#line 302 "parser.y"
                                                                 {
         printf("\t\t\tSoustraction\n");
         //$$=strcat(strcat(strdup($1),strdup("-")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)-(yyvsp[0].num);
     }
-#line 1672 "parser.tab.c"
+#line 1873 "parser.tab.c"
     break;
 
-  case 59: /* multiplication: expression_arithmetique TOKEN_MULT expression_arithmetique  */
-#line 317 "parser.y"
+  case 56:
+#line 308 "parser.y"
                                                               {
         printf("\t\t\tMultiplication\n");
         //$$=strcat(strcat(strdup($1),strdup("*")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)*(yyvsp[0].num);
     }
-#line 1682 "parser.tab.c"
+#line 1883 "parser.tab.c"
     break;
 
-  case 60: /* division: expression_arithmetique TOKEN_DIVIS expression_arithmetique  */
-#line 323 "parser.y"
+  case 57:
+#line 314 "parser.y"
                                                                {
         printf("\t\t\tDivision\n");
         //$$=strcat(strcat(strdup($1),strdup("/")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)/(yyvsp[0].num);
     }
-#line 1692 "parser.tab.c"
+#line 1893 "parser.tab.c"
     break;
 
-  case 61: /* modulo: expression_arithmetique TOKEN_MOD expression_arithmetique  */
-#line 329 "parser.y"
+  case 58:
+#line 320 "parser.y"
                                                              {
         printf("\t\t\tModulo\n");
         //$$=strcat(strcat(strdup($1),strdup("%")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)%(yyvsp[0].num);
     }
-#line 1702 "parser.tab.c"
+#line 1903 "parser.tab.c"
     break;
 
-  case 62: /* ecriture: TOKEN_WRITE variable FININSTR  */
+  case 59:
+#line 326 "parser.y"
+                                                  {
+		//printf("\t\t\t Affichage de variable %s \n",$2);
+		}
+#line 1911 "parser.tab.c"
+    break;
+
+  case 60:
+#line 329 "parser.y"
+                                         {}
+#line 1917 "parser.tab.c"
+    break;
+
+  case 61:
+#line 332 "parser.y"
+                                                 {
+	//	printf("\t\t\t Lecture variable %s\n ",$2);
+		}
+#line 1925 "parser.tab.c"
+    break;
+
+  case 62:
 #line 335 "parser.y"
-                                             {
-		printf("\t\t\t Affichage de variable %s \n",(yyvsp[-1].text));
-		}
-#line 1710 "parser.tab.c"
-    break;
-
-  case 63: /* lecture: TOKEN_READ variable FININSTR  */
-#line 339 "parser.y"
-                                            {
-		printf("\t\t\t Lecture variable %s\n ",(yyvsp[-1].text));
-		}
-#line 1718 "parser.tab.c"
-    break;
-
-  case 64: /* while: TOKEN_WHILE expression_booleenne TOKEN_BEGIN bloc_code END  */
-#line 342 "parser.y"
-                                                                          {
+                                                             {
                     
                 }
-#line 1726 "parser.tab.c"
+#line 1933 "parser.tab.c"
     break;
 
-  case 65: /* for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END  */
-#line 345 "parser.y"
+  case 63:
+#line 338 "parser.y"
                                                                                                              {
 
                 }
-#line 1734 "parser.tab.c"
+#line 1941 "parser.tab.c"
     break;
 
-  case 66: /* for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code END  */
-#line 349 "parser.y"
+  case 64:
+#line 342 "parser.y"
                                                                                {
 
                 }
-#line 1742 "parser.tab.c"
+#line 1949 "parser.tab.c"
     break;
 
-  case 67: /* conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code END  */
-#line 352 "parser.y"
+  case 65:
+#line 345 "parser.y"
                                                             {
 
                 }
-#line 1750 "parser.tab.c"
+#line 1957 "parser.tab.c"
     break;
 
-  case 68: /* conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code TOKEN_ELSE bloc_code END  */
-#line 355 "parser.y"
+  case 66:
+#line 348 "parser.y"
                                                                                   {
                     
                 }
-#line 1758 "parser.tab.c"
+#line 1965 "parser.tab.c"
     break;
 
-  case 69: /* expression_booleenne: ExpBool  */
+  case 67:
+#line 353 "parser.y"
+                               { printf("ana machi variable ana expression_booleenne"); }
+#line 1971 "parser.tab.c"
+    break;
+
+  case 68:
+#line 354 "parser.y"
+                              {//$$ = $1;
+                }
+#line 1978 "parser.tab.c"
+    break;
+
+  case 69:
+#line 356 "parser.y"
+                              { //$$=0; 
+                }
+#line 1985 "parser.tab.c"
+    break;
+
+  case 70:
 #line 358 "parser.y"
-                             {
-
-                      }
-#line 1766 "parser.tab.c"
+                              { //$$=1; 
+                }
+#line 1992 "parser.tab.c"
     break;
 
-  case 70: /* expression_booleenne: Comparaison  */
+  case 71:
+#line 360 "parser.y"
+                                                    {// $$=$2;
+                 }
+#line 1999 "parser.tab.c"
+    break;
+
+  case 72:
 #line 362 "parser.y"
-                                {
-
-                    }
-#line 1774 "parser.tab.c"
+                                    { //$$=!$2; 
+                }
+#line 2006 "parser.tab.c"
     break;
 
-  case 71: /* expression_booleenne: TOKEN_TRUE  */
+  case 73:
+#line 364 "parser.y"
+                                            { //$$=($1)&&($3); 
+                }
+#line 2013 "parser.tab.c"
+    break;
+
+  case 74:
 #line 366 "parser.y"
-                          {
-                        printf("Booleen vrai\n");
-                        (yyval.BOOLEAN)=1;
-               	}
-#line 1783 "parser.tab.c"
+                                            { //$$=($1)||($3); 
+                }
+#line 2020 "parser.tab.c"
     break;
 
-  case 72: /* expression_booleenne: TOKEN_FALSE  */
-#line 371 "parser.y"
-                           {
-                   	printf("Booleaen faux\n");
-                        (yyval.BOOLEAN)=0;
-		}
-#line 1792 "parser.tab.c"
-    break;
-
-  case 73: /* ExpBool: variable  */
-#line 378 "parser.y"
-                          {(yyval.BOOLEAN)=atoi((yyvsp[0].text)); }
-#line 1798 "parser.tab.c"
-    break;
-
-  case 74: /* ExpBool: Comparaison  */
-#line 379 "parser.y"
-                              {(yyval.BOOLEAN) = (yyvsp[0].BOOLEAN);}
-#line 1804 "parser.tab.c"
-    break;
-
-  case 75: /* ExpBool: TOKEN_FALSE  */
-#line 380 "parser.y"
-                              { (yyval.BOOLEAN)=(yyvsp[0].BOOLEAN); }
-#line 1810 "parser.tab.c"
-    break;
-
-  case 76: /* ExpBool: TOKEN_TRUE  */
-#line 381 "parser.y"
-                              { (yyval.BOOLEAN)=(yyvsp[0].BOOLEAN); }
-#line 1816 "parser.tab.c"
-    break;
-
-  case 77: /* ExpBool: PARENTHESE_G ExpBool PARENTHESE_D  */
-#line 382 "parser.y"
-                                                    { (yyval.BOOLEAN)=(yyvsp[-1].BOOLEAN); }
-#line 1822 "parser.tab.c"
-    break;
-
-  case 78: /* ExpBool: TOKEN_NOT ExpBool  */
-#line 383 "parser.y"
-                                    { (yyval.BOOLEAN)=!(yyvsp[0].BOOLEAN); }
-#line 1828 "parser.tab.c"
-    break;
-
-  case 79: /* ExpBool: ExpBool TOKEN_AND ExpBool  */
-#line 384 "parser.y"
-                                            { (yyval.BOOLEAN)=((yyvsp[-2].BOOLEAN))&&((yyvsp[0].BOOLEAN)); }
-#line 1834 "parser.tab.c"
-    break;
-
-  case 80: /* ExpBool: ExpBool TOKEN_OR ExpBool  */
-#line 385 "parser.y"
-                                            { (yyval.BOOLEAN)=((yyvsp[-2].BOOLEAN))||((yyvsp[0].BOOLEAN)); }
-#line 1840 "parser.tab.c"
-    break;
-
-  case 81: /* Comparaison: comparable TOKEN_EGAL comparable  */
-#line 388 "parser.y"
+  case 75:
+#line 370 "parser.y"
                                                   { (yyval.BOOLEAN)=((yyvsp[-2].num) == (yyvsp[0].num)); }
-#line 1846 "parser.tab.c"
+#line 2026 "parser.tab.c"
     break;
 
-  case 82: /* Comparaison: comparable TOKEN_DIFF comparable  */
-#line 389 "parser.y"
+  case 76:
+#line 371 "parser.y"
                                                    { (yyval.BOOLEAN)=((yyvsp[-2].num) != (yyvsp[0].num)); }
-#line 1852 "parser.tab.c"
+#line 2032 "parser.tab.c"
     break;
 
-  case 83: /* Comparaison: comparable TOKEN_SUP comparable  */
-#line 390 "parser.y"
+  case 77:
+#line 372 "parser.y"
                                                   { (yyval.BOOLEAN)=((yyvsp[-2].num) > (yyvsp[0].num)); }
-#line 1858 "parser.tab.c"
+#line 2038 "parser.tab.c"
     break;
 
-  case 84: /* Comparaison: comparable TOKEN_SUPEGAL comparable  */
-#line 391 "parser.y"
+  case 78:
+#line 373 "parser.y"
                                                       { (yyval.BOOLEAN)=((yyvsp[-2].num) >= (yyvsp[0].num)); }
-#line 1864 "parser.tab.c"
+#line 2044 "parser.tab.c"
     break;
 
-  case 85: /* Comparaison: comparable TOKEN_INF comparable  */
-#line 392 "parser.y"
+  case 79:
+#line 374 "parser.y"
                                                   { (yyval.BOOLEAN)=((yyvsp[-2].num) < (yyvsp[0].num)); }
-#line 1870 "parser.tab.c"
+#line 2050 "parser.tab.c"
     break;
 
-  case 86: /* Comparaison: comparable TOKEN_INFEGAL comparable  */
-#line 393 "parser.y"
+  case 80:
+#line 375 "parser.y"
                                                       { (yyval.BOOLEAN)=((yyvsp[-2].num) <= (yyvsp[0].num)); }
-#line 1876 "parser.tab.c"
+#line 2056 "parser.tab.c"
     break;
 
 
-#line 1880 "parser.tab.c"
+#line 2060 "parser.tab.c"
 
       default: break;
     }
@@ -1891,10 +2071,11 @@ yyreduce:
      case of YYERROR or YYBACKUP, subsequent parser actions might lead
      to an incorrect destructor call or verbose syntax error message
      before the lookahead is translated.  */
-  YY_SYMBOL_PRINT ("-> $$ =", YY_CAST (yysymbol_kind_t, yyr1[yyn]), &yyval, &yyloc);
+  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
 
   YYPOPSTACK (yylen);
   yylen = 0;
+  YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
 
@@ -1918,13 +2099,49 @@ yyreduce:
 yyerrlab:
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
-  yytoken = yychar == YYEMPTY ? YYSYMBOL_YYEMPTY : YYTRANSLATE (yychar);
+  yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
+
   /* If not already recovering from an error, report this error.  */
   if (!yyerrstatus)
     {
       ++yynerrs;
+#if ! YYERROR_VERBOSE
       yyerror (YY_("syntax error"));
+#else
+# define YYSYNTAX_ERROR yysyntax_error (&yymsg_alloc, &yymsg, \
+                                        yyssp, yytoken)
+      {
+        char const *yymsgp = YY_("syntax error");
+        int yysyntax_error_status;
+        yysyntax_error_status = YYSYNTAX_ERROR;
+        if (yysyntax_error_status == 0)
+          yymsgp = yymsg;
+        else if (yysyntax_error_status == 1)
+          {
+            if (yymsg != yymsgbuf)
+              YYSTACK_FREE (yymsg);
+            yymsg = YY_CAST (char *, YYSTACK_ALLOC (YY_CAST (YYSIZE_T, yymsg_alloc)));
+            if (!yymsg)
+              {
+                yymsg = yymsgbuf;
+                yymsg_alloc = sizeof yymsgbuf;
+                yysyntax_error_status = 2;
+              }
+            else
+              {
+                yysyntax_error_status = YYSYNTAX_ERROR;
+                yymsgp = yymsg;
+              }
+          }
+        yyerror (yymsgp);
+        if (yysyntax_error_status == 2)
+          goto yyexhaustedlab;
+      }
+# undef YYSYNTAX_ERROR
+#endif
     }
+
+
 
   if (yyerrstatus == 3)
     {
@@ -1974,14 +2191,13 @@ yyerrorlab:
 yyerrlab1:
   yyerrstatus = 3;      /* Each real token shifted decrements this.  */
 
-  /* Pop stack until we find a state that shifts the error token.  */
   for (;;)
     {
       yyn = yypact[yystate];
       if (!yypact_value_is_default (yyn))
         {
-          yyn += YYSYMBOL_YYerror;
-          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYSYMBOL_YYerror)
+          yyn += YYTERROR;
+          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
             {
               yyn = yytable[yyn];
               if (0 < yyn)
@@ -1995,7 +2211,7 @@ yyerrlab1:
 
 
       yydestruct ("Error: popping",
-                  YY_ACCESSING_SYMBOL (yystate), yyvsp);
+                  yystos[yystate], yyvsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -2007,7 +2223,7 @@ yyerrlab1:
 
 
   /* Shift the error token.  */
-  YY_SYMBOL_PRINT ("Shifting", YY_ACCESSING_SYMBOL (yyn), yyvsp, yylsp);
+  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
 
   yystate = yyn;
   goto yynewstate;
@@ -2029,20 +2245,20 @@ yyabortlab:
   goto yyreturn;
 
 
-#if !defined yyoverflow
+#if !defined yyoverflow || YYERROR_VERBOSE
 /*-------------------------------------------------.
 | yyexhaustedlab -- memory exhaustion comes here.  |
 `-------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturn;
+  /* Fall through.  */
 #endif
 
 
-/*-------------------------------------------------------.
-| yyreturn -- parsing is finished, clean up and return.  |
-`-------------------------------------------------------*/
+/*-----------------------------------------------------.
+| yyreturn -- parsing is finished, return the result.  |
+`-----------------------------------------------------*/
 yyreturn:
   if (yychar != YYEMPTY)
     {
@@ -2059,22 +2275,25 @@ yyreturn:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp);
+                  yystos[+*yyssp], yyvsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
   if (yyss != yyssa)
     YYSTACK_FREE (yyss);
 #endif
-
+#if YYERROR_VERBOSE
+  if (yymsg != yymsgbuf)
+    YYSTACK_FREE (yymsg);
+#endif
   return yyresult;
 }
-
-#line 400 "parser.y"
+#line 382 "parser.y"
 
 
 int main(void) {
   yyparse();
+  
 }
 
 void yyerror (char const *s) {

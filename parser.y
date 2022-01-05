@@ -2,7 +2,7 @@
 #include "global.h"
 #include <string.h>
 
-//bool erreurSyntax = false;
+bool erreurSyntax = false;
 extern unsigned int linenbr;
 extern bool erreurLexical;
 
@@ -24,17 +24,17 @@ void yyerror (char const *s);
 
 /* regles d'associativites: l'ordre de priorite est inverse a celui de lex, last one is plus prioritaire*/
 
+%left TOKEN_ADD TOKEN_SOUSTR TOKEN_OR
+%left TOKEN_MULT TOKEN_DIVIS TOKEN_AND
+%left TOKEN_NOT
 
-%left TOKEN_ADD TOKEN_SOUSTR
-%left TOKEN_MULT TOKEN_DIVIS 
 
-
+%right TOKEN_MOD
 %right PARENTHESE_G PARENTHESE_D
 
 /* liste des expressions i.e. les non terminaux */
 
 
-%type<text>     code
 %type<text>     commentaire
 %type<text>	DECLARE
 %type<text>	LISTE
@@ -44,11 +44,10 @@ void yyerror (char const *s);
 %type<text>     lecture
 %type<text>     ecriture
 %type<text>     conditionnel
-%type<text>     variable
 %type<num>     expression_arithmetique
-%type<BOOLEAN>     expression_booleenne
 %type<text>     while
 %type<text>     for
+%type<text>     variable_name
 %type<num>     addition
 %type<num>     soustraction
 %type<num>     multiplication
@@ -121,10 +120,10 @@ void yyerror (char const *s);
 /* definition des regles de production  */
 program: TOKEN_DECLARE bloc_declaration TOKEN_START bloc_code TOKEN_STOP ;
 
-bloc_code:      instruction bloc_code | commentaire bloc_code | commentaire | instruction;
+bloc_code:      instruction bloc_code | commentaire bloc_code | %empty | error bloc_code {printf("erreur syntaxique a la ligne %d",linenbr);erreurSyntax=true;};
 
 bloc_declaration: 
-    DECLARE bloc_declaration | commentaire bloc_declaration| commentaire | DECLARE | %empty;
+    DECLARE bloc_declaration | commentaire bloc_declaration | %empty;
 commentaire:    TOKEN_COMMENT{
                     printf("commentaire ");
                 }
@@ -159,34 +158,27 @@ instruction:    affectation{
                     printf("Boucle Pour\n");
                     
                 };
-affectation:  variable TOKEN_ASSIGN expression FININSTR{
+affectation:  variable_name TOKEN_ASSIGN expression FININSTR{
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
-                        printf("\t\tAffectation sur la variable %s\n",$2);
-                };
-    
-variable:	
+                        printf("\t\tAffectation sur la variable \n");
+                }
+                |variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR
+                ;
+
+variable_name:	
         TOKEN_ID{
             printf("hadi variabl");
                        // $$=$1;
                         //$$=strdup($1);
                 }
 		|
-		TOKEN_CHAR{
-			printf("Caractere: %c\n",$1);
-            char buffer[2];
-            buffer[1] = '\0';
-            buffer[0] = $1;
-			$$=$1;
-            //$$=strdup(buffer);
-		}
-		|
-		TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D{
-			printf("Acces a lelement %d du tableau %s\n",$3,$1);
+		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{
+			printf("Acces a lelement  du tableau \n");
 			//$$=strdup($1[$3]);	
 		}
 		|
 		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
-			printf("Acces au champs %s de la structure %s\n",$3,$1);
+			printf("Acces au champss de la structure \n");
 			//$$=strdup($1.$3);	
 		};
 
@@ -265,22 +257,19 @@ expression : 	expression_arithmetique{
 		
 		}
 		|
-		expression_booleenne{
+		ExpBool{
 		
 		}; 
 
 expression_arithmetique: TOKEN_NUMBER{
                                         printf("\t\t\tNombre : %ld\n",$1);
  /* Comme le token TOK_NOMBRE est de type entier et que on a type expression_arithmetique comme du texte, il nous faut convertir la valeur en texte. */
-                                        int length=snprintf(NULL,0,"%ld",$1);
+                                      /*  int length=snprintf(NULL,0,"%ld",$1);
                                         char* str=malloc(length+1);
-                                        snprintf(str,length+1,"%ld",$1);
+                                        snprintf(str,length+1,"%ld",$1);*/
                                         //$$=strdup(str);
                                         $$=$1;
-                                        free(str);
-                                }
-                                |
-                                variable{
+                                       // free(str);
                                 }
                                 |
                                 addition{
@@ -334,14 +323,16 @@ modulo:
         $$=$1%$3;
     };
 
-ecriture:	TOKEN_WRITE variable FININSTR{
-		printf("\t\t\t Affichage de variable %s \n",$2);
-		};
+ecriture:	TOKEN_WRITE variable_name FININSTR{
+		//printf("\t\t\t Affichage de variable %s \n",$2);
+		}
+        |TOKEN_WRITE TOKEN_TEXT FININSTR {}
+        ;
 
-lecture:	TOKEN_READ variable FININSTR{
-		printf("\t\t\t Lecture variable %s\n ",$2);
+lecture:	TOKEN_READ variable_name FININSTR{
+	//	printf("\t\t\t Lecture variable %s\n ",$2);
 		};		
-while :         TOKEN_WHILE expression_booleenne TOKEN_BEGIN bloc_code END{
+while :         TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code END{
                     
                 };
 for :           TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END{
@@ -357,34 +348,23 @@ conditionnel :  TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code END {
                 |TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code TOKEN_ELSE  bloc_code END{
                     
                 }
-expression_booleenne: ExpBool{
-
-                      }
-                      |
-                    Comparaison {
-
-                    }
-		|
-		TOKEN_TRUE{
-                        printf("Booleen vrai\n");
-                        $$=1;
-               	}
-               	|
-               	TOKEN_FALSE{
-                   	printf("Booleaen faux\n");
-                        $$=0;
-		};
-
 
 ExpBool:
-                 variable {$$=atoi($1); } //verifier si la variable est une variable booleen dans l'analyse semantique
-                | Comparaison {$$ = $1;}
-                | TOKEN_FALSE { $$=$1; }
-                | TOKEN_TRUE  { $$=$1; }
-                | PARENTHESE_G ExpBool PARENTHESE_D { $$=$2; }
-                | TOKEN_NOT ExpBool { $$=!$2; }
-                | ExpBool TOKEN_AND ExpBool { $$=($1)&&($3); }
-                | ExpBool TOKEN_OR ExpBool  { $$=($1)||($3); }
+                 variable_name { printf("ana machi variable ana expression_booleenne"); } //verifier si la variable est une variable booleen dans l'analyse semantique
+                | Comparaison {//$$ = $1;
+                }
+                | TOKEN_FALSE { //$$=0; 
+                }
+                | TOKEN_TRUE  { //$$=1; 
+                }
+                | PARENTHESE_G ExpBool PARENTHESE_D {// $$=$2;
+                 }
+                | TOKEN_NOT ExpBool { //$$=!$2; 
+                }
+                | ExpBool TOKEN_AND ExpBool { //$$=($1)&&($3); 
+                }
+                | ExpBool TOKEN_OR ExpBool  { //$$=($1)||($3); 
+                }
   ;
 Comparaison:
                  comparable TOKEN_EGAL comparable { $$=($1 == $3); }
