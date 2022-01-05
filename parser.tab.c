@@ -574,14 +574,14 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int16 yyrline[] =
 {
        0,   122,   122,   124,   124,   124,   124,   127,   127,   127,
-     128,   132,   136,   141,   145,   149,   153,   158,   162,   166,
-     170,   176,   181,   186,   190,   194,   198,   202,   206,   210,
-     214,   218,   222,   226,   230,   234,   237,   239,   242,   244,
-     246,   248,   250,   252,   254,   256,   261,   265,   276,   279,
-     282,   285,   288,   291,   297,   303,   309,   315,   321,   327,
-     330,   333,   336,   339,   343,   346,   349,   354,   355,   357,
-     359,   361,   363,   365,   367,   371,   372,   373,   374,   375,
-     376,   379,   379
+     128,   132,   136,   141,   146,   151,   155,   160,   164,   168,
+     172,   178,   183,   188,   192,   196,   200,   204,   208,   212,
+     216,   220,   224,   228,   232,   236,   239,   241,   244,   246,
+     248,   250,   252,   254,   256,   258,   263,   267,   278,   281,
+     284,   287,   290,   293,   299,   305,   311,   317,   323,   329,
+     332,   335,   338,   341,   345,   348,   351,   356,   357,   359,
+     361,   363,   365,   367,   369,   373,   374,   375,   376,   377,
+     378,   381,   381
 };
 #endif
 
@@ -1534,7 +1534,7 @@ yyreduce:
   case 12:
 #line 136 "parser.y"
                            {
-			printf("\tInstruction type Affectation\n");
+			printf("\tInstruction Affectation\n");
 
                 }
 #line 1541 "parser.tab.c"
@@ -1543,262 +1543,264 @@ yyreduce:
   case 13:
 #line 141 "parser.y"
                        {
+			printf("\tInstruction Lecture\n");
 
                 }
-#line 1549 "parser.tab.c"
+#line 1550 "parser.tab.c"
     break;
 
   case 14:
-#line 145 "parser.y"
+#line 146 "parser.y"
                         {
+			printf("\tInstruction ecriture\n");
 
                 }
-#line 1557 "parser.tab.c"
+#line 1559 "parser.tab.c"
     break;
 
   case 15:
-#line 149 "parser.y"
+#line 151 "parser.y"
                             {
-                    printf("conditionnel\n");
+                    printf(" instruction conditionnel\n");
                 }
-#line 1565 "parser.tab.c"
+#line 1567 "parser.tab.c"
     break;
 
   case 16:
-#line 153 "parser.y"
+#line 155 "parser.y"
                      {
                     printf("Boucle Tant que\n");
                     
                 }
-#line 1574 "parser.tab.c"
+#line 1576 "parser.tab.c"
     break;
 
   case 17:
-#line 158 "parser.y"
+#line 160 "parser.y"
                    {
                     printf("Boucle Pour\n");
                     
                 }
-#line 1583 "parser.tab.c"
+#line 1585 "parser.tab.c"
     break;
 
   case 18:
-#line 162 "parser.y"
+#line 164 "parser.y"
                                                             {
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
                         printf("\t\tAffectation sur la variable \n");
                 }
-#line 1592 "parser.tab.c"
+#line 1594 "parser.tab.c"
     break;
 
   case 20:
-#line 170 "parser.y"
+#line 172 "parser.y"
                 {
             printf("hadi variabl");
                        // $$=$1;
                         //$$=strdup($1);
                 }
-#line 1602 "parser.tab.c"
+#line 1604 "parser.tab.c"
     break;
 
   case 21:
-#line 176 "parser.y"
+#line 178 "parser.y"
                                                                     {
 			printf("Acces a lelement  du tableau \n");
 			//$$=strdup($1[$3]);	
 		}
-#line 1611 "parser.tab.c"
+#line 1613 "parser.tab.c"
     break;
 
   case 22:
-#line 181 "parser.y"
+#line 183 "parser.y"
                                                 {
 			printf("Acces au champss de la structure \n");
 			//$$=strdup($1.$3);	
 		}
-#line 1620 "parser.tab.c"
+#line 1622 "parser.tab.c"
     break;
 
   case 23:
-#line 186 "parser.y"
+#line 188 "parser.y"
                                      {
 			printf("Declaration dun entier\n");
 		}
-#line 1628 "parser.tab.c"
+#line 1630 "parser.tab.c"
     break;
 
   case 24:
-#line 190 "parser.y"
+#line 192 "parser.y"
                                       {
 			printf("Declaration dun booleen\n");
 		}
-#line 1636 "parser.tab.c"
+#line 1638 "parser.tab.c"
     break;
 
   case 25:
-#line 194 "parser.y"
+#line 196 "parser.y"
                                       {
 			printf("Declaration dun caractere\n");
 		}
-#line 1644 "parser.tab.c"
+#line 1646 "parser.tab.c"
     break;
 
   case 26:
-#line 198 "parser.y"
+#line 200 "parser.y"
                                                           {
 			printf("Declaration dune constante de type entier\n");
 		}
-#line 1652 "parser.tab.c"
+#line 1654 "parser.tab.c"
     break;
 
   case 27:
-#line 202 "parser.y"
+#line 204 "parser.y"
                                                         {
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1660 "parser.tab.c"
+#line 1662 "parser.tab.c"
     break;
 
   case 28:
-#line 206 "parser.y"
+#line 208 "parser.y"
                                                          {
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1668 "parser.tab.c"
+#line 1670 "parser.tab.c"
     break;
 
   case 29:
-#line 210 "parser.y"
+#line 212 "parser.y"
                                                         {
 			printf("Declaration dune constante de type caractere\n");
 		}
-#line 1676 "parser.tab.c"
+#line 1678 "parser.tab.c"
     break;
 
   case 30:
-#line 214 "parser.y"
+#line 216 "parser.y"
                                                                       {
 			printf("Declaration dun tableau de type entier et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1684 "parser.tab.c"
+#line 1686 "parser.tab.c"
     break;
 
   case 31:
-#line 218 "parser.y"
+#line 220 "parser.y"
                                                                        {
 			printf("Declaration dun tableau de type booleen et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1692 "parser.tab.c"
+#line 1694 "parser.tab.c"
     break;
 
   case 32:
-#line 222 "parser.y"
+#line 224 "parser.y"
                                                                        {
 			printf("Declaration dun tableau de type caractere et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1700 "parser.tab.c"
+#line 1702 "parser.tab.c"
     break;
 
   case 33:
-#line 226 "parser.y"
+#line 228 "parser.y"
                                                                            {
 			printf("Declaration dun tableau de type structure %s et de taille %d\n",(yyvsp[-4].text),(yyvsp[-2].num));
 		}
-#line 1708 "parser.tab.c"
+#line 1710 "parser.tab.c"
     break;
 
   case 34:
-#line 230 "parser.y"
+#line 232 "parser.y"
                                           {
 			printf("Declaration dune structure");
 		}
-#line 1716 "parser.tab.c"
+#line 1718 "parser.tab.c"
     break;
 
   case 35:
-#line 234 "parser.y"
+#line 236 "parser.y"
                                                                         {
 			printf("Creation dune structure");
 		}
-#line 1724 "parser.tab.c"
+#line 1726 "parser.tab.c"
     break;
 
   case 36:
-#line 237 "parser.y"
+#line 239 "parser.y"
                       {}
-#line 1730 "parser.tab.c"
+#line 1732 "parser.tab.c"
     break;
 
   case 37:
-#line 239 "parser.y"
+#line 241 "parser.y"
                            {
 		}
-#line 1737 "parser.tab.c"
+#line 1739 "parser.tab.c"
     break;
 
   case 38:
-#line 242 "parser.y"
+#line 244 "parser.y"
                                      {}
-#line 1743 "parser.tab.c"
+#line 1745 "parser.tab.c"
     break;
 
   case 39:
-#line 244 "parser.y"
+#line 246 "parser.y"
                                       {}
-#line 1749 "parser.tab.c"
+#line 1751 "parser.tab.c"
     break;
 
   case 40:
-#line 246 "parser.y"
+#line 248 "parser.y"
                                       {}
-#line 1755 "parser.tab.c"
+#line 1757 "parser.tab.c"
     break;
 
   case 41:
-#line 248 "parser.y"
+#line 250 "parser.y"
                                                                       {}
-#line 1761 "parser.tab.c"
+#line 1763 "parser.tab.c"
     break;
 
   case 42:
-#line 250 "parser.y"
+#line 252 "parser.y"
                                                                        {}
-#line 1767 "parser.tab.c"
+#line 1769 "parser.tab.c"
     break;
 
   case 43:
-#line 252 "parser.y"
+#line 254 "parser.y"
                                                                        {}
-#line 1773 "parser.tab.c"
+#line 1775 "parser.tab.c"
     break;
 
   case 44:
-#line 254 "parser.y"
+#line 256 "parser.y"
                                           {}
-#line 1779 "parser.tab.c"
+#line 1781 "parser.tab.c"
     break;
 
   case 45:
-#line 256 "parser.y"
+#line 258 "parser.y"
                                        {
 
 		
 		}
-#line 1788 "parser.tab.c"
+#line 1790 "parser.tab.c"
     break;
 
   case 46:
-#line 261 "parser.y"
+#line 263 "parser.y"
                        {
 		
 		}
-#line 1796 "parser.tab.c"
+#line 1798 "parser.tab.c"
     break;
 
   case 47:
-#line 265 "parser.y"
+#line 267 "parser.y"
                                      {
-                                        printf("\t\t\tNombre : %ld\n",(yyvsp[0].num));
+                                        //printf("\t\t\tNombre : %ld\n",$1);
  /* Comme le token TOK_NOMBRE est de type entier et que on a type expression_arithmetique comme du texte, il nous faut convertir la valeur en texte. */
                                       /*  int length=snprintf(NULL,0,"%ld",$1);
                                         char* str=malloc(length+1);
@@ -1807,259 +1809,259 @@ yyreduce:
                                         (yyval.num)=(yyvsp[0].num);
                                        // free(str);
                                 }
-#line 1811 "parser.tab.c"
+#line 1813 "parser.tab.c"
     break;
 
   case 48:
-#line 276 "parser.y"
+#line 278 "parser.y"
                                         {
                                 }
-#line 1818 "parser.tab.c"
+#line 1820 "parser.tab.c"
     break;
 
   case 49:
-#line 279 "parser.y"
+#line 281 "parser.y"
                                             {
                                 }
-#line 1825 "parser.tab.c"
+#line 1827 "parser.tab.c"
     break;
 
   case 50:
-#line 282 "parser.y"
+#line 284 "parser.y"
                                               {
                                 }
-#line 1832 "parser.tab.c"
+#line 1834 "parser.tab.c"
     break;
 
   case 51:
-#line 285 "parser.y"
+#line 287 "parser.y"
                                         {
                                 }
-#line 1839 "parser.tab.c"
+#line 1841 "parser.tab.c"
     break;
 
   case 52:
-#line 288 "parser.y"
+#line 290 "parser.y"
                                       {
                                 }
-#line 1846 "parser.tab.c"
+#line 1848 "parser.tab.c"
     break;
 
   case 53:
-#line 291 "parser.y"
+#line 293 "parser.y"
                                                                                  {
-                                        printf("\t\t\tCest une expression artihmetique entre parentheses\n");
+                                       // printf("\t\t\tCest une expression artihmetique entre parentheses\n");
                                         //$$=strcat(strcat(strdup("("),strdup($2)),strdup(")"));
                                         (yyval.num)=(yyvsp[-1].num);
                                 }
-#line 1856 "parser.tab.c"
+#line 1858 "parser.tab.c"
     break;
 
   case 54:
-#line 297 "parser.y"
+#line 299 "parser.y"
                                                              {
-        printf("\t\t\tAddition\n");
+        //printf("\t\t\tAddition\n");
         //$$=strcat(strcat(strdup($1),strdup("+")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)+(yyvsp[0].num);
     }
-#line 1866 "parser.tab.c"
+#line 1868 "parser.tab.c"
     break;
 
   case 55:
-#line 303 "parser.y"
+#line 305 "parser.y"
                                                                 {
-        printf("\t\t\tSoustraction\n");
+       // printf("\t\t\tSoustraction\n");
         //$$=strcat(strcat(strdup($1),strdup("-")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)-(yyvsp[0].num);
     }
-#line 1876 "parser.tab.c"
+#line 1878 "parser.tab.c"
     break;
 
   case 56:
-#line 309 "parser.y"
+#line 311 "parser.y"
                                                               {
-        printf("\t\t\tMultiplication\n");
+        //printf("\t\t\tMultiplication\n");
         //$$=strcat(strcat(strdup($1),strdup("*")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)*(yyvsp[0].num);
     }
-#line 1886 "parser.tab.c"
+#line 1888 "parser.tab.c"
     break;
 
   case 57:
-#line 315 "parser.y"
+#line 317 "parser.y"
                                                                {
-        printf("\t\t\tDivision\n");
+       // printf("\t\t\tDivision\n");
         //$$=strcat(strcat(strdup($1),strdup("/")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)/(yyvsp[0].num);
     }
-#line 1896 "parser.tab.c"
+#line 1898 "parser.tab.c"
     break;
 
   case 58:
-#line 321 "parser.y"
+#line 323 "parser.y"
                                                              {
         printf("\t\t\tModulo\n");
         //$$=strcat(strcat(strdup($1),strdup("%")),strdup($3));
         (yyval.num)=(yyvsp[-2].num)%(yyvsp[0].num);
     }
-#line 1906 "parser.tab.c"
+#line 1908 "parser.tab.c"
     break;
 
   case 59:
-#line 327 "parser.y"
+#line 329 "parser.y"
                                                   {
-		//printf("\t\t\t Affichage de variable %s \n",$2);
+	//	printf("ecriture");
 		}
-#line 1914 "parser.tab.c"
+#line 1916 "parser.tab.c"
     break;
 
   case 60:
-#line 330 "parser.y"
+#line 332 "parser.y"
                                          {}
-#line 1920 "parser.tab.c"
+#line 1922 "parser.tab.c"
     break;
 
   case 61:
-#line 333 "parser.y"
+#line 335 "parser.y"
                                                  {
-	//	printf("\t\t\t Lecture variable %s\n ",$2);
+	//	printf("lecture");
 		}
-#line 1928 "parser.tab.c"
+#line 1930 "parser.tab.c"
     break;
 
   case 62:
-#line 336 "parser.y"
+#line 338 "parser.y"
                                                              {
                     
                 }
-#line 1936 "parser.tab.c"
+#line 1938 "parser.tab.c"
     break;
 
   case 63:
-#line 339 "parser.y"
+#line 341 "parser.y"
                                                                                                              {
 
                 }
-#line 1944 "parser.tab.c"
+#line 1946 "parser.tab.c"
     break;
 
   case 64:
-#line 343 "parser.y"
+#line 345 "parser.y"
                                                                                {
 
                 }
-#line 1952 "parser.tab.c"
+#line 1954 "parser.tab.c"
     break;
 
   case 65:
-#line 346 "parser.y"
+#line 348 "parser.y"
                                                             {
 
                 }
-#line 1960 "parser.tab.c"
+#line 1962 "parser.tab.c"
     break;
 
   case 66:
-#line 349 "parser.y"
+#line 351 "parser.y"
                                                                                   {
                     
                 }
-#line 1968 "parser.tab.c"
+#line 1970 "parser.tab.c"
     break;
 
   case 67:
-#line 354 "parser.y"
-                               { printf("ana machi variable ana expression_booleenne"); }
-#line 1974 "parser.tab.c"
+#line 356 "parser.y"
+                               {  }
+#line 1976 "parser.tab.c"
     break;
 
   case 68:
-#line 355 "parser.y"
+#line 357 "parser.y"
                               {//$$ = $1;
                 }
-#line 1981 "parser.tab.c"
+#line 1983 "parser.tab.c"
     break;
 
   case 69:
-#line 357 "parser.y"
+#line 359 "parser.y"
                               { //$$=0; 
                 }
-#line 1988 "parser.tab.c"
+#line 1990 "parser.tab.c"
     break;
 
   case 70:
-#line 359 "parser.y"
+#line 361 "parser.y"
                               { //$$=1; 
                 }
-#line 1995 "parser.tab.c"
+#line 1997 "parser.tab.c"
     break;
 
   case 71:
-#line 361 "parser.y"
+#line 363 "parser.y"
                                                     {// $$=$2;
                  }
-#line 2002 "parser.tab.c"
+#line 2004 "parser.tab.c"
     break;
 
   case 72:
-#line 363 "parser.y"
+#line 365 "parser.y"
                                     { //$$=!$2; 
                 }
-#line 2009 "parser.tab.c"
+#line 2011 "parser.tab.c"
     break;
 
   case 73:
-#line 365 "parser.y"
+#line 367 "parser.y"
                                             { //$$=($1)&&($3); 
                 }
-#line 2016 "parser.tab.c"
+#line 2018 "parser.tab.c"
     break;
 
   case 74:
-#line 367 "parser.y"
+#line 369 "parser.y"
                                             { //$$=($1)||($3); 
                 }
-#line 2023 "parser.tab.c"
+#line 2025 "parser.tab.c"
     break;
 
   case 75:
-#line 371 "parser.y"
+#line 373 "parser.y"
                                                   { (yyval.BOOLEAN)=((yyvsp[-2].num) == (yyvsp[0].num)); }
-#line 2029 "parser.tab.c"
+#line 2031 "parser.tab.c"
     break;
 
   case 76:
-#line 372 "parser.y"
+#line 374 "parser.y"
                                                    { (yyval.BOOLEAN)=((yyvsp[-2].num) != (yyvsp[0].num)); }
-#line 2035 "parser.tab.c"
+#line 2037 "parser.tab.c"
     break;
 
   case 77:
-#line 373 "parser.y"
+#line 375 "parser.y"
                                                   { (yyval.BOOLEAN)=((yyvsp[-2].num) > (yyvsp[0].num)); }
-#line 2041 "parser.tab.c"
+#line 2043 "parser.tab.c"
     break;
 
   case 78:
-#line 374 "parser.y"
+#line 376 "parser.y"
                                                       { (yyval.BOOLEAN)=((yyvsp[-2].num) >= (yyvsp[0].num)); }
-#line 2047 "parser.tab.c"
+#line 2049 "parser.tab.c"
     break;
 
   case 79:
-#line 375 "parser.y"
+#line 377 "parser.y"
                                                   { (yyval.BOOLEAN)=((yyvsp[-2].num) < (yyvsp[0].num)); }
-#line 2053 "parser.tab.c"
+#line 2055 "parser.tab.c"
     break;
 
   case 80:
-#line 376 "parser.y"
+#line 378 "parser.y"
                                                       { (yyval.BOOLEAN)=((yyvsp[-2].num) <= (yyvsp[0].num)); }
-#line 2059 "parser.tab.c"
+#line 2061 "parser.tab.c"
     break;
 
 
-#line 2063 "parser.tab.c"
+#line 2065 "parser.tab.c"
 
       default: break;
     }
@@ -2291,7 +2293,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 383 "parser.y"
+#line 385 "parser.y"
 
 
 int main(int argc , char** argv) {

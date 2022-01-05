@@ -170,7 +170,6 @@ affectation:  variable_name TOKEN_ASSIGN expression FININSTR{
 
 variable_name:	
         TOKEN_ID{
-            printf("hadi variabl");
                        // $$=$1;
                         //$$=strdup($1);
                 }

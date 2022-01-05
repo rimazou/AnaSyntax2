@@ -3,16 +3,11 @@ variable2 num .
 var3 char . 
 tab1 bool [10].
 START
-variable2 <- 23+34.
+variable2 <- 23 + 34.
 read variable2.
+if g <= 4 
+begin
+read r.
+x <- 34 - 4.
+end 
 STOP
-TOKEN_CHAR{
-			printf("Caractere: %c\n",$1);
-            char buffer[2];
-            buffer[1] = '\0';
-            buffer[0] = $1;
-			$$=$1;
-            //$$=strdup(buffer);
-		}
-		|
-		T
