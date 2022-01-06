@@ -112,7 +112,7 @@ union YYSTYPE
     long num;
     char* text;
     char CHARACTER;
-    int BOOLEAN;
+    bool BOOLEAN;
 
 #line 118 "parser.tab.h"
 

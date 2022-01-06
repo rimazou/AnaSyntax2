@@ -20,7 +20,7 @@ void yyerror (char const *s);
     long num;
     char* text;
     char CHARACTER;
-    int BOOLEAN;
+    bool BOOLEAN;
 }
 
 /* regles d'associativites: l'ordre de priorite est inverse a celui de lex, last one is plus prioritaire*/
@@ -36,7 +36,6 @@ void yyerror (char const *s);
 /* liste des expressions i.e. les non terminaux */
 
 
-%type<text>     commentaire
 %type<text>	DECLARE
 %type<text>	LISTE
 %type<text>	CHAMP
@@ -121,17 +120,10 @@ void yyerror (char const *s);
 /* definition des regles de production  */
 program: TOKEN_DECLARE bloc_declaration TOKEN_START bloc_code TOKEN_STOP ;
 
-bloc_code:      instruction bloc_code | commentaire bloc_code | %empty | error bloc_code {printf("erreur syntaxique a la ligne %d",linenbr);erreurSyntax=true;};
+bloc_code:      instruction bloc_code  | %empty | error bloc_code {printf("erreur syntaxique a la ligne %d",linenbr);erreurSyntax=true;};
 
 bloc_declaration: 
-    DECLARE bloc_declaration | commentaire bloc_declaration | %empty;
-commentaire:    TOKEN_COMMENT{
-                    printf("commentaire ");
-                }
-                |
-                TOKEN_MULTICOM{
-                    printf("commentaire de multiples lignes");
-                };                
+    DECLARE bloc_declaration  | %empty;
 
 instruction:    affectation{
 			printf("\tInstruction Affectation\n");
@@ -211,6 +203,10 @@ DECLARE:	TOKEN_ID NUM FININSTR{
 		TOKEN_CONST TOKEN_ID TOKEN_CHAR FININSTR{
 			printf("Declaration dune constante de type caractere\n");
 		}
+        |
+        TOKEN_CONST TOKEN_ID TOKEN_TEXT FININSTR{
+			printf("Declaration dune constante de type texte \n");
+		}
 		|
 		TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
 			printf("Declaration dun tableau de type entier et de taille %d\n",$4);
@@ -232,7 +228,7 @@ DECLARE:	TOKEN_ID NUM FININSTR{
 			printf("Declaration dune structure");
 		}
 		|
-		TOKEN_STRUCT TOKEN_ID ACCOLAD_G LISTE ACCOLAD_G FININSTR{
+		TOKEN_STRUCT TOKEN_ID ACCOLAD_G LISTE ACCOLAD_D FININSTR{
 			printf("Creation dune structure");
 		};
 LISTE:		%empty{}
@@ -251,6 +247,8 @@ CHAMP:		TOKEN_ID NUM FININSTR{}
 		TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{}
 		|
 		TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{}
+        |
+        TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{}
 		|
 		TOKEN_ID TOKEN_ID FININSTR{};
 		

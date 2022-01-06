@@ -24,13 +24,13 @@ everything .
 
 %%
 
-\*{3}({everything}|\n)*\*{3} {return TOKEN_MULTICOM;} /* can be used with files only */
+\*{3}({everything}|\n)*\*{3} {} /* can be used with files only */
 
-\*{2}{everything}* {return TOKEN_COMMENT;}
+\*{2}{everything}* {}
 
-\'{everything}\' {return TOKEN_CHAR;}
+\'{everything}\' {printf("ana caractere");return TOKEN_CHAR;}
 
-\"{everything}+\" { return TOKEN_TEXT;} /*Text is a string*/
+"\"{everything}+\"" { printf("w ana texte"); return TOKEN_TEXT;} /*Text is a string*/
 
 {digit}+ {yylval.num=atoi(yytext); return TOKEN_NUMBER;}
 

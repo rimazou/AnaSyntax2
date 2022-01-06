@@ -1,0 +1,25 @@
+DECLARE
+variable2 num .
+var3 char . 
+tab1 bool [10] .
+CONST myconst2 345 .
+CONST myconst "hello" .
+START
+variable2 <- 23 + 34 .
+read r .
+if g <= 4
+begin
+read  r . ***hi i'm a comment
+ i will be 
+ ignored***
+while x =3
+begin
+write m .
+if (m > r) and g
+begin
+read j .
+end
+end
+x <- 34 - 4 .
+end
+STOP
