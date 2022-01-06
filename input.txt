@@ -4,6 +4,7 @@ var3 char .
 tab1 bool [10] .
 CONST myconst2 345 .
 CONST myconst "hello" .
+CONST const3 'r'.
 START
 variable2 <- 23 + 34 .
 read r .

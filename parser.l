@@ -24,13 +24,15 @@ everything .
 
 %%
 
+
 \*{3}({everything}|\n)*\*{3} {} /* can be used with files only */
 
 \*{2}{everything}* {}
 
-\'{everything}\' {printf("ana caractere");return TOKEN_CHAR;}
+\'{everything}\' {return TOKEN_CHAR;}
 
-"\"{everything}+\"" { printf("w ana texte"); return TOKEN_TEXT;} /*Text is a string*/
+\"(\\.|[^"\\])*\" { return TOKEN_TEXT;} /*Text is a string*/
+
 
 {digit}+ {yylval.num=atoi(yytext); return TOKEN_NUMBER;}
 
@@ -58,7 +60,7 @@ everything .
 "char" {return CHAR;}
 
 
-[" "]* {}/* ignore all space */
+" "* {}/* ignore all space */
 
 "." {return FININSTR;}
 

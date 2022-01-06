@@ -383,8 +383,11 @@ comparable:
 
 int main(int argc , char** argv) {
     yyin= fopen (argv[1], "r");
-  yyparse();
-  
+    int result = yyparse();
+    if(result == 0) {
+        printf("\n********\n\t\tProgramme syntaxiquement correct\n********\n");
+    }
+    
 }
 
 void yyerror (char const *s) {

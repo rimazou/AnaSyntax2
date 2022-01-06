@@ -1,0 +1,4 @@
+DECLARE
+CONST var " test " .
+START
+STOP
