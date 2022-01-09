@@ -1,11 +1,12 @@
 %{
 #include "global.h"
 #include <string.h>
+#include "test.h"
 
 bool erreurSyntax = false;
 extern unsigned int linenbr;
 extern bool erreurLexical;
-
+extern TableIds* table;
 extern FILE * yyin ;
 int yylex(void);
 void yyerror (char const *s);
@@ -177,30 +178,44 @@ variable_name:
 		};
 
 DECLARE:	TOKEN_ID NUM FININSTR{
+    Identifiant* p;
+    p=Identifiant* declarer ($1,$2, NULL)
 			printf("Declaration dun entier\n");
 		}
 		|
 		TOKEN_ID BOOL FININSTR{
+            Identifiant* p;
+    p=Identifiant* declarer ($1,$2, NULL)
 			printf("Declaration dun booleen\n");
 		}
 		|
 		TOKEN_ID CHAR FININSTR{
+            Identifiant* p;
+    p=Identifiant* declarer ($1,$2, NULL);
 			printf("Declaration dun caractere\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_NUMBER FININSTR{
+            Identifiant* p;
+    p=Identifiant* declarer ($2,$3, $1);
 			printf("Declaration dune constante de type entier\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_TRUE FININSTR{
+              Identifiant* p;
+    p=Identifiant* declarer ($2,$3, $1);
 			printf("Declaration dune constante de type booleen\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_FALSE FININSTR{
+              Identifiant* p;
+    p=Identifiant* declarer ($2,$3, $1);
 			printf("Declaration dune constante de type booleen\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_CHAR FININSTR{
+              Identifiant* p;
+    p=Identifiant* declarer ($2,$3, $1);
 			printf("Declaration dune constante de type caractere\n");
 		}
         |
@@ -386,6 +401,7 @@ int main(int argc , char** argv) {
     int result = yyparse();
     if(result == 0) {
         printf("\n********\n\t\tProgramme syntaxiquement correct\n********\n");
+        AfficherTable(table->tete) ;
     }
     
 }

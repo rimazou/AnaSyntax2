@@ -2,12 +2,12 @@
 
 #include "global.h"
 #include "parser.tab.h"
-#include"TableSymbole.h" 
+#include "test.h" 
 
-TableSymbole* table;
+struct TableIds* table;
 bool erreurLexical = false;
 unsigned int linenbr=1;
-
+table = initialisation();
 %}
 
 
