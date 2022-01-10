@@ -4,10 +4,9 @@
 #include "parser.tab.h"
 #include "test.h" 
 
-struct TableIds* table;
 bool erreurLexical = false;
 unsigned int linenbr=1;
-table = initialisation();
+TableIds* table;
 %}
 
 
@@ -29,9 +28,9 @@ everything .
 
 \*{2}{everything}* {}
 
-\'{everything}\' {return TOKEN_CHAR;}
+\'{everything}\' {yylval.CHARACTER=yytext[0];  return TOKEN_CHAR;}
 
-\"(\\.|[^"\\])*\" { return TOKEN_TEXT;} /*Text is a string*/
+\"(\\.|[^"\\])*\" {yylval.text=yytext; return TOKEN_TEXT;} /*Text is a string*/
 
 
 {digit}+ {yylval.num=atoi(yytext); return TOKEN_NUMBER;}
@@ -95,6 +94,7 @@ everything .
 
 {identifier} {	
 		//AjouterTable(table->Entete_llc, "identifier",yytext);
+		yylval.text = yytext;
 		return TOKEN_ID;
 		}
 

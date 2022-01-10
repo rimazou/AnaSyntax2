@@ -3,26 +3,28 @@
 
 #include "parser.tab.h"
 
-typedef enum { ENTIER, BOOLEEN, CARACTERE, TEXT }typePossible ;
-typedef enum {PRIMITIF, COMPLEXE}Nature;
-typedef enum {CONSTANTE, VARIABLE}NatureID;
+enum typePossible{ ENTIER, BOOLEEN, CARACTERE, TEXT } ;
+enum Nature{PRIMITIF, COMPLEXE};
+enum NatureID{CONSTANTE, VARIABLE};
+typedef enum typePossible typePossible;
+typedef enum Nature Nature;
+typedef enum NatureID NatureID;
+typedef struct Identifiant Identifiant;
 
-
-typedef struct Identifiant Identifiant ;
-struct Identifiant{
+struct Identifiant {
 char nom[25];
 char valeur[25];
-Nature nature;
-NatureId natureId;
-typePossible type;
+enum Nature nature;
+enum NatureID natureId;
+enum typePossible type;
 Identifiant* suivant ;
 };
-
-typedef struct TableIds TablesIds ;
-struct TableIds
+typedef struct
 {
-   Identifiant* tete;
-};
+   Identifiant* Entete_llc;
+}TableIds;
+
+
 
 /*creation de la table*/
 TableIds* initialisation()
@@ -37,28 +39,41 @@ TableIds* initialisation()
 
     strcpy((identif->nom), "");
     strcpy((identif->valeur),"");
-    identif->nature = NULL;
-    identif->natureId = NULL;
-    identif->type = NULL;
     identif->suivant = NULL;
-    tableId->Entete_llc = maillon;
+    tableId->Entete_llc = identif;
 
 
     return tableId;
 }
 /*allocation d'un maillon*/
-Identifiant* declarer (char nom[],yytokentype type, yytokentype natureID)
+Identifiant* declarerVar (char nom[],typePossible type, Nature nature)
 {
     // nous savons qu'un declaration contient assez d'information pour alouer directement avec des valeurs
     Identifiant* p=NULL;
     p = malloc(sizeof(Identifiant));
     strcpy((p->nom),nom);
-
+    p->type = type ;
+    p->nature = nature;
+    p->natureId = VARIABLE ;
+   
+    if (p == NULL){exit(1);}
+    return(p);
+}
+/*
+Identifiant* garbage (char nom[],typePossible type, Nature nature)
+{
+    // nous savons qu'un declaration contient assez d'information pour alouer directement avec des valeurs
+    Identifiant* p=NULL;
+    p = malloc(sizeof(Identifiant));
+    strcpy((p->nom),nom);
+    p->type = type ;
+    p->nature = nature;
+    p->natureId = VARIABLE ;
     switch (type)
    {
-      case (NUM || TOKEN_NUMBRT):  p->type = ENTIER; break;
-      case (BOOL ||TOKEN_TRUE||TOKEN_FALSE) : p->type = BOOLEEN; break;
-      case (CHAR || TOKEN_CHAR) :p->type = CARACTERE; break;
+      case NUM:  p->type = ENTIER; break;
+      case BOOL : p->type = BOOLEEN; break;
+      case CHAR :p->type = CARACTERE; break;
       default : printf("\n autre chose");
    }
 
@@ -74,28 +89,9 @@ Identifiant* declarer (char nom[],yytokentype type, yytokentype natureID)
     if (p == NULL){exit(1);}
     return(p);
 }
-
-TableIds* ajouter(TableIds* table,Identifiant* maille) 
-{
-(table->tete)->suivant = maille;
-}
-
-void AfficherTable (Identifiant* tete)
-{
-	Identifiant* p;
-	p=tete;
-
-	while(p!=NULL){
-		printf("Nom :%s\n",p->nom);
-		printf("Nature identif: %s\n",p->natureId);
-        printf("Nature: %s\n",p->nature);
-        printf("Type: %s\n",p->type);
-
-		p=p->suivant;
+*/
 
 
-	}
 
-}
 
 #endif // TEST_H_INCLUDED
