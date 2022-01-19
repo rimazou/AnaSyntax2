@@ -2,14 +2,15 @@
 #include "global.h"
 #include <string.h>
 #include <stdbool.h>
-#include "test.h"
+
+
+extern TableIds * table = NULL;
 
 bool erreurSyntax = false;
 extern unsigned int linenbr;
 extern bool erreurLexical;
-extern TableIds* table;
+
 extern FILE * yyin ;
-table= initialisation();
 int yylex(void);
 void yyerror (char const *s);
 
@@ -23,7 +24,7 @@ void yyerror (char const *s);
     long num;
     char* text;
     char CHARACTER;
-    bool BOOLEAN;
+    int BOOLEAN;
 }
 
 /* regles d'associativites: l'ordre de priorite est inverse a celui de lex, last one is plus prioritaire*/
@@ -182,18 +183,24 @@ variable_name:
 DECLARE:	TOKEN_ID NUM FININSTR{
     Identifiant* p;
     p=declarerVar ($1,ENTIER, PRIMITIF);
+    p->suivant = table->Entete_llc;
+             table->Entete_llc = p;
 			printf("Declaration dun entier\n");
 		}
 		|
 		TOKEN_ID BOOL FININSTR{
           Identifiant* p;
     p=declarerVar ($1,BOOLEEN, PRIMITIF);
+    p->suivant = table->Entete_llc;
+             table->Entete_llc = p;
 			printf("Declaration dun booleen\n");
 		}
 		|
 		TOKEN_ID CHAR FININSTR{
            Identifiant* p;
-    p=declarerVar ($1,CARACTERE, PRIMITIF);
+             p=declarerVar ($1,CARACTERE, PRIMITIF);
+             p->suivant = table->Entete_llc;
+             table->Entete_llc = p;
 			printf("Declaration dun caractere\n");
 		}
 		|
@@ -395,6 +402,8 @@ comparable:
 %%
 
 int main(int argc , char** argv) {
+    table = initialisation();
+
     yyin= fopen (argv[1], "r");
     int result = yyparse();
     if(result == 0) {

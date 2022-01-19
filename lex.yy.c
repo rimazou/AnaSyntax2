@@ -1,5 +1,5 @@
 
-#line 3 "lex.yy.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -540,14 +540,11 @@ char *yytext;
 #line 2 "parser.l"
 
 #include "global.h"
-#include "parser.tab.h"
-#include "test.h" 
 
 bool erreurLexical = false;
 unsigned int linenbr=1;
-TableIds* table;
-#line 550 "lex.yy.c"
-#line 551 "lex.yy.c"
+#line 546 "lex.yy.c"
+#line 547 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -764,11 +761,11 @@ YY_DECL
 		}
 
 	{
-#line 24 "parser.l"
+#line 21 "parser.l"
 
 
 
-#line 772 "lex.yy.c"
+#line 768 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -828,258 +825,258 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 27 "parser.l"
+#line 24 "parser.l"
 {} /* can be used with files only */
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "parser.l"
+#line 26 "parser.l"
 {}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 31 "parser.l"
+#line 28 "parser.l"
 {yylval.CHARACTER=yytext[0];  return TOKEN_CHAR;}
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 33 "parser.l"
+#line 30 "parser.l"
 {yylval.text=yytext; return TOKEN_TEXT;} /*Text is a string*/
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 36 "parser.l"
+#line 33 "parser.l"
 {yylval.num=atoi(yytext); return TOKEN_NUMBER;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 38 "parser.l"
+#line 35 "parser.l"
 {yylval.BOOLEAN=0; return TOKEN_FALSE;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 39 "parser.l"
+#line 36 "parser.l"
 {yylval.BOOLEAN=1; return TOKEN_TRUE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 41 "parser.l"
+#line 38 "parser.l"
 {return TOKEN_DECLARE	;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 42 "parser.l"
+#line 39 "parser.l"
 {return TOKEN_CONST;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 43 "parser.l"
+#line 40 "parser.l"
 {return TOKEN_START	;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 44 "parser.l"
+#line 41 "parser.l"
 {return TOKEN_STOP	;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 45 "parser.l"
+#line 42 "parser.l"
 {return TOKEN_STRUCT;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 46 "parser.l"
+#line 43 "parser.l"
 {return TOKEN_READ	;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 47 "parser.l"
+#line 44 "parser.l"
 {return TOKEN_WRITE	;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 48 "parser.l"
+#line 45 "parser.l"
 {return TOKEN_IF	;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 49 "parser.l"
+#line 46 "parser.l"
 {return TOKEN_ELSE	;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 50 "parser.l"
+#line 47 "parser.l"
 {return 	TOKEN_FOR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 51 "parser.l"
+#line 48 "parser.l"
 {return TOKEN_IN	;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 52 "parser.l"
+#line 49 "parser.l"
 {return TOKEN_FROM	;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 53 "parser.l"
+#line 50 "parser.l"
 {return TOKEN_WHILE;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 55 "parser.l"
+#line 52 "parser.l"
 {return TOKEN_ASSIGN;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 57 "parser.l"
+#line 54 "parser.l"
 { return NUM;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 58 "parser.l"
+#line 55 "parser.l"
 {return BOOL;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 59 "parser.l"
+#line 56 "parser.l"
 {return CHAR;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 62 "parser.l"
+#line 59 "parser.l"
 {}/* ignore all space */
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 64 "parser.l"
+#line 61 "parser.l"
 {return FININSTR;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 66 "parser.l"
+#line 63 "parser.l"
 {return ACCOLAD_G;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 67 "parser.l"
+#line 64 "parser.l"
 { return ACCOLAD_D;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 68 "parser.l"
+#line 65 "parser.l"
 {return TOKEN_BEGIN;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 69 "parser.l"
+#line 66 "parser.l"
 {return END;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 70 "parser.l"
+#line 67 "parser.l"
 {return PARENTHESE_G;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 71 "parser.l"
+#line 68 "parser.l"
 {return PARENTHESE_D;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 72 "parser.l"
+#line 69 "parser.l"
 {return CROCHET_G;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 73 "parser.l"
+#line 70 "parser.l"
 {return CROCHET_D;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 76 "parser.l"
+#line 73 "parser.l"
 {return TOKEN_INF;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 77 "parser.l"
+#line 74 "parser.l"
 {return TOKEN_SUP;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 78 "parser.l"
+#line 75 "parser.l"
 {return TOKEN_INFEGAL;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 79 "parser.l"
+#line 76 "parser.l"
 {return TOKEN_SUPEGAL;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 80 "parser.l"
+#line 77 "parser.l"
 {return TOKEN_EGAL;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 81 "parser.l"
+#line 78 "parser.l"
 {return TOKEN_DIFF;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 82 "parser.l"
+#line 79 "parser.l"
 {return TOKEN_ADD;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 83 "parser.l"
+#line 80 "parser.l"
 {return TOKEN_SOUSTR;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 84 "parser.l"
+#line 81 "parser.l"
 {return TOKEN_MULT;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 85 "parser.l"
+#line 82 "parser.l"
 {return TOKEN_DIVIS;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 86 "parser.l"
+#line 83 "parser.l"
 {return TOKEN_MOD;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 88 "parser.l"
+#line 85 "parser.l"
 {return TOKEN_NOT;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 89 "parser.l"
+#line 86 "parser.l"
 {return TOKEN_AND;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 90 "parser.l"
+#line 87 "parser.l"
 {return TOKEN_OR;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 92 "parser.l"
+#line 89 "parser.l"
 {return TOKEN_COMMA;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 93 "parser.l"
+#line 90 "parser.l"
 {return TOKEN_ACSTRUCT;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 95 "parser.l"
+#line 92 "parser.l"
 {	
 		//AjouterTable(table->Entete_llc, "identifier",yytext);
 		yylval.text = yytext;
@@ -1088,28 +1085,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 101 "parser.l"
+#line 98 "parser.l"
 {return TOKEN_FININPUT;}
 	YY_BREAK
 case 53:
 /* rule 53 can match eol */
 YY_RULE_SETUP
-#line 103 "parser.l"
+#line 100 "parser.l"
 {linenbr++;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 104 "parser.l"
+#line 101 "parser.l"
 {fprintf(stderr,"\tERREUR : Lexeme inconnu a la ligne %d. Il s'agit de %s et comporte %d lettre(s)\n",linenbr,yytext,yyleng);
         erreurLexical = true;
         return yytext[0];}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 108 "parser.l"
+#line 105 "parser.l"
 ECHO;
 	YY_BREAK
-#line 1113 "lex.yy.c"
+#line 1109 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2114,7 +2111,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 108 "parser.l"
+#line 105 "parser.l"
 
 
 

@@ -1,12 +1,9 @@
 %{
 
 #include "global.h"
-#include "parser.tab.h"
-#include "test.h" 
 
 bool erreurLexical = false;
 unsigned int linenbr=1;
-TableIds* table;
 %}
 
 
