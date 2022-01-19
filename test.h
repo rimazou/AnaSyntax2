@@ -32,6 +32,7 @@ typedef struct
 TableIds* initialisation();
 Identifiant* declarerVar (char nom[],typePossible type, Nature nature);
 void AfficherTable(Identifiant* entete);
+Identifiant* rechercherVar(TableIds* table, char* nom);
 
 
 

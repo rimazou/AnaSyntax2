@@ -5,4 +5,5 @@ CONST myconst2 345 .
 CONST const3 'r'.
 CONST vrai true.
 START
+variable2 <- 2.
 STOP

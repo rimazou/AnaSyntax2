@@ -160,6 +160,10 @@ instruction:    affectation{
 affectation:  variable_name TOKEN_ASSIGN expression FININSTR{
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
                         printf("\t\tAffectation sur la variable \n");
+                        Identifiant* p = rechercherVar(table, $1);
+                        if(p != NULL) {
+                            printf("test: %s\n", p->nom);
+                        }
                 }
                 |variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR
                 ;
@@ -167,7 +171,7 @@ affectation:  variable_name TOKEN_ASSIGN expression FININSTR{
 variable_name:	
         TOKEN_ID{
                        // $$=$1;
-                        //$$=strdup($1);
+                        $$=strdup($1);
                 }
 		|
 		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{

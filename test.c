@@ -52,6 +52,22 @@ void AfficherTable(Identifiant* tete) {
 
 	}
 }
+
+//Recherche
+Identifiant* rechercherVar(TableIds* table,char* nom  ) {
+    Identifiant* p = table->Entete_llc;
+
+    while (p != NULL)
+    {
+        if (strcmp(p->nom, nom) == 0)
+        {
+            return p;
+        }
+        p = p->suivant;
+    }
+    return NULL;
+}
+
 /*
 Identifiant* garbage (char nom[],typePossible type, Nature nature)
 {
