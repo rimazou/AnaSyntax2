@@ -13,10 +13,7 @@ TableIds* initialisation()
         exit(EXIT_FAILURE);
     }
 
-    strcpy((identif->nom), "");
-    strcpy((identif->valeur),"");
-    identif->suivant = NULL;
-    tableId->Entete_llc = identif;
+    tableId->Entete_llc = NULL;
 
 
     return tableId;
@@ -40,16 +37,23 @@ Identifiant* declarerVar (char* nom,typePossible type, Nature nature)
 void AfficherTable(Identifiant* tete) {
     Identifiant* p;
 	p=tete;
+
     printf("Affichage de la table des IDs \n");
 	while(p!=NULL){
 		printf("Token :%s\n",p->nom);
         if(p->nature == PRIMITIF)
-		    printf("Type: PRIMITIF\n");
+		    printf("Nature: PRIMITIF\n");
         else
-		    printf("Type: COMPLEXE\n");
+		    printf("Nature: COMPLEXE\n");
+
+        if (p->type == ENTIER)
+        {
+            printf("Type: Eniter \n");
+        }
+
+        printf("Valeur: %s\n", p->valeur);
+        
 		p=p->suivant;
-
-
 	}
 }
 

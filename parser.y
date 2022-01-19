@@ -157,12 +157,32 @@ instruction:    affectation{
                     printf("Boucle Pour\n");
                     
                 };
-affectation:  variable_name TOKEN_ASSIGN expression FININSTR{
+affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
                         printf("\t\tAffectation sur la variable \n");
                         Identifiant* p = rechercherVar(table, $1);
                         if(p != NULL) {
-                            printf("test: %s\n", p->nom);
+                            if(p->type == ENTIER){
+                                printf("Type correct: %s\n", p->nom);
+                                sprintf(p->valeur, "%ld", $3);
+                            }
+                        }
+                        else {
+                            fprintf(stderr, "ERREUR: Identifiant %s non declare.", $1);
+                            yyerror("Compilation interrompue");
+                            exit(1);
+                        }
+                }
+                |
+                variable_name TOKEN_ASSIGN ExpBool FININSTR{
+                        /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
+                        printf("\t\tAffectation sur la variable \n");
+                        Identifiant* p = rechercherVar(table, $1);
+                        if(p != NULL) {
+                            if(p->type == BOOLEEN)
+                            printf("Type correct: %s\n", p->nom);
+                            else
+                            fprintf(stderr, "Erreur, type attendu: %d, rencontré: BOOLEEN", p->type);
                         }
                 }
                 |variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR
@@ -315,7 +335,14 @@ expression_arithmetique: TOKEN_NUMBER{
                                        // printf("\t\t\tCest une expression artihmetique entre parentheses\n");
                                         //$$=strcat(strcat(strdup("("),strdup($2)),strdup(")"));
                                         $$=$2;
-                                };
+                                }
+                                |
+                                variable_name {
+                                    printf("Test %s", $1);
+                                    Identifiant* p = rechercherVar(table, $1);
+                                    $$= atoi(p->valeur);
+                                }
+                                ;
 addition:	
     expression_arithmetique TOKEN_ADD expression_arithmetique{
         //printf("\t\t\tAddition\n");

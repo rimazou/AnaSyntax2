@@ -1,9 +1,5 @@
 DECLARE
-variable2 num .
-var3 char . 
-CONST myconst2 345 .
-CONST const3 'r'.
-CONST vrai true.
+x num. y num. z num.
 START
-variable2 <- 2.
+x <- 2. y <- 3. z <- x+y.
 STOP
