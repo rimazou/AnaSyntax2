@@ -1079,7 +1079,7 @@ YY_RULE_SETUP
 #line 92 "parser.l"
 {	
 		//AjouterTable(table->Entete_llc, "identifier",yytext);
-		yylval.text = yytext;
+		yylval.text = strdup(yytext);
 		return TOKEN_ID;
 		}
 	YY_BREAK

@@ -91,7 +91,7 @@ everything .
 
 {identifier} {	
 		//AjouterTable(table->Entete_llc, "identifier",yytext);
-		yylval.text = yytext;
+		yylval.text = strdup(yytext);
 		return TOKEN_ID;
 		}
 

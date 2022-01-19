@@ -22,7 +22,7 @@ TableIds* initialisation()
     return tableId;
 }
 /*allocation d'un maillon*/
-Identifiant* declarerVar (char nom[],typePossible type, Nature nature)
+Identifiant* declarerVar (char* nom,typePossible type, Nature nature)
 {
     // nous savons qu'un declaration contient assez d'information pour alouer directement avec des valeurs
     Identifiant* p=NULL;
