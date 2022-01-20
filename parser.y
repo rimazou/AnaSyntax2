@@ -5,6 +5,7 @@
 
 
 extern TableIds * table = NULL;
+Identifiant* p = NULL;
 
 bool erreurSyntax = false;
 extern unsigned int linenbr;
@@ -160,7 +161,7 @@ instruction:    affectation{
 affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
                         printf("\t\tAffectation sur la variable \n");
-                        Identifiant* p = rechercherVar(table, $1);
+                        
                         if(p != NULL) {
                             if(p->type == ENTIER){
                                 printf("Type correct: %s\n", p->nom);
@@ -175,12 +176,15 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                 }
                 |
                 variable_name TOKEN_ASSIGN ExpBool FININSTR{
-                        /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
+                        /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 	
+                        			$3 est la valeur du 2nd non terminal. */
                         printf("\t\tAffectation sur la variable \n");
-                        Identifiant* p = rechercherVar(table, $1);
+                       
                         if(p != NULL) {
-                            if(p->type == BOOLEEN)
+                            if(p->type == BOOLEEN){
                             printf("Type correct: %s\n", p->nom);
+                             sprintf(p->valeur, "%s", $3);
+                             }
                             else
                             fprintf(stderr, "Erreur, type attendu: %d, rencontré: BOOLEEN", p->type);
                         }
@@ -191,76 +195,78 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
 variable_name:	
         TOKEN_ID{
                        // $$=$1;
+                        p = rechercherVar(table, $1);
                         $$=strdup($1);
                 }
 		|
 		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{
-			printf("Acces a lelement  du tableau \n");
+			printf("Acces a un element  du tableau \n");
+            p = rechercheElemTab(table, $1, $3);
 			//$$=strdup($1[$3]);	
 		}
 		|
 		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
-			printf("Acces au champss de la structure \n");
+			printf("Acces au champs de la structure \n");
 			//$$=strdup($1.$3);	
 		};
 
 DECLARE:	TOKEN_ID NUM FININSTR{
-    Identifiant* p;
-    p=declarerVar ($1,ENTIER, PRIMITIF);
-    p->suivant = table->Entete_llc;
-             table->Entete_llc = p;
+   
+            table->Entete_llc = declarerVar (table, $1, ENTIER, PRIMITIF);
 			printf("Declaration dun entier\n");
 		}
 		|
 		TOKEN_ID BOOL FININSTR{
-          Identifiant* p;
-    p=declarerVar ($1,BOOLEEN, PRIMITIF);
-    p->suivant = table->Entete_llc;
-             table->Entete_llc = p;
+        
+        table->Entete_llc  = declarerVar (table, $1,BOOLEEN, PRIMITIF);
+  
 			printf("Declaration dun booleen\n");
 		}
 		|
 		TOKEN_ID CHAR FININSTR{
-           Identifiant* p;
-             p=declarerVar ($1,CARACTERE, PRIMITIF);
-             p->suivant = table->Entete_llc;
-             table->Entete_llc = p;
+          
+            table->Entete_llc= declarerVar (table, $1,CARACTERE, PRIMITIF);
+            
 			printf("Declaration dun caractere\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_NUMBER FININSTR{
-             
+            table->Entete_llc = declarerConst (table, $2, ENTIER, PRIMITIF, $3); 
 			printf("Declaration dune constante de type entier\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_TRUE FININSTR{
-              
+            table->Entete_llc = declarerConst (table, $2, BOOLEAN, PRIMITIF, $3);  
 			printf("Declaration dune constante de type booleen\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_FALSE FININSTR{
-             
+             table->Entete_llc = declarerConst (table, $2, BOOLEAN, PRIMITIF, $3);
 			printf("Declaration dune constante de type booleen\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_CHAR FININSTR{
-              
+             table->Entete_llc = declarerConst (table, $2, CHARACTER, PRIMITIF, $3); 
 			printf("Declaration dune constante de type caractere\n");
 		}
         |
         TOKEN_CONST TOKEN_ID TOKEN_TEXT FININSTR{
+            table->Entete_llc = declarerConst (table, $2, TEXT, PRIMITIF, $3);
 			printf("Declaration dune constante de type texte \n");
 		}
 		|
 		TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
+            table->Entete_llc = declarerTab(table, $1, ENTIER, $4);
 			printf("Declaration dun tableau de type entier et de taille %d\n",$4);
 		}
 		|
 		TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
-			printf("Declaration dun tableau de type booleen et de taille %d\n",$4);
+		    table->Entete_llc = declarerTab(table, $1, BOOLEEN, $4);
+            printf("Declaration dun tableau de type booleen et de taille %d\n",$4);
 		}
 		|
 		TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
+            table->Entete_llc = declarerTab(table, $1, CARACTERE, $4);
 			printf("Declaration dun tableau de type caractere et de taille %d\n",$4);
 		}
 		|
@@ -339,7 +345,7 @@ expression_arithmetique: TOKEN_NUMBER{
                                 |
                                 variable_name {
                                     printf("Test %s", $1);
-                                    Identifiant* p = rechercherVar(table, $1);
+                                   
                                     $$= atoi(p->valeur);
                                 }
                                 ;
@@ -402,19 +408,19 @@ conditionnel :  TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code END {
 
 ExpBool:
                  variable_name {  } //verifier si la variable est une variable booleen dans l'analyse semantique
-                | Comparaison {//$$ = $1;
+                | Comparaison {$$ = $1;
                 }
-                | TOKEN_FALSE { //$$=0; 
+                | TOKEN_FALSE { $$=0; 
                 }
-                | TOKEN_TRUE  { //$$=1; 
+                | TOKEN_TRUE  { $$=1; 
                 }
-                | PARENTHESE_G ExpBool PARENTHESE_D {// $$=$2;
+                | PARENTHESE_G ExpBool PARENTHESE_D { $$=$2;
                  }
-                | TOKEN_NOT ExpBool { //$$=!$2; 
+                | TOKEN_NOT ExpBool { $$=!$2; 
                 }
-                | ExpBool TOKEN_AND ExpBool { //$$=($1)&&($3); 
+                | ExpBool TOKEN_AND ExpBool { $$=($1)&&($3); 
                 }
-                | ExpBool TOKEN_OR ExpBool  { //$$=($1)||($3); 
+                | ExpBool TOKEN_OR ExpBool  { $$=($1)||($3); 
                 }
   ;
 Comparaison:
@@ -441,7 +447,7 @@ int main(int argc , char** argv) {
         printf("\n********\n\t\tProgramme syntaxiquement correct\n********\n");
         AfficherTable(table->Entete_llc) ;
     }
-    
+   
 }
 
 void yyerror (char const *s) {

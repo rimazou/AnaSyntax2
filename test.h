@@ -7,7 +7,7 @@
 #include <string.h>
 
 
-enum typePossible{ ENTIER, BOOLEEN, CARACTERE, TEXT } ;
+enum typePossible{ ENTIER, BOOLEEN, CARACTERE, TEXT, TABLEAU, STRUCTURE } ;
 enum Nature{PRIMITIF, COMPLEXE};
 enum NatureID{CONSTANTE, VARIABLE};
 typedef enum typePossible typePossible;
@@ -16,8 +16,8 @@ typedef enum NatureID NatureID;
 typedef struct Identifiant Identifiant;
 
 struct Identifiant {
-char nom[25];
-char valeur[25];
+char* nom[25];
+char* valeur; 
 enum Nature nature;
 enum NatureID natureId;
 enum typePossible type;
@@ -30,9 +30,13 @@ typedef struct
 
 //Definitions
 TableIds* initialisation();
-Identifiant* declarerVar (char nom[],typePossible type, Nature nature);
+Identifiant* declarerVar (TableIds* table, char nom[],typePossible type, Nature nature);
+Identifiant* declarerConst (TableIds* table, char* nom,typePossible type, char* valeur);
+Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int taille);
+//Identifiant* declarerStruct(TableIds* table, char*nom);
 void AfficherTable(Identifiant* entete);
 Identifiant* rechercherVar(TableIds* table, char* nom);
+Identifiant* rechercheElemTab(TableIds* table, char* nom, int index);
 
 
 

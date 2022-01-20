@@ -19,7 +19,9 @@ TableIds* initialisation()
     return tableId;
 }
 /*allocation d'un maillon*/
-Identifiant* declarerVar (char* nom,typePossible type, Nature nature)
+
+// POUR UNE VARIABLE SIMPLE
+Identifiant* declarerVar (TableIds* table, char* nom,typePossible type, Nature nature)
 {
     // nous savons qu'un declaration contient assez d'information pour alouer directement avec des valeurs
     Identifiant* p=NULL;
@@ -30,7 +32,67 @@ Identifiant* declarerVar (char* nom,typePossible type, Nature nature)
     p->natureId = VARIABLE ;
    
     if (p == NULL){exit(1);}
+    p->suivant = table->Entete_llc;
     return(p);
+}
+//LES CONSTANTES
+Identifiant* declarerConst (TableIds* table, char* nom,typePossible type, char* valeur){
+
+    Identifiant* p=NULL;
+    p = malloc(sizeof(Identifiant));
+    strcpy((p->nom),nom);
+    strcpy((p->valeur),valeur);
+    p->type = type ;
+    p->nature = PRIMITIF;
+    p->natureId = CONSTANTE ; 
+    if (p == NULL){exit(1);}
+     p->suivant = table->Entete_llc;
+    return(p);
+}
+//DECLARATION D'UN TABLEAU
+Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int taille){
+    
+    if (taille<=0){exit(1);}
+    Identifiant* p = NULL;
+    p = malloc(sizeof(Identifiant));
+    strcpy((p->nom),nom);
+    p->type = TABLEAU ;
+    strcpy(p->valeur , taille);
+    //IMPORTANT : if la taille contient deux chiffres ex: 12 elle n'est pas recuperer dans p->valeur
+
+    p->nature = COMPLEXE ;
+    p->natureId = VARIABLE ; 
+    // p represente la tete de la sous-llc du tableau
+    Identifiant* q = NULL;
+    q = malloc(sizeof(Identifiant));
+    p->suivant = q;
+    Identifiant* z = NULL;
+    //q et z c'est pour le parcour de llc
+    for (int i = 1; i <= taille; i++)
+    {
+      
+     
+        strcpy((q->nom),nom);
+        
+        q->type = type ;
+        if (type == TABLEAU || type == STRUCTURE)
+        {
+              q->nature = COMPLEXE ;
+        }
+        else  q->nature = PRIMITIF;
+        q->natureId = VARIABLE ; 
+        if (i != taille)
+        {
+             z =malloc(sizeof(Identifiant));
+        }
+
+        q->suivant = z ;
+        q = z ;
+      
+    }
+    q->suivant = table->Entete_llc ; //lier entre la table des symbole et cette sous-llc
+    
+    return p;
 }
 
 //Affichage de table
@@ -44,14 +106,26 @@ void AfficherTable(Identifiant* tete) {
         if(p->nature == PRIMITIF)
 		    printf("Nature: PRIMITIF\n");
         else
-		    printf("Nature: COMPLEXE\n");
+           printf("Nature: COMPLEXE\n");
+		    
 
         if (p->type == ENTIER)
         {
-            printf("Type: Eniter \n");
+            printf("Type: Entier \n");
+        }
+         if (p->type == BOOLEEN)
+        {
+            printf("Type: BOOL \n");
         }
 
-        printf("Valeur: %s\n", p->valeur);
+        if (p->type==TABLEAU)
+        {
+             printf("Taille: %s\n", p->valeur);
+        }else{
+             printf("Valeur: %s\n", p->valeur);
+        }
+        
+       
         
 		p=p->suivant;
 	}
@@ -69,6 +143,29 @@ Identifiant* rechercherVar(TableIds* table,char* nom  ) {
         }
         p = p->suivant;
     }
+    return NULL;
+}
+
+Identifiant* rechercheElemTab(TableIds* table, char* nom, int index){
+    Identifiant* p = table->Entete_llc;
+    int c = 1;
+    while (c == 1)
+    {
+        if (strcmp(p->nom, nom) == 0)
+        {
+            c=0;
+        }else
+        p = p->suivant;
+    }
+    if (c==0)
+    {
+        for (int i = 1; i <= index ; i++)
+        {
+            p = p->suivant;   
+        }
+        printf("element trouver: %s\n",p->nom);
+        return p;
+    } 
     return NULL;
 }
 
