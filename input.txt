@@ -1,5 +1,6 @@
 DECLARE
-CONST r 4.
+CONST r "bonjour" .
+CONST j 4.
 x num[2].
 y num.
 b bool.
@@ -7,6 +8,6 @@ START
 b<- true.
 b<- not b.
 y<-6.
-x[1]<-y.
+x[1]<-y-3.
 x[2]<-4.
 STOP

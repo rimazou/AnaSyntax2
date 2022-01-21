@@ -54,7 +54,7 @@ Identifiant* declarerConst (TableIds* table, char* nom ,typePossible type, char*
 Identifiant* declarerConstint (TableIds* table, char* nom ,typePossible type, int valeur){
 
     Identifiant* p=NULL;
-    printf("%s  %d\n", nom,valeur);
+    
     p = malloc(sizeof (Identifiant));
    
     strcpy((p->nom),nom);
@@ -91,7 +91,7 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
     {
         
         //strcpy((q->nom),nom);
-        sprintf(q->nom, "%d", i);
+       // sprintf(q->nom, "%d", i);
         q->type = type ;
         if (type == TABLEAU || type == STRUCTURE)
         {
@@ -118,39 +118,29 @@ void AfficherTable(Identifiant* tete) {
     Identifiant* p;
 	p=tete;
 
-    printf("Affichage de la table des IDs \n");
+    printf("\t\tAffichage de la table des symboles \n\n");
+    printf("\tTOKEN\tVALEUR\tTYPE\tNATURE\t\tNATUREID\n\n");
 	while(p!=NULL){
-		printf("Token :%s\n",p->nom);
+		printf("\t%s\t",p->nom);
+        if(p->type== BOOLEEN || p->type== ENTIER || p->type==TABLEAU) printf("%s\t",p->valeur);
+        else   printf("%s\t", p->valeur);
+        if (p->type==ENTIER) printf("entier\t");
+        if (p->type==BOOLEEN) printf("bool\t");
+        if (p->type==CARACTERE) printf("char\t");
+        if (p->type==TEXT) printf("text\t");
+        if (p->type==TABLEAU) printf("tableau\t");
+        
         if(p->nature == PRIMITIF)
-		    printf("Nature: PRIMITIF\n");
+		    printf("PRIMITIF\t");
         else
-           printf("Nature: COMPLEXE\n");
-		    
-
-        if (p->type == ENTIER)
-        {
-            printf("Type: Entier \n");
-        }
-         if (p->type == BOOLEEN)
-        {
-            printf("Type: BOOL \n");
-        }
-
-        if (p->type==TABLEAU)
-        {
-             printf("Taille: %s\n", p->valeur);
-        }else{
-             printf("Valeur: %s\n", p->valeur);
-        }
-
+           printf("COMPLEXE\t");
+		
          if (p->natureId==CONSTANTE)
         {
              printf("CONSTANTE\n");
         }else{
              printf("VARIABLE\n");
         }
-        
-        printf("\n");
         
 		p=p->suivant;
 	}
@@ -188,7 +178,7 @@ Identifiant* rechercheElemTab(TableIds* table, char* nom, int index){
         {
             p = p->suivant;   
         }
-        printf("element trouver: %s\n",p->nom);
+    
         return p;
     } 
     return NULL;
