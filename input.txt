@@ -1,4 +1,5 @@
 DECLARE
+CONST r 4.
 x num[2].
 y num.
 b bool.

@@ -56,9 +56,9 @@ Identifiant* declarerConstint (TableIds* table, char* nom ,typePossible type, in
     Identifiant* p=NULL;
     printf("%s  %d\n", nom,valeur);
     p = malloc(sizeof (Identifiant));
-    printf("%s  %s\n", nom,valeur);
-   // strcpy((p->nom),nom);
-   // sprintf(p->valeur, "%d", valeur);
+   
+    strcpy((p->nom),nom);
+    sprintf(p->valeur, "%d", valeur);
     
     p->type = type ;
     p->nature = PRIMITIF;
