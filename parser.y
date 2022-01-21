@@ -6,6 +6,7 @@
 
 extern TableIds * table = NULL;
 Identifiant* p = NULL;
+Identifiant* q = NULL;
 
 bool erreurSyntax = false;
 extern unsigned int linenbr;
@@ -52,6 +53,7 @@ void yyerror (char const *s);
 %type<num>     expression_arithmetique
 %type<text>     while
 %type<text>     for
+%type<text>     variable
 %type<text>     variable_name
 %type<num>     addition
 %type<num>     soustraction
@@ -158,7 +160,7 @@ instruction:    affectation{
                     printf("Boucle Pour\n");
                     
                 };
-affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
+affectation:  variable TOKEN_ASSIGN expression_arithmetique FININSTR{
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
                         printf("\t\tAffectation sur la variable \n");
                         
@@ -175,7 +177,7 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                         }
                 }
                 |
-                variable_name TOKEN_ASSIGN ExpBool FININSTR{
+                variable TOKEN_ASSIGN ExpBool FININSTR{
                         /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 	
                         			$3 est la valeur du 2nd non terminal. */
                         printf("\t\tAffectation sur la variable \n");
@@ -183,30 +185,48 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                         if(p != NULL) {
                             if(p->type == BOOLEEN){
                             printf("Type correct: %s\n", p->nom);
-                             sprintf(p->valeur, "%s", $3);
+                             sprintf(p->valeur, "%d", $3);
                              }
                             else
                             fprintf(stderr, "Erreur, type attendu: %d, rencontré: BOOLEEN", p->type);
                         }
                 }
-                |variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR
+                |variable TOKEN_ASSIGN TOKEN_CHAR FININSTR
                 ;
+variable:	
+        TOKEN_ID{
+                       
+                        p = rechercherVar(table, $1);
+                      
+                }
+		|
+		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{
+		
+            p = rechercheElemTab(table, $1, $3);
+				
+		}
+		|
+		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
+		//	printf("Acces au champs de la structure \n");
+			
+		};
 
 variable_name:	
         TOKEN_ID{
-                       // $$=$1;
-                        p = rechercherVar(table, $1);
-                        $$=strdup($1);
+                     
+                        q = rechercherVar(table, $1);
+                        $$ = q->valeur;
+                        
                 }
 		|
 		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{
 			printf("Acces a un element  du tableau \n");
-            p = rechercheElemTab(table, $1, $3);
-			//$$=strdup($1[$3]);	
+            q = rechercheElemTab(table, $1, $3);
+			$$= q->valeur;	
 		}
 		|
 		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
-			printf("Acces au champs de la structure \n");
+		//	printf("Acces au champs de la structure \n");
 			//$$=strdup($1.$3);	
 		};
 
@@ -231,27 +251,27 @@ DECLARE:	TOKEN_ID NUM FININSTR{
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_NUMBER FININSTR{
-            table->Entete_llc = declarerConst (table, $2, ENTIER, PRIMITIF, $3); 
+            table->Entete_llc = declarerConstint (table, $2, ENTIER, $3); 
 			printf("Declaration dune constante de type entier\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_TRUE FININSTR{
-            table->Entete_llc = declarerConst (table, $2, BOOLEAN, PRIMITIF, $3);  
+            table->Entete_llc = declarerConstint (table, $2, BOOLEEN, 1);  
 			printf("Declaration dune constante de type booleen\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_FALSE FININSTR{
-             table->Entete_llc = declarerConst (table, $2, BOOLEAN, PRIMITIF, $3);
+             table->Entete_llc = declarerConstint (table, $2, BOOLEEN, 0);
 			printf("Declaration dune constante de type booleen\n");
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_CHAR FININSTR{
-             table->Entete_llc = declarerConst (table, $2, CHARACTER, PRIMITIF, $3); 
+             table->Entete_llc = declarerConst (table, $2, CARACTERE,  $3); 
 			printf("Declaration dune constante de type caractere\n");
 		}
         |
         TOKEN_CONST TOKEN_ID TOKEN_TEXT FININSTR{
-            table->Entete_llc = declarerConst (table, $2, TEXT, PRIMITIF, $3);
+            table->Entete_llc = declarerConst (table, $2, TEXT, $3);
 			printf("Declaration dune constante de type texte \n");
 		}
 		|
@@ -344,9 +364,9 @@ expression_arithmetique: TOKEN_NUMBER{
                                 }
                                 |
                                 variable_name {
-                                    printf("Test %s", $1);
+                                  //  printf("Test %s", $1);
                                    
-                                    $$= atoi(p->valeur);
+                                    $$= atoi($1);
                                 }
                                 ;
 addition:	
@@ -407,7 +427,7 @@ conditionnel :  TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code END {
                 }
 
 ExpBool:
-                 variable_name {  } //verifier si la variable est une variable booleen dans l'analyse semantique
+                 variable_name { $$= atoi($1); } //verifier si la variable est une variable booleen dans l'analyse semantique
                 | Comparaison {$$ = $1;
                 }
                 | TOKEN_FALSE { $$=0; 

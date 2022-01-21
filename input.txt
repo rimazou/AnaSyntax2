@@ -1,10 +1,10 @@
 DECLARE
-CONST c 5.
-x num[3].
+x num[2].
 y num.
 b bool.
 START
 b<- true.
+b<- not b.
 y<-6.
 x[1]<-y.
 x[2]<-4.

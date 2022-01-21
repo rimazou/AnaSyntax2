@@ -16,8 +16,8 @@ typedef enum NatureID NatureID;
 typedef struct Identifiant Identifiant;
 
 struct Identifiant {
-char* nom[25];
-char* valeur; 
+char nom[26];
+char valeur[26]; 
 enum Nature nature;
 enum NatureID natureId;
 enum typePossible type;
@@ -30,8 +30,9 @@ typedef struct
 
 //Definitions
 TableIds* initialisation();
-Identifiant* declarerVar (TableIds* table, char nom[],typePossible type, Nature nature);
+Identifiant* declarerVar (TableIds* table, char* nom,typePossible type, Nature nature);
 Identifiant* declarerConst (TableIds* table, char* nom,typePossible type, char* valeur);
+Identifiant* declarerConstint (TableIds* table, char* nom ,typePossible type, int valeur);
 Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int taille);
 //Identifiant* declarerStruct(TableIds* table, char*nom);
 void AfficherTable(Identifiant* entete);

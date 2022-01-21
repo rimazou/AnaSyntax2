@@ -21,7 +21,7 @@ TableIds* initialisation()
 /*allocation d'un maillon*/
 
 // POUR UNE VARIABLE SIMPLE
-Identifiant* declarerVar (TableIds* table, char* nom,typePossible type, Nature nature)
+Identifiant* declarerVar (TableIds* table, char* nom , typePossible type, Nature nature)
 {
     // nous savons qu'un declaration contient assez d'information pour alouer directement avec des valeurs
     Identifiant* p=NULL;
@@ -36,12 +36,31 @@ Identifiant* declarerVar (TableIds* table, char* nom,typePossible type, Nature n
     return(p);
 }
 //LES CONSTANTES
-Identifiant* declarerConst (TableIds* table, char* nom,typePossible type, char* valeur){
+Identifiant* declarerConst (TableIds* table, char* nom ,typePossible type, char* valeur){
 
     Identifiant* p=NULL;
     p = malloc(sizeof(Identifiant));
     strcpy((p->nom),nom);
     strcpy((p->valeur),valeur);
+     
+    p->type = type ;
+    p->nature = PRIMITIF;
+    p->natureId = CONSTANTE ; 
+    if (p == NULL){exit(1);}
+     p->suivant = table->Entete_llc;
+    return(p);
+}
+
+Identifiant* declarerConstint (TableIds* table, char* nom ,typePossible type, int valeur){
+
+    Identifiant* p=NULL;
+    printf("%s  %d\n", nom,valeur);
+
+    p = malloc(sizeof(Identifiant));
+    printf("%s  %s\n", nom,valeur);
+    strcpy((p->nom),nom);
+    sprintf(p->valeur, "%ld", valeur);
+    
     p->type = type ;
     p->nature = PRIMITIF;
     p->natureId = CONSTANTE ; 
@@ -57,9 +76,8 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
     p = malloc(sizeof(Identifiant));
     strcpy((p->nom),nom);
     p->type = TABLEAU ;
-    strcpy(p->valeur , taille);
-    //IMPORTANT : if la taille contient deux chiffres ex: 12 elle n'est pas recuperer dans p->valeur
-
+    //sprintf(p->valeur, "%d", taille);
+    strcpy(p->valeur, taille);
     p->nature = COMPLEXE ;
     p->natureId = VARIABLE ; 
     // p represente la tete de la sous-llc du tableau
@@ -70,9 +88,8 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
     //q et z c'est pour le parcour de llc
     for (int i = 1; i <= taille; i++)
     {
-      
-     
-        strcpy((q->nom),nom);
+        
+        //strcpy((q->nom),nom);
         
         q->type = type ;
         if (type == TABLEAU || type == STRUCTURE)
@@ -124,8 +141,15 @@ void AfficherTable(Identifiant* tete) {
         }else{
              printf("Valeur: %s\n", p->valeur);
         }
+
+         if (p->natureId==CONSTANTE)
+        {
+             printf("CONSTANTE\n");
+        }else{
+             printf("VARIABLE\n");
+        }
         
-       
+        printf("\n");
         
 		p=p->suivant;
 	}
