@@ -1,5 +1,11 @@
 DECLARE
-x num. y num. z num.
+x num[2].
+y num.
+b bool.
 START
-x <- 2. y <- 3. z <- x+y.
+b<- true.
+b<- not b.
+y<-6.
+x[1]<-y.
+x[2]<-4.
 STOP
