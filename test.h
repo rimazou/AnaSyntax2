@@ -1,7 +1,6 @@
 #ifndef TEST_H_INCLUDED
 #define TEST_H_INCLUDED
 
-#include "parser.tab.h"
 #include <malloc.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,6 +37,8 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
 void AfficherTable(Identifiant* entete);
 Identifiant* rechercherVar(TableIds* table, char* nom);
 Identifiant* rechercheElemTab(TableIds* table, char* nom, int index);
+
+char* typeOf(typePossible type);
 
 
 

@@ -1,5 +1,5 @@
 
-#line 3 "lex.yy.c"
+#line 2 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -543,6 +543,7 @@ char *yytext;
 
 bool erreurLexical = false;
 unsigned int linenbr=1;
+
 #line 547 "lex.yy.c"
 #line 548 "lex.yy.c"
 
@@ -761,11 +762,10 @@ YY_DECL
 		}
 
 	{
-#line 21 "parser.l"
+#line 22 "parser.l"
 
 
-
-#line 769 "lex.yy.c"
+#line 768 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -842,7 +842,7 @@ case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
 #line 30 "parser.l"
-{yylval.text=yytext; return TOKEN_TEXT;} /*Text is a string*/
+{yylval.text=strdup(yytext); return TOKEN_TEXT;} /*Text is a string*/
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
@@ -1106,7 +1106,7 @@ YY_RULE_SETUP
 #line 105 "parser.l"
 ECHO;
 	YY_BREAK
-#line 1110 "lex.yy.c"
+#line 1109 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

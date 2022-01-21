@@ -27,6 +27,7 @@ void yyerror (char const *s);
     char* text;
     char CHARACTER;
     int BOOLEAN;
+    Identifiant *varId;
 }
 
 /* regles d'associativites: l'ordre de priorite est inverse a celui de lex, last one is plus prioritaire*/
@@ -53,8 +54,7 @@ void yyerror (char const *s);
 %type<num>     expression_arithmetique
 %type<text>     while
 %type<text>     for
-%type<text>     variable
-%type<text>     variable_name
+%type<varId>     variable_name
 %type<num>     addition
 %type<num>     soustraction
 %type<num>     multiplication
@@ -160,74 +160,60 @@ instruction:    affectation{
                     printf("Boucle Pour\n");
                     
                 };
-affectation:  variable TOKEN_ASSIGN expression_arithmetique FININSTR{
-                        /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 				$3 est la valeur du 2nd non terminal. */
-                        printf("\t\tAffectation sur la variable \n");
-                        
-                        if(p != NULL) {
-                            if(p->type == ENTIER){
-                                printf("Type correct: %s\n", p->nom);
-                                sprintf(p->valeur, "%ld", $3);
+affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{                    
+                        if($1 != NULL) {
+                            if($1->type == ENTIER){
+                                printf("Type correct: %s\n", $1->nom);
+                                sprintf($1->valeur, "%ld", $3);
+                            }
+                            else {
+                                fprintf(stderr, "Erreur, type attendu: %s, trouvé: ENTIER\n", typeOf($1->type));
+                                exit(1);
                             }
                         }
                         else {
-                            fprintf(stderr, "ERREUR: Identifiant %s non declare.", $1);
+                            fprintf(stderr, "ERREUR: Identifiant non declare");
                             yyerror("Compilation interrompue");
                             exit(1);
                         }
                 }
                 |
-                variable TOKEN_ASSIGN ExpBool FININSTR{
-                        /* $1 est la valeur du premier non terminal. Ici c'est la valeur du non terminal variable. 	
-                        			$3 est la valeur du 2nd non terminal. */
-                        printf("\t\tAffectation sur la variable \n");
-                       
-                        if(p != NULL) {
-                            if(p->type == BOOLEEN){
-                            printf("Type correct: %s\n", p->nom);
-                             sprintf(p->valeur, "%d", $3);
+                variable_name TOKEN_ASSIGN ExpBool FININSTR{
+                        if($1 != NULL) {
+                            if($1->type == BOOLEEN){
+                            printf("Type correct: %s\n", $1->nom);
+                             sprintf($1->valeur, "%d", $3);
                              }
-                            else
-                            fprintf(stderr, "Erreur, type attendu: %d, rencontré: BOOLEEN", p->type);
+                            else {
+                                fprintf(stderr, "Erreur dans, type attendu: %s, trouvé: BOOLEEN\n", typeOf($1->type));
+                                exit(1);
+                            }
+                        }
+                        else {
+                            fprintf(stderr, "ERREUR: Identifiant non declare.");
+                            yyerror("Compilation interrompue");
+                            exit(1);
                         }
                 }
-                |variable TOKEN_ASSIGN TOKEN_CHAR FININSTR
+                |variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR
                 ;
-variable:	
-        TOKEN_ID{
-                       
-                        p = rechercherVar(table, $1);
-                      
-                }
-		|
-		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{
-		
-            p = rechercheElemTab(table, $1, $3);
-				
-		}
-		|
-		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
-		//	printf("Acces au champs de la structure \n");
-			
-		};
+
 
 variable_name:	
         TOKEN_ID{
-                     
-                        q = rechercherVar(table, $1);
-                        $$ = q->valeur;
+                        Identifiant *m = rechercherVar(table, $1);
                         
+                        $$ = m;
+                            
                 }
 		|
 		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{
 			printf("Acces a un element  du tableau \n");
             q = rechercheElemTab(table, $1, $3);
-			$$= q->valeur;	
+			$$= q;	
 		}
 		|
 		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
-		//	printf("Acces au champs de la structure \n");
-			//$$=strdup($1.$3);	
 		};
 
 DECLARE:	TOKEN_ID NUM FININSTR{
@@ -331,84 +317,54 @@ expression : 	expression_arithmetique{
 		
 		}; 
 
-expression_arithmetique: TOKEN_NUMBER{
-                                        //printf("\t\t\tNombre : %ld\n",$1);
- /* Comme le token TOK_NOMBRE est de type entier et que on a type expression_arithmetique comme du texte, il nous faut convertir la valeur en texte. */
-                                      /*  int length=snprintf(NULL,0,"%ld",$1);
-                                        char* str=malloc(length+1);
-                                        snprintf(str,length+1,"%ld",$1);*/
-                                        //$$=strdup(str);
-                                        $$=$1;
-                                       // free(str);
-                                }
-                                |
-                                addition{
-                                }
-                                |
-                                soustraction{
-                                }
-                                |
-                                multiplication{
-                                }
-                                |
-                                division{
-                                }
-                                |
-                                modulo{
-                                }
-                                |
-                                PARENTHESE_G expression_arithmetique PARENTHESE_D{
-                                       // printf("\t\t\tCest une expression artihmetique entre parentheses\n");
-                                        //$$=strcat(strcat(strdup("("),strdup($2)),strdup(")"));
-                                        $$=$2;
-                                }
-                                |
-                                variable_name {
-                                  //  printf("Test %s", $1);
-                                   
-                                    $$= atoi($1);
-                                }
-                                ;
+expression_arithmetique: 
+    TOKEN_NUMBER{ $$=$1;}
+    |
+    addition
+    |
+    soustraction
+    |
+    multiplication
+    |
+    division
+    |
+    modulo
+    |
+    PARENTHESE_G expression_arithmetique PARENTHESE_D {$$=$2;}
+    |
+    variable_name {
+        if ($1 != NULL) {
+            if ($1->type != ENTIER) {
+                fprintf(stderr, "Erreur variable %s, son type est : %s, type attendu: ENTIER \n", $1->nom, typeOf($1->type) );
+                exit(1);
+            } 
+            else {
+                $$= atoi($1->valeur);
+            }
+        } else {
+            fprintf(stderr, "symbol non définit");
+            exit(1);
+        }
+            
+    }
+    ;
 addition:	
-    expression_arithmetique TOKEN_ADD expression_arithmetique{
-        //printf("\t\t\tAddition\n");
-        //$$=strcat(strcat(strdup($1),strdup("+")),strdup($3));
-        $$=$1+$3;
-    };
-soustraction:	
-    expression_arithmetique TOKEN_SOUSTR expression_arithmetique{
-       // printf("\t\t\tSoustraction\n");
-        //$$=strcat(strcat(strdup($1),strdup("-")),strdup($3));
-        $$=$1-$3;
-    };
+    expression_arithmetique TOKEN_ADD expression_arithmetique {$$=$1+$3;};
+soustraction: 
+    expression_arithmetique TOKEN_SOUSTR expression_arithmetique {$$=$1-$3;};
 multiplication:	
-    expression_arithmetique TOKEN_MULT expression_arithmetique{
-        //printf("\t\t\tMultiplication\n");
-        //$$=strcat(strcat(strdup($1),strdup("*")),strdup($3));
-        $$=$1*$3;
-    };
+    expression_arithmetique TOKEN_MULT expression_arithmetique {$$=$1*$3;};
 division:	
-    expression_arithmetique TOKEN_DIVIS expression_arithmetique{
-       // printf("\t\t\tDivision\n");
-        //$$=strcat(strcat(strdup($1),strdup("/")),strdup($3));
-        $$=$1/$3;
-    };
+    expression_arithmetique TOKEN_DIVIS expression_arithmetique { $$=$1/$3;};
 modulo:	
-    expression_arithmetique TOKEN_MOD expression_arithmetique{
-        printf("\t\t\tModulo\n");
-        //$$=strcat(strcat(strdup($1),strdup("%")),strdup($3));
-        $$=$1%$3;
-    };
+    expression_arithmetique TOKEN_MOD expression_arithmetique { $$=$1%$3; };
 
-ecriture:	TOKEN_WRITE variable_name FININSTR{
-	//	printf("ecriture");
-		}
-        |TOKEN_WRITE TOKEN_TEXT FININSTR {}
+ecriture:	TOKEN_WRITE variable_name FININSTR {}
+        |
+        TOKEN_WRITE TOKEN_TEXT FININSTR
         ;
 
-lecture:	TOKEN_READ variable_name FININSTR{
-	//	printf("lecture");
-		};		
+lecture:	TOKEN_READ variable_name FININSTR;		
 while :         TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code END{
                     
                 };
@@ -427,33 +383,54 @@ conditionnel :  TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code END {
                 }
 
 ExpBool:
-                 variable_name { $$= atoi($1); } //verifier si la variable est une variable booleen dans l'analyse semantique
-                | Comparaison {$$ = $1;
-                }
-                | TOKEN_FALSE { $$=0; 
-                }
-                | TOKEN_TRUE  { $$=1; 
-                }
-                | PARENTHESE_G ExpBool PARENTHESE_D { $$=$2;
-                 }
-                | TOKEN_NOT ExpBool { $$=!$2; 
-                }
-                | ExpBool TOKEN_AND ExpBool { $$=($1)&&($3); 
-                }
-                | ExpBool TOKEN_OR ExpBool  { $$=($1)||($3); 
-                }
+    variable_name { 
+        if ($1 != NULL) {
+            if ($1->type != ENTIER) {
+                fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: ENTIER \n", $1->nom, typeOf($1->type));
+                exit(1);
+            } 
+            else {
+                $$= atoi($1->valeur);
+            }
+        } else {
+            fprintf(stderr, "symbol non définit");
+            exit(1);
+        }
+    } 
+    | Comparaison {$$ = $1;}
+    | TOKEN_FALSE { $$=0;}
+    | TOKEN_TRUE  { $$=1; }
+    | PARENTHESE_G ExpBool PARENTHESE_D { $$=$2;}
+    | TOKEN_NOT ExpBool { $$=!$2;}
+    | ExpBool TOKEN_AND ExpBool { $$=($1)&&($3); }
+    | ExpBool TOKEN_OR ExpBool  { $$=($1)||($3); }
   ;
 Comparaison:
-                 comparable TOKEN_EGAL comparable { $$=($1 == $3); }
-                | comparable TOKEN_DIFF comparable { $$=($1 != $3); }
-                | comparable TOKEN_SUP comparable { $$=($1 > $3); }
-                | comparable TOKEN_SUPEGAL comparable { $$=($1 >= $3); }
-                | comparable TOKEN_INF comparable { $$=($1 < $3); }
-                | comparable TOKEN_INFEGAL comparable { $$=($1 <= $3); }
-                ;
+    comparable TOKEN_EGAL comparable { $$=($1 == $3); }
+    | comparable TOKEN_DIFF comparable { $$=($1 != $3); }
+    | comparable TOKEN_SUP comparable { $$=($1 > $3); }
+    | comparable TOKEN_SUPEGAL comparable { $$=($1 >= $3); }
+    | comparable TOKEN_INF comparable { $$=($1 < $3); }
+    | comparable TOKEN_INFEGAL comparable { $$=($1 <= $3); }
+    ;
 comparable:
-                 TOKEN_NUMBER | variable_name
-                 ;
+    TOKEN_NUMBER
+    |
+    variable_name {
+    if ($1 != NULL) {
+        if ($1->type != ENTIER) {
+            fprintf(stderr, "Erreur variable %s, son type est : %s, type attendu: ENTIER \n", $1->nom, typeOf($1->type) );
+            exit(1);
+        } 
+        else {
+            $$= atoi($1->valeur);
+        }
+    } else {
+        fprintf(stderr, "symbol non définit");
+        exit(1);
+    }
+    }
+    ;
                               
                 
 %%

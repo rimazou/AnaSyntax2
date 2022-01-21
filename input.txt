@@ -6,8 +6,8 @@ y num.
 b bool.
 START
 b<- true.
-b<- not b.
+**b<- not b.
 y<-6.
-x[1]<-y-3.
+x[1]<-y-b.
 x[2]<-4.
 STOP

@@ -184,6 +184,33 @@ Identifiant* rechercheElemTab(TableIds* table, char* nom, int index){
     return NULL;
 }
 
+char* typeOf(typePossible type) {
+    switch (type)
+    {
+    case ENTIER:
+        return "ENTIER";
+        break;
+    case BOOLEEN:
+        return "BOOLEEN";
+        break;
+    case CARACTERE:
+        return "CARACTERE";
+        break;
+    case TEXT:
+        return "TEXT";
+        break;
+    case TABLEAU:
+        return "TABLEAU";
+        break;
+    case STRUCTURE:
+        return "STRUCTURE";
+        break;
+    default:
+        return "N/A";
+        break;
+    }
+}
+
 /*
 Identifiant* garbage (char nom[],typePossible type, Nature nature)
 {

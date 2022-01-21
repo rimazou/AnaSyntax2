@@ -4,6 +4,7 @@
 
 bool erreurLexical = false;
 unsigned int linenbr=1;
+
 %}
 
 
@@ -20,14 +21,13 @@ everything .
 
 %%
 
-
 \*{3}({everything}|\n)*\*{3} {} /* can be used with files only */
 
 \*{2}{everything}* {}
 
 \'{everything}\' {yylval.CHARACTER=yytext[0];  return TOKEN_CHAR;}
 
-\"(\\.|[^"\\])*\" {yylval.text=yytext; return TOKEN_TEXT;} /*Text is a string*/
+\"(\\.|[^"\\])*\" {yylval.text=strdup(yytext); return TOKEN_TEXT;} /*Text is a string*/
 
 
 {digit}+ {yylval.num=atoi(yytext); return TOKEN_NUMBER;}
