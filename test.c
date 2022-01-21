@@ -55,11 +55,10 @@ Identifiant* declarerConstint (TableIds* table, char* nom ,typePossible type, in
 
     Identifiant* p=NULL;
     printf("%s  %d\n", nom,valeur);
-
-    p = malloc(sizeof(Identifiant));
+    p = malloc(sizeof (Identifiant));
     printf("%s  %s\n", nom,valeur);
-    strcpy((p->nom),nom);
-    sprintf(p->valeur, "%ld", valeur);
+   // strcpy((p->nom),nom);
+   // sprintf(p->valeur, "%d", valeur);
     
     p->type = type ;
     p->nature = PRIMITIF;
@@ -74,10 +73,12 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
     if (taille<=0){exit(1);}
     Identifiant* p = NULL;
     p = malloc(sizeof(Identifiant));
+    
     strcpy((p->nom),nom);
+    
     p->type = TABLEAU ;
-    //sprintf(p->valeur, "%d", taille);
-    strcpy(p->valeur, taille);
+    sprintf(p->valeur, "%d", taille);
+    //strcpy(p->valeur, taille);
     p->nature = COMPLEXE ;
     p->natureId = VARIABLE ; 
     // p represente la tete de la sous-llc du tableau
@@ -90,7 +91,7 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
     {
         
         //strcpy((q->nom),nom);
-        
+        sprintf(q->nom, "%d", i);
         q->type = type ;
         if (type == TABLEAU || type == STRUCTURE)
         {

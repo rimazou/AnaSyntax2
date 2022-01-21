@@ -836,7 +836,7 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 28 "parser.l"
-{yylval.CHARACTER=yytext[1];  return TOKEN_CHAR;}
+{yylval.CHARACTER=yytext[0];  return TOKEN_CHAR;}
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
