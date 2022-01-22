@@ -75,6 +75,9 @@
 
 
 extern TableIds * table = NULL;
+extern TableStructures * tableStruct = NULL;
+extern BufferLLC* champBuffer = NULL;
+
 Identifiant* p = NULL;
 Identifiant* q = NULL;
 
@@ -87,7 +90,7 @@ int yylex(void);
 void yyerror (char const *s);
 
 
-#line 91 "parser.tab.c"
+#line 94 "parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -577,15 +580,15 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   128,   128,   130,   130,   130,   133,   133,   135,   140,
-     145,   150,   154,   159,   163,   181,   198,   203,   210,   216,
-     219,   225,   232,   239,   244,   249,   254,   259,   264,   269,
-     274,   279,   283,   287,   290,   292,   295,   297,   299,   301,
-     303,   305,   307,   309,   321,   323,   325,   327,   329,   331,
-     333,   335,   352,   354,   356,   358,   360,   362,   364,   367,
-     368,   371,   375,   378,   381,   386,   400,   401,   402,   403,
-     404,   405,   406,   409,   410,   411,   412,   413,   414,   417,
-     419
+       0,   131,   131,   133,   133,   133,   136,   136,   138,   143,
+     148,   153,   157,   162,   166,   184,   201,   206,   213,   219,
+     224,   230,   237,   244,   249,   254,   259,   265,   270,   275,
+     280,   285,   289,   306,   315,   317,   321,   329,   336,   343,
+     350,   357,   364,   371,   385,   387,   389,   391,   393,   395,
+     397,   399,   416,   418,   420,   422,   424,   426,   428,   431,
+     432,   435,   439,   442,   445,   450,   464,   465,   466,   467,
+     468,   469,   470,   473,   474,   475,   476,   477,   478,   481,
+     483
 };
 #endif
 
@@ -1301,66 +1304,66 @@ yyreduce:
   switch (yyn)
     {
   case 5: /* bloc_code: error bloc_code  */
-#line 130 "parser.y"
+#line 133 "parser.y"
                                                                   {printf("erreur syntaxique a la ligne %d",linenbr);erreurSyntax=true;}
-#line 1307 "parser.tab.c"
+#line 1310 "parser.tab.c"
     break;
 
   case 8: /* instruction: affectation  */
-#line 135 "parser.y"
+#line 138 "parser.y"
                            {
 			printf("\tInstruction Affectation\n");
 
                 }
-#line 1316 "parser.tab.c"
+#line 1319 "parser.tab.c"
     break;
 
   case 9: /* instruction: lecture  */
-#line 140 "parser.y"
+#line 143 "parser.y"
                        {
 			printf("\tInstruction Lecture\n");
 
                 }
-#line 1325 "parser.tab.c"
+#line 1328 "parser.tab.c"
     break;
 
   case 10: /* instruction: ecriture  */
-#line 145 "parser.y"
+#line 148 "parser.y"
                         {
 			printf("\tInstruction ecriture\n");
 
                 }
-#line 1334 "parser.tab.c"
+#line 1337 "parser.tab.c"
     break;
 
   case 11: /* instruction: conditionnel  */
-#line 150 "parser.y"
+#line 153 "parser.y"
                             {
                     printf(" instruction conditionnel\n");
                 }
-#line 1342 "parser.tab.c"
+#line 1345 "parser.tab.c"
     break;
 
   case 12: /* instruction: while  */
-#line 154 "parser.y"
+#line 157 "parser.y"
                      {
                     printf("Boucle Tant que\n");
                     
                 }
-#line 1351 "parser.tab.c"
+#line 1354 "parser.tab.c"
     break;
 
   case 13: /* instruction: for  */
-#line 159 "parser.y"
+#line 162 "parser.y"
                    {
                     printf("Boucle Pour\n");
                     
                 }
-#line 1360 "parser.tab.c"
+#line 1363 "parser.tab.c"
     break;
 
   case 14: /* affectation: variable_name TOKEN_ASSIGN expression_arithmetique FININSTR  */
-#line 163 "parser.y"
+#line 166 "parser.y"
                                                                          {                    
                         if((yyvsp[-3].varId) != NULL) {
                             if((yyvsp[-3].varId)->type == ENTIER){
@@ -1373,16 +1376,16 @@ yyreduce:
                             }
                         }
                         else {
-                            fprintf(stderr, "ERREUR: Identifiant non declare");
-                            yyerror("Compilation interrompue");
+                            fprintf(stderr, "ERREUR: Identifiant non declare\n");
+                            yyerror("Compilation interrompue\n");
                             exit(1);
                         }
                 }
-#line 1382 "parser.tab.c"
+#line 1385 "parser.tab.c"
     break;
 
   case 15: /* affectation: variable_name TOKEN_ASSIGN ExpBool FININSTR  */
-#line 181 "parser.y"
+#line 184 "parser.y"
                                                            {
                         if((yyvsp[-3].varId) != NULL) {
                             if((yyvsp[-3].varId)->type == BOOLEEN){
@@ -1400,240 +1403,299 @@ yyreduce:
                             exit(1);
                         }
                 }
-#line 1404 "parser.tab.c"
+#line 1407 "parser.tab.c"
     break;
 
   case 17: /* variable_name: TOKEN_ID  */
-#line 203 "parser.y"
+#line 206 "parser.y"
                 {
                         Identifiant *m = rechercherVar(table, (yyvsp[0].text));
                         
                         (yyval.varId) = m;
                             
                 }
-#line 1415 "parser.tab.c"
+#line 1418 "parser.tab.c"
     break;
 
   case 18: /* variable_name: TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D  */
-#line 210 "parser.y"
+#line 213 "parser.y"
                                                                     {
 			printf("Acces a un element  du tableau \n");
             q = rechercheElemTab(table, (yyvsp[-3].text), (yyvsp[-1].num));
 			(yyval.varId)= q;	
 		}
-#line 1425 "parser.tab.c"
+#line 1428 "parser.tab.c"
     break;
 
   case 19: /* variable_name: TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID  */
-#line 216 "parser.y"
+#line 219 "parser.y"
                                                 {
+            char * nom = strcat( strcat((yyvsp[-2].text), ":"), (yyvsp[0].text));
+            (yyval.varId) = rechercherVar(table, nom);
 		}
-#line 1432 "parser.tab.c"
+#line 1437 "parser.tab.c"
     break;
 
   case 20: /* DECLARE: TOKEN_ID NUM FININSTR  */
-#line 219 "parser.y"
+#line 224 "parser.y"
                                      {
    
             table->Entete_llc = declarerVar (table, (yyvsp[-2].text), ENTIER, PRIMITIF);
 			printf("Declaration dun entier\n");
 		}
-#line 1442 "parser.tab.c"
+#line 1447 "parser.tab.c"
     break;
 
   case 21: /* DECLARE: TOKEN_ID BOOL FININSTR  */
-#line 225 "parser.y"
+#line 230 "parser.y"
                                       {
         
         table->Entete_llc  = declarerVar (table, (yyvsp[-2].text),BOOLEEN, PRIMITIF);
   
 			printf("Declaration dun booleen\n");
 		}
-#line 1453 "parser.tab.c"
+#line 1458 "parser.tab.c"
     break;
 
   case 22: /* DECLARE: TOKEN_ID CHAR FININSTR  */
-#line 232 "parser.y"
+#line 237 "parser.y"
                                       {
           
             table->Entete_llc= declarerVar (table, (yyvsp[-2].text),CARACTERE, PRIMITIF);
             
 			printf("Declaration dun caractere\n");
 		}
-#line 1464 "parser.tab.c"
+#line 1469 "parser.tab.c"
     break;
 
   case 23: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_NUMBER FININSTR  */
-#line 239 "parser.y"
+#line 244 "parser.y"
                                                           {
             table->Entete_llc = declarerConstint (table, (yyvsp[-2].text), ENTIER, (yyvsp[-1].num)); 
 			printf("Declaration dune constante de type entier\n");
 		}
-#line 1473 "parser.tab.c"
+#line 1478 "parser.tab.c"
     break;
 
   case 24: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_TRUE FININSTR  */
-#line 244 "parser.y"
+#line 249 "parser.y"
                                                         {
             table->Entete_llc = declarerConstint (table, (yyvsp[-2].text), BOOLEEN, 1);  
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1482 "parser.tab.c"
+#line 1487 "parser.tab.c"
     break;
 
   case 25: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_FALSE FININSTR  */
-#line 249 "parser.y"
+#line 254 "parser.y"
                                                          {
              table->Entete_llc = declarerConstint (table, (yyvsp[-2].text), BOOLEEN, 0);
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1491 "parser.tab.c"
+#line 1496 "parser.tab.c"
     break;
 
   case 26: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_CHAR FININSTR  */
-#line 254 "parser.y"
+#line 259 "parser.y"
                                                         {
-             table->Entete_llc = declarerConst (table, (yyvsp[-2].text), CARACTERE,  (yyvsp[-1].CHARACTER)); 
+            char medium[2] = {(yyvsp[-1].CHARACTER), '\0'};
+             table->Entete_llc = declarerConst (table, (yyvsp[-2].text), CARACTERE,  medium); 
 			printf("Declaration dune constante de type caractere\n");
 		}
-#line 1500 "parser.tab.c"
+#line 1506 "parser.tab.c"
     break;
 
   case 27: /* DECLARE: TOKEN_CONST TOKEN_ID TOKEN_TEXT FININSTR  */
-#line 259 "parser.y"
+#line 265 "parser.y"
                                                 {
             table->Entete_llc = declarerConst (table, (yyvsp[-2].text), TEXT, (yyvsp[-1].text));
 			printf("Declaration dune constante de type texte \n");
 		}
-#line 1509 "parser.tab.c"
+#line 1515 "parser.tab.c"
     break;
 
   case 28: /* DECLARE: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 264 "parser.y"
+#line 270 "parser.y"
                                                                       {
             table->Entete_llc = declarerTab(table, (yyvsp[-5].text), ENTIER, (yyvsp[-2].num));
 			printf("Declaration dun tableau de type entier et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1518 "parser.tab.c"
+#line 1524 "parser.tab.c"
     break;
 
   case 29: /* DECLARE: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 269 "parser.y"
+#line 275 "parser.y"
                                                                        {
 		    table->Entete_llc = declarerTab(table, (yyvsp[-5].text), BOOLEEN, (yyvsp[-2].num));
             printf("Declaration dun tableau de type booleen et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1527 "parser.tab.c"
+#line 1533 "parser.tab.c"
     break;
 
   case 30: /* DECLARE: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 274 "parser.y"
+#line 280 "parser.y"
                                                                        {
             table->Entete_llc = declarerTab(table, (yyvsp[-5].text), CARACTERE, (yyvsp[-2].num));
 			printf("Declaration dun tableau de type caractere et de taille %d\n",(yyvsp[-2].num));
 		}
-#line 1536 "parser.tab.c"
+#line 1542 "parser.tab.c"
     break;
 
   case 31: /* DECLARE: TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 279 "parser.y"
+#line 285 "parser.y"
                                                                            {
 			printf("Declaration dun tableau de type structure %s et de taille %d\n",(yyvsp[-4].text),(yyvsp[-2].num));
 		}
-#line 1544 "parser.tab.c"
+#line 1550 "parser.tab.c"
     break;
 
   case 32: /* DECLARE: TOKEN_ID TOKEN_ID FININSTR  */
-#line 283 "parser.y"
+#line 289 "parser.y"
                                           {
-			printf("Declaration dune structure");
+            Structure * p = rechercherStructure(tableStruct, (yyvsp[-1].text));
+            if (p != NULL) {
+                //Insertion du symbol de la structure
+                table->Entete_llc= declarerVar(table, (yyvsp[-2].text), STRUCTURE, COMPLEXE);
+
+                //Insertion des symboles
+                declarerChampsDeVariableDeTypeStructure(table, p, (yyvsp[-2].text));
+            } else {
+                fprintf(stderr, "Structure %s non definit.\n", (yyvsp[-1].text));
+                exit(1); 
+            }
+            
+
+			printf("Declaration dune variable de type structure\n");
 		}
-#line 1552 "parser.tab.c"
+#line 1571 "parser.tab.c"
     break;
 
   case 33: /* DECLARE: TOKEN_STRUCT TOKEN_ID ACCOLAD_G LISTE ACCOLAD_D FININSTR  */
-#line 287 "parser.y"
+#line 306 "parser.y"
                                                                         {
-			printf("Creation dune structure");
+            tableStruct->tete = declarerStructure(tableStruct, (yyvsp[-4].text));
+
+            //On lie les champs déclaré avec leur structure, qui vien detre déclaré
+            linkChampsDeStructure(tableStruct->tete, champBuffer);
+
+            champBuffer = NULL;
+			printf("Creation dune structure\n");
 		}
-#line 1560 "parser.tab.c"
-    break;
-
-  case 34: /* LISTE: %empty  */
-#line 290 "parser.y"
-                      {}
-#line 1566 "parser.tab.c"
-    break;
-
-  case 35: /* LISTE: LISTE CHAMP  */
-#line 292 "parser.y"
-                           {
-		}
-#line 1573 "parser.tab.c"
-    break;
-
-  case 36: /* CHAMP: TOKEN_ID NUM FININSTR  */
-#line 295 "parser.y"
-                                     {}
-#line 1579 "parser.tab.c"
-    break;
-
-  case 37: /* CHAMP: TOKEN_ID BOOL FININSTR  */
-#line 297 "parser.y"
-                                      {}
 #line 1585 "parser.tab.c"
     break;
 
-  case 38: /* CHAMP: TOKEN_ID CHAR FININSTR  */
-#line 299 "parser.y"
-                                      {}
+  case 34: /* LISTE: %empty  */
+#line 315 "parser.y"
+                      {}
 #line 1591 "parser.tab.c"
     break;
 
-  case 39: /* CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 301 "parser.y"
-                                                                      {}
-#line 1597 "parser.tab.c"
+  case 35: /* LISTE: LISTE CHAMP  */
+#line 317 "parser.y"
+                           {
+		}
+#line 1598 "parser.tab.c"
     break;
 
-  case 40: /* CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 303 "parser.y"
-                                                                       {}
-#line 1603 "parser.tab.c"
+  case 36: /* CHAMP: TOKEN_ID NUM FININSTR  */
+#line 321 "parser.y"
+                         {
+        if(champBuffer == NULL){
+            champBuffer = initialisationBuffer();
+        }
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-2].text), ENTIER, 0);
+    }
+#line 1610 "parser.tab.c"
     break;
 
-  case 41: /* CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 305 "parser.y"
-                                                                       {}
-#line 1609 "parser.tab.c"
-    break;
-
-  case 42: /* CHAMP: TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
-#line 307 "parser.y"
-                                                                   {}
-#line 1615 "parser.tab.c"
-    break;
-
-  case 43: /* CHAMP: TOKEN_ID TOKEN_ID FININSTR  */
-#line 309 "parser.y"
-                                          {}
+  case 37: /* CHAMP: TOKEN_ID BOOL FININSTR  */
+#line 329 "parser.y"
+                          {
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-2].text), BOOLEEN, 0);
+    }
 #line 1621 "parser.tab.c"
     break;
 
+  case 38: /* CHAMP: TOKEN_ID CHAR FININSTR  */
+#line 336 "parser.y"
+                          {
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-2].text), CARACTERE, 0);
+    }
+#line 1632 "parser.tab.c"
+    break;
+
+  case 39: /* CHAMP: TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
+#line 343 "parser.y"
+                                                          {
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
+    }
+#line 1643 "parser.tab.c"
+    break;
+
+  case 40: /* CHAMP: TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
+#line 350 "parser.y"
+                                                           {
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
+    }
+#line 1654 "parser.tab.c"
+    break;
+
+  case 41: /* CHAMP: TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
+#line 357 "parser.y"
+                                                           {
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
+    }
+#line 1665 "parser.tab.c"
+    break;
+
+  case 42: /* CHAMP: TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR  */
+#line 364 "parser.y"
+                                                               {
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
+    }
+#line 1676 "parser.tab.c"
+    break;
+
+  case 43: /* CHAMP: TOKEN_ID TOKEN_ID FININSTR  */
+#line 371 "parser.y"
+                              {
+    }
+#line 1683 "parser.tab.c"
+    break;
+
   case 44: /* expression_arithmetique: TOKEN_NUMBER  */
-#line 321 "parser.y"
+#line 385 "parser.y"
                 { (yyval.num)=(yyvsp[0].num);}
-#line 1627 "parser.tab.c"
+#line 1689 "parser.tab.c"
     break;
 
   case 50: /* expression_arithmetique: PARENTHESE_G expression_arithmetique PARENTHESE_D  */
-#line 333 "parser.y"
+#line 397 "parser.y"
                                                       {(yyval.num)=(yyvsp[-1].num);}
-#line 1633 "parser.tab.c"
+#line 1695 "parser.tab.c"
     break;
 
   case 51: /* expression_arithmetique: variable_name  */
-#line 335 "parser.y"
+#line 399 "parser.y"
                   {
         if ((yyvsp[0].varId) != NULL) {
             if ((yyvsp[0].varId)->type != ENTIER) {
@@ -1649,87 +1711,87 @@ yyreduce:
         }
             
     }
-#line 1653 "parser.tab.c"
+#line 1715 "parser.tab.c"
     break;
 
   case 52: /* addition: expression_arithmetique TOKEN_ADD expression_arithmetique  */
-#line 352 "parser.y"
+#line 416 "parser.y"
                                                               {(yyval.num)=(yyvsp[-2].num)+(yyvsp[0].num);}
-#line 1659 "parser.tab.c"
-    break;
-
-  case 53: /* soustraction: expression_arithmetique TOKEN_SOUSTR expression_arithmetique  */
-#line 354 "parser.y"
-                                                                 {(yyval.num)=(yyvsp[-2].num)-(yyvsp[0].num);}
-#line 1665 "parser.tab.c"
-    break;
-
-  case 54: /* multiplication: expression_arithmetique TOKEN_MULT expression_arithmetique  */
-#line 356 "parser.y"
-                                                               {(yyval.num)=(yyvsp[-2].num)*(yyvsp[0].num);}
-#line 1671 "parser.tab.c"
-    break;
-
-  case 55: /* division: expression_arithmetique TOKEN_DIVIS expression_arithmetique  */
-#line 358 "parser.y"
-                                                                { (yyval.num)=(yyvsp[-2].num)/(yyvsp[0].num);}
-#line 1677 "parser.tab.c"
-    break;
-
-  case 56: /* modulo: expression_arithmetique TOKEN_MOD expression_arithmetique  */
-#line 360 "parser.y"
-                                                              { (yyval.num)=(yyvsp[-2].num)%(yyvsp[0].num); }
-#line 1683 "parser.tab.c"
-    break;
-
-  case 57: /* ecriture: TOKEN_WRITE variable_name FININSTR  */
-#line 362 "parser.y"
-                                                   {}
-#line 1689 "parser.tab.c"
-    break;
-
-  case 60: /* while: TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code END  */
-#line 368 "parser.y"
-                                                             {
-                    
-                }
-#line 1697 "parser.tab.c"
-    break;
-
-  case 61: /* for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END  */
-#line 371 "parser.y"
-                                                                                                             {
-
-                }
-#line 1705 "parser.tab.c"
-    break;
-
-  case 62: /* for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code END  */
-#line 375 "parser.y"
-                                                                               {
-
-                }
-#line 1713 "parser.tab.c"
-    break;
-
-  case 63: /* conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code END  */
-#line 378 "parser.y"
-                                                            {
-
-                }
 #line 1721 "parser.tab.c"
     break;
 
+  case 53: /* soustraction: expression_arithmetique TOKEN_SOUSTR expression_arithmetique  */
+#line 418 "parser.y"
+                                                                 {(yyval.num)=(yyvsp[-2].num)-(yyvsp[0].num);}
+#line 1727 "parser.tab.c"
+    break;
+
+  case 54: /* multiplication: expression_arithmetique TOKEN_MULT expression_arithmetique  */
+#line 420 "parser.y"
+                                                               {(yyval.num)=(yyvsp[-2].num)*(yyvsp[0].num);}
+#line 1733 "parser.tab.c"
+    break;
+
+  case 55: /* division: expression_arithmetique TOKEN_DIVIS expression_arithmetique  */
+#line 422 "parser.y"
+                                                                { (yyval.num)=(yyvsp[-2].num)/(yyvsp[0].num);}
+#line 1739 "parser.tab.c"
+    break;
+
+  case 56: /* modulo: expression_arithmetique TOKEN_MOD expression_arithmetique  */
+#line 424 "parser.y"
+                                                              { (yyval.num)=(yyvsp[-2].num)%(yyvsp[0].num); }
+#line 1745 "parser.tab.c"
+    break;
+
+  case 57: /* ecriture: TOKEN_WRITE variable_name FININSTR  */
+#line 426 "parser.y"
+                                                   {}
+#line 1751 "parser.tab.c"
+    break;
+
+  case 60: /* while: TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code END  */
+#line 432 "parser.y"
+                                                             {
+                    
+                }
+#line 1759 "parser.tab.c"
+    break;
+
+  case 61: /* for: TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END  */
+#line 435 "parser.y"
+                                                                                                             {
+
+                }
+#line 1767 "parser.tab.c"
+    break;
+
+  case 62: /* for: TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code END  */
+#line 439 "parser.y"
+                                                                               {
+
+                }
+#line 1775 "parser.tab.c"
+    break;
+
+  case 63: /* conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code END  */
+#line 442 "parser.y"
+                                                            {
+
+                }
+#line 1783 "parser.tab.c"
+    break;
+
   case 64: /* conditionnel: TOKEN_IF ExpBool TOKEN_BEGIN bloc_code TOKEN_ELSE bloc_code END  */
-#line 381 "parser.y"
+#line 445 "parser.y"
                                                                                   {
                     
                 }
-#line 1729 "parser.tab.c"
+#line 1791 "parser.tab.c"
     break;
 
   case 65: /* ExpBool: variable_name  */
-#line 386 "parser.y"
+#line 450 "parser.y"
                   { 
         if ((yyvsp[0].varId) != NULL) {
             if ((yyvsp[0].varId)->type != ENTIER) {
@@ -1744,89 +1806,89 @@ yyreduce:
             exit(1);
         }
     }
-#line 1748 "parser.tab.c"
+#line 1810 "parser.tab.c"
     break;
 
   case 66: /* ExpBool: Comparaison  */
-#line 400 "parser.y"
+#line 464 "parser.y"
                   {(yyval.BOOLEAN) = (yyvsp[0].BOOLEAN);}
-#line 1754 "parser.tab.c"
+#line 1816 "parser.tab.c"
     break;
 
   case 67: /* ExpBool: TOKEN_FALSE  */
-#line 401 "parser.y"
+#line 465 "parser.y"
                   { (yyval.BOOLEAN)=0;}
-#line 1760 "parser.tab.c"
+#line 1822 "parser.tab.c"
     break;
 
   case 68: /* ExpBool: TOKEN_TRUE  */
-#line 402 "parser.y"
+#line 466 "parser.y"
                   { (yyval.BOOLEAN)=1; }
-#line 1766 "parser.tab.c"
+#line 1828 "parser.tab.c"
     break;
 
   case 69: /* ExpBool: PARENTHESE_G ExpBool PARENTHESE_D  */
-#line 403 "parser.y"
+#line 467 "parser.y"
                                         { (yyval.BOOLEAN)=(yyvsp[-1].BOOLEAN);}
-#line 1772 "parser.tab.c"
+#line 1834 "parser.tab.c"
     break;
 
   case 70: /* ExpBool: TOKEN_NOT ExpBool  */
-#line 404 "parser.y"
+#line 468 "parser.y"
                         { (yyval.BOOLEAN)=!(yyvsp[0].BOOLEAN);}
-#line 1778 "parser.tab.c"
+#line 1840 "parser.tab.c"
     break;
 
   case 71: /* ExpBool: ExpBool TOKEN_AND ExpBool  */
-#line 405 "parser.y"
+#line 469 "parser.y"
                                 { (yyval.BOOLEAN)=((yyvsp[-2].BOOLEAN))&&((yyvsp[0].BOOLEAN)); }
-#line 1784 "parser.tab.c"
+#line 1846 "parser.tab.c"
     break;
 
   case 72: /* ExpBool: ExpBool TOKEN_OR ExpBool  */
-#line 406 "parser.y"
+#line 470 "parser.y"
                                 { (yyval.BOOLEAN)=((yyvsp[-2].BOOLEAN))||((yyvsp[0].BOOLEAN)); }
-#line 1790 "parser.tab.c"
+#line 1852 "parser.tab.c"
     break;
 
   case 73: /* Comparaison: comparable TOKEN_EGAL comparable  */
-#line 409 "parser.y"
+#line 473 "parser.y"
                                      { (yyval.BOOLEAN)=((yyvsp[-2].num) == (yyvsp[0].num)); }
-#line 1796 "parser.tab.c"
+#line 1858 "parser.tab.c"
     break;
 
   case 74: /* Comparaison: comparable TOKEN_DIFF comparable  */
-#line 410 "parser.y"
+#line 474 "parser.y"
                                        { (yyval.BOOLEAN)=((yyvsp[-2].num) != (yyvsp[0].num)); }
-#line 1802 "parser.tab.c"
+#line 1864 "parser.tab.c"
     break;
 
   case 75: /* Comparaison: comparable TOKEN_SUP comparable  */
-#line 411 "parser.y"
+#line 475 "parser.y"
                                       { (yyval.BOOLEAN)=((yyvsp[-2].num) > (yyvsp[0].num)); }
-#line 1808 "parser.tab.c"
+#line 1870 "parser.tab.c"
     break;
 
   case 76: /* Comparaison: comparable TOKEN_SUPEGAL comparable  */
-#line 412 "parser.y"
+#line 476 "parser.y"
                                           { (yyval.BOOLEAN)=((yyvsp[-2].num) >= (yyvsp[0].num)); }
-#line 1814 "parser.tab.c"
+#line 1876 "parser.tab.c"
     break;
 
   case 77: /* Comparaison: comparable TOKEN_INF comparable  */
-#line 413 "parser.y"
+#line 477 "parser.y"
                                       { (yyval.BOOLEAN)=((yyvsp[-2].num) < (yyvsp[0].num)); }
-#line 1820 "parser.tab.c"
+#line 1882 "parser.tab.c"
     break;
 
   case 78: /* Comparaison: comparable TOKEN_INFEGAL comparable  */
-#line 414 "parser.y"
+#line 478 "parser.y"
                                           { (yyval.BOOLEAN)=((yyvsp[-2].num) <= (yyvsp[0].num)); }
-#line 1826 "parser.tab.c"
+#line 1888 "parser.tab.c"
     break;
 
   case 80: /* comparable: variable_name  */
-#line 419 "parser.y"
+#line 483 "parser.y"
                   {
     if ((yyvsp[0].varId) != NULL) {
         if ((yyvsp[0].varId)->type != ENTIER) {
@@ -1841,11 +1903,11 @@ yyreduce:
         exit(1);
     }
     }
-#line 1845 "parser.tab.c"
+#line 1907 "parser.tab.c"
     break;
 
 
-#line 1849 "parser.tab.c"
+#line 1911 "parser.tab.c"
 
       default: break;
     }
@@ -2039,11 +2101,13 @@ yyreturn:
   return yyresult;
 }
 
-#line 436 "parser.y"
+#line 500 "parser.y"
 
 
 int main(int argc , char** argv) {
+    //initialisation des Tables des symboles et structures globales
     table = initialisation();
+    tableStruct = initialisationTableStructures();
 
     yyin= fopen (argv[1], "r");
     int result = yyparse();

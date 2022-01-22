@@ -37,8 +37,41 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
 void AfficherTable(Identifiant* entete);
 Identifiant* rechercherVar(TableIds* table, char* nom);
 Identifiant* rechercheElemTab(TableIds* table, char* nom, int index);
-
 char* typeOf(typePossible type);
+
+
+//Gestion des structures
+
+struct Champ {
+   char * nom;
+   typePossible type;
+   int taille;
+   struct Champ* champSuivant;
+};
+
+
+struct Structure {
+   char* nom;
+   struct Champ* champSuivant;
+   TableIds* tableLocale;
+   struct Structure* suivant;
+};
+typedef struct Structure Structure;
+typedef struct { Structure* tete;} TableStructures;
+
+//Ce buffer sert à sauvegarder les variables analysé à l'interieure de la structure
+typedef struct BufferLLC{
+   struct Champ* tete;
+}
+BufferLLC;
+
+TableStructures* initialisationTableStructures();
+Structure* declarerStructure(TableStructures* table, char* nom);
+Structure* rechercherStructure(TableStructures* table, char* nom);
+void linkChampsDeStructure(Structure* myStrct, BufferLLC *buffer);
+int declarerChampsDeVariableDeTypeStructure(TableIds* table, Structure* structure, char* nomVariable);
+BufferLLC* initialisationBuffer();
+struct Champ* sauvegarderVariable(BufferLLC* buffer,char* nom, typePossible type, int taille);
 
 
 

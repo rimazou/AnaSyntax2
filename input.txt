@@ -1,13 +1,17 @@
 DECLARE
-CONST r "bonjour" .
-CONST j 4.
-x num[2].
-y num.
-b bool.
+structure type2 {
+    y num.
+    x num.
+}.
+structure type1 {
+    y num.
+    x num.
+    m type2.
+}.
+y type1.
+x num.
 START
-b<- true.
-**b<- not b.
-y<-6.
-x[1]<-y-b.
-x[2]<-4.
+y:y <- 1.
+y:x <- 2.
+x <- y:y + y:x.
 STOP

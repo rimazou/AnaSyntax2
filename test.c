@@ -119,27 +119,23 @@ void AfficherTable(Identifiant* tete) {
 	p=tete;
 
     printf("\t\tAffichage de la table des symboles \n\n");
-    printf("\tTOKEN\tVALEUR\tTYPE\tNATURE\t\tNATUREID\n\n");
+    printf("\t%-12s\t%-12s\t%-12s\t%-12s\t%-12s\n\n", "NOM", "VALEUR", "TYPE", "NATURE", "NATUREID");
 	while(p!=NULL){
-		printf("\t%s\t",p->nom);
-        if(p->type== BOOLEEN || p->type== ENTIER || p->type==TABLEAU) printf("%s\t",p->valeur);
-        else   printf("%s\t", p->valeur);
-        if (p->type==ENTIER) printf("entier\t");
-        if (p->type==BOOLEEN) printf("bool\t");
-        if (p->type==CARACTERE) printf("char\t");
-        if (p->type==TEXT) printf("text\t");
-        if (p->type==TABLEAU) printf("tableau\t");
+		printf("\t%-12s\t",p->nom);
+        if(p->type== BOOLEEN || p->type== ENTIER || p->type==TABLEAU) printf("%-12s\t",p->valeur);
+        else   printf("%-12s\t", p->valeur);
+        printf("%-12s\t", typeOf(p->type));
         
         if(p->nature == PRIMITIF)
-		    printf("PRIMITIF\t");
+		    printf("%-12s\t", "PRIMITIF");
         else
-           printf("COMPLEXE\t");
+           printf("%-12s\t", "COMPLEXE");
 		
          if (p->natureId==CONSTANTE)
         {
-             printf("CONSTANTE\n");
+             printf("%-12s\n","CONSTANTE");
         }else{
-             printf("VARIABLE\n");
+             printf("%-12s\n","VARIABLE");
         }
         
 		p=p->suivant;
@@ -209,6 +205,96 @@ char* typeOf(typePossible type) {
         return "N/A";
         break;
     }
+}
+
+TableStructures* initialisationTableStructures()
+{
+    TableStructures* tableId = malloc(sizeof(TableStructures));
+ Structure* strcture = malloc(sizeof(Structure));
+
+    if (tableId == NULL || strcture == NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    tableId->tete = NULL;
+
+
+    return tableId;
+}
+
+Structure* declarerStructure(TableStructures* table, char* nom){
+    Structure* structure = malloc(sizeof(Structure));
+
+    structure->nom = strdup(nom);
+    structure->tableLocale = initialisation();
+    structure->champSuivant = NULL;
+
+    structure->suivant = table->tete;
+
+    return structure;
+}
+
+Structure* rechercherStructure(TableStructures* table, char* nom) {
+    Structure* iterateur = table->tete;
+
+    while (iterateur != NULL)
+    {
+        if (strcmp(iterateur->nom, nom) == 0)
+        {
+            return iterateur;
+        }
+        
+        iterateur = iterateur->suivant;
+    }
+    
+    return NULL;
+}
+
+void linkChampsDeStructure(Structure* myStrct, BufferLLC* buffer) {
+   myStrct->champSuivant = buffer->tete; 
+}
+
+//Parametre taille n'a un sense que lorque le type est TABLEAU
+int declarerChampsDeVariableDeTypeStructure(TableIds* table,Structure* structure, char * nomVariable) {
+    struct Champ* iterateur = structure->champSuivant;
+
+    char * nomConcatene1 = strcat(strdup(nomVariable), ":");
+    char * nomConcatene2 = NULL;
+
+
+    while (iterateur != NULL) {
+        //On concatene le nom pour le sauvegarde de cette forme: "nom_struct:nom_champ"
+        nomConcatene2 = strcat(strdup(nomConcatene1), iterateur->nom);
+
+        if (iterateur->type != TABLEAU && iterateur->type!=STRUCTURE){
+            table->Entete_llc = declarerVar(table, nomConcatene2, iterateur->type, PRIMITIF);
+        }
+        else if (iterateur->type == TABLEAU){
+            table->Entete_llc = declarerTab(table, nomConcatene2, iterateur->type, iterateur->taille);
+        } 
+
+        iterateur = iterateur->champSuivant;
+    }
+    return 1;
+}
+
+BufferLLC* initialisationBuffer(){
+    BufferLLC* buffer = malloc(sizeof(BufferLLC));
+    buffer->tete = NULL;
+
+    return buffer;
+}
+//Parametre taille n'a un sense que lorque le type est TABLEAU, mais il DOIT être passé
+struct Champ* sauvegarderVariable(BufferLLC *buffer, char* nom, typePossible type, int taille){
+
+    struct Champ* variable = malloc(sizeof(struct Champ));
+    variable->nom = strdup(nom);
+    variable->type = type;
+    variable->taille = taille;
+    variable->champSuivant = buffer->tete;
+
+    return variable;
 }
 
 /*

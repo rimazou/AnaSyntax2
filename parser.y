@@ -5,6 +5,9 @@
 
 
 extern TableIds * table = NULL;
+extern TableStructures * tableStruct = NULL;
+extern BufferLLC* champBuffer = NULL;
+
 Identifiant* p = NULL;
 Identifiant* q = NULL;
 
@@ -172,8 +175,8 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                             }
                         }
                         else {
-                            fprintf(stderr, "ERREUR: Identifiant non declare");
-                            yyerror("Compilation interrompue");
+                            fprintf(stderr, "ERREUR: Identifiant non declare\n");
+                            yyerror("Compilation interrompue\n");
                             exit(1);
                         }
                 }
@@ -214,6 +217,8 @@ variable_name:
 		}
 		|
 		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
+            char * nom = strcat( strcat($1, ":"), $3);
+            $$ = rechercherVar(table, nom);
 		};
 
 DECLARE:	TOKEN_ID NUM FININSTR{
@@ -252,7 +257,8 @@ DECLARE:	TOKEN_ID NUM FININSTR{
 		}
 		|
 		TOKEN_CONST TOKEN_ID TOKEN_CHAR FININSTR{
-             table->Entete_llc = declarerConst (table, $2, CARACTERE,  $3); 
+            char medium[2] = {$3, '\0'};
+             table->Entete_llc = declarerConst (table, $2, CARACTERE,  medium); 
 			printf("Declaration dune constante de type caractere\n");
 		}
         |
@@ -281,33 +287,91 @@ DECLARE:	TOKEN_ID NUM FININSTR{
 		}
 		|
 		TOKEN_ID TOKEN_ID FININSTR{
-			printf("Declaration dune structure");
+            Structure * p = rechercherStructure(tableStruct, $2);
+            if (p != NULL) {
+                //Insertion du symbol de la structure
+                table->Entete_llc= declarerVar(table, $1, STRUCTURE, COMPLEXE);
+
+                //Insertion des symboles
+                declarerChampsDeVariableDeTypeStructure(table, p, $1);
+            } else {
+                fprintf(stderr, "Structure %s non definit.\n", $2);
+                exit(1); 
+            }
+            
+
+			printf("Declaration dune variable de type structure\n");
 		}
 		|
 		TOKEN_STRUCT TOKEN_ID ACCOLAD_G LISTE ACCOLAD_D FININSTR{
-			printf("Creation dune structure");
+            tableStruct->tete = declarerStructure(tableStruct, $2);
+
+            //On lie les champs déclaré avec leur structure, qui vien detre déclaré
+            linkChampsDeStructure(tableStruct->tete, champBuffer);
+
+            champBuffer = NULL;
+			printf("Creation dune structure\n");
 		};
 LISTE:		%empty{}
                 |
 		LISTE CHAMP{
 		};
 
-CHAMP:		TOKEN_ID NUM FININSTR{}
-		|
-		TOKEN_ID BOOL FININSTR{}
-		|
-		TOKEN_ID CHAR FININSTR{}
-		|
-		TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{}
-		|
-		TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{}
-		|
-		TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{}
-        |
-        TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{}
-		|
-		TOKEN_ID TOKEN_ID FININSTR{};
-		
+CHAMP:		
+    TOKEN_ID NUM FININSTR{
+        if(champBuffer == NULL){
+            champBuffer = initialisationBuffer();
+        }
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, $1, ENTIER, 0);
+    }
+    |
+    TOKEN_ID BOOL FININSTR{
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, $1, BOOLEEN, 0);
+    }
+    |
+    TOKEN_ID CHAR FININSTR{
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, $1, CARACTERE, 0);
+    }
+    |
+    TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, $1, TABLEAU, $4);
+    }
+    |
+    TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, $1, TABLEAU, $4);
+    }
+    |
+    TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, $1, TABLEAU, $4);
+    }
+    |
+    TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
+        if(champBuffer == NULL)
+            champBuffer = initialisationBuffer();
+        
+        champBuffer->tete = sauvegarderVariable(champBuffer, $1, TABLEAU, $4);
+    }
+    |
+    TOKEN_ID TOKEN_ID FININSTR{
+    }
+    ;
+    
 expression : 	expression_arithmetique{
 
 		
@@ -404,7 +468,7 @@ ExpBool:
     | TOKEN_NOT ExpBool { $$=!$2;}
     | ExpBool TOKEN_AND ExpBool { $$=($1)&&($3); }
     | ExpBool TOKEN_OR ExpBool  { $$=($1)||($3); }
-  ;
+    ;
 Comparaison:
     comparable TOKEN_EGAL comparable { $$=($1 == $3); }
     | comparable TOKEN_DIFF comparable { $$=($1 != $3); }
@@ -436,7 +500,9 @@ comparable:
 %%
 
 int main(int argc , char** argv) {
+    //initialisation des Tables des symboles et structures globales
     table = initialisation();
+    tableStruct = initialisationTableStructures();
 
     yyin= fopen (argv[1], "r");
     int result = yyparse();
