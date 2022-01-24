@@ -36,7 +36,7 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
 //Identifiant* declarerStruct(TableIds* table, char*nom);
 void AfficherTable(Identifiant* entete);
 Identifiant* rechercherVar(TableIds* table, char* nom);
-Identifiant* rechercheElemTab(TableIds* table, char* nom, int index);
+Identifiant* rechercheElemTab(TableIds* table, char* nom);
 char* typeOf(typePossible type);
 void afficher(char table[100][4][25], int index);
 

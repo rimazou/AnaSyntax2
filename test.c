@@ -157,7 +157,7 @@ Identifiant* rechercherVar(TableIds* table,char* nom  ) {
     return NULL;
 }
 
-Identifiant* rechercheElemTab(TableIds* table, char* nom, int index){
+Identifiant* rechercheElemTab(TableIds* table, char* nom){
     Identifiant* p = table->Entete_llc;
     int c = 1;
     while (c == 1)
@@ -170,10 +170,7 @@ Identifiant* rechercheElemTab(TableIds* table, char* nom, int index){
     }
     if (c==0)
     {
-        for (int i = 1; i <= index ; i++)
-        {
-            p = p->suivant;   
-        }
+        p = p->suivant;
     
         return p;
     } 
