@@ -1,0 +1,11 @@
+DECLARE
+structure vecteur2D {
+  x num.
+  y num.
+}.
+x vecteur2D.
+y vecteur2D.
+START
+x:x <- 2. x:y <- 1.
+y:x <- x:y. y:y <- x:x.
+STOP

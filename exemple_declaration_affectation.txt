@@ -1,0 +1,9 @@
+DECLARE
+y num.
+x num.
+z num.
+START
+x <- 10.
+y <- 5.
+z <- ( x + 5 ) * 2 + y.
+STOP

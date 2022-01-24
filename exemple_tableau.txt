@@ -1,0 +1,7 @@
+DECLARE
+var num[5].
+START
+var[1] <- 2.
+var[2] <- var[1].
+var[3] <- var[2-1] + var [2].
+STOP
