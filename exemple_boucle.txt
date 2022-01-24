@@ -1,0 +1,20 @@
+DECLARE
+x num.
+w bool.
+t num[5].
+CONST b "bonjour!".
+START
+if w begin
+    write b.
+else
+end
+for x from 0,10 begin
+    for x in t begin
+        t[1] <- 2.
+    end
+while not w begin
+    w <- false .
+end
+end
+
+STOP

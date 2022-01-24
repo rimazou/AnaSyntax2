@@ -523,7 +523,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  8
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   266
+#define YYLAST   265
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  54
@@ -585,14 +585,14 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int16 yyrline[] =
 {
        0,   134,   134,   136,   136,   136,   139,   139,   141,   146,
-     151,   156,   160,   165,   169,   198,   225,   252,   259,   265,
-     270,   276,   283,   290,   295,   300,   305,   311,   316,   321,
-     326,   331,   335,   352,   361,   363,   367,   375,   382,   389,
-     396,   403,   410,   417,   432,   439,   441,   443,   445,   447,
-     449,   455,   474,   491,   505,   519,   535,   549,   553,   556,
-     557,   560,   564,   567,   570,   575,   591,   593,   595,   597,
-     599,   601,   603,   607,   609,   611,   613,   615,   617,   621,
-     623
+     151,   156,   160,   165,   169,   198,   230,   257,   264,   270,
+     275,   281,   288,   295,   300,   305,   310,   316,   321,   326,
+     331,   336,   340,   357,   366,   368,   372,   380,   387,   394,
+     401,   408,   415,   422,   437,   444,   446,   448,   450,   452,
+     454,   460,   479,   496,   510,   524,   540,   554,   558,   561,
+     562,   565,   581,   607,   610,   615,   631,   634,   639,   644,
+     647,   661,   675,   691,   705,   719,   733,   747,   761,   777,
+     785
 };
 #endif
 
@@ -634,7 +634,7 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-61)
+#define YYPACT_NINF (-59)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -648,25 +648,25 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     -16,    37,     6,   -25,    -4,    64,    40,    37,   -61,   208,
-     -19,     7,    26,    58,    59,   108,   -61,    27,    49,    88,
-      93,    95,   -61,   -61,   125,   -61,   127,   -61,   136,   -61,
-     157,    65,    86,    -9,   151,   132,   151,    -7,   163,    65,
-     -61,   162,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,
-     -61,   -61,    68,   131,   146,   177,   178,   -61,   195,   196,
-     197,   151,   151,   -61,   -61,   -61,    12,    -3,   -61,   161,
-     198,    13,   165,    -2,   -61,   -61,   148,   199,   111,   -61,
-     200,   201,   202,   203,   -61,   -61,   -61,   -61,   180,   151,
-     151,    76,     5,     5,     5,     5,     5,     5,   185,   224,
-     123,   -61,    -2,   -61,   -61,    23,   -61,   -61,   -61,   -61,
-     -61,   172,   205,   167,   133,    28,    42,   -61,    91,   102,
-     119,   135,   -61,   -61,   -61,   -61,   -61,   235,   -61,    -5,
-     -61,   -61,   -61,   -61,   -61,   -61,   -61,   204,   206,   207,
-     190,    -2,    -2,    -2,    -2,    -2,   -61,   -61,   -61,   -61,
-     -61,   228,   -61,   229,   -61,   230,   -61,   232,   123,   -61,
-     123,   233,   -61,   -61,   106,   106,   241,   241,   241,   209,
-     210,   211,   212,   214,   215,   213,   220,   221,   222,   223,
-     -61,   -61,   123,   -61,   -61,   -61,   -61,   225,   -61
+     -16,    28,     9,   -29,   -25,   112,     7,    28,   -59,   197,
+      -3,   -30,   -11,    59,    60,   105,   -59,     8,    27,    51,
+      79,    98,   -59,   -59,   124,   -59,   126,   -59,   127,   -59,
+     132,    76,   107,   -14,   167,   107,   167,    61,   138,    76,
+     -59,   134,   -59,   -59,   -59,   -59,   -59,   -59,   -59,   -59,
+     -59,   -59,    68,   137,   146,   150,   151,   -59,   181,   182,
+     198,   167,   167,   -59,   -59,   -59,    53,    19,   -59,   164,
+      32,    39,   119,    31,   -59,   -59,   141,   199,   130,   -59,
+     201,   202,   203,   204,   -59,   -59,   -59,   -59,   193,   167,
+     167,     5,   -12,   -12,   -12,   -12,   -12,   -12,   107,   166,
+     113,   -59,    31,   -59,   -59,    13,   -59,   -59,   -59,   -59,
+     -59,   170,   205,   179,   128,    88,    45,   -59,    63,    72,
+     116,   140,   -59,   -59,   -59,   -59,   -59,   235,   -59,   154,
+     -59,   -59,   -59,   -59,   -59,   -59,   -59,   206,   196,   207,
+     190,    31,    31,    31,    31,    31,   -59,   -59,   -59,   -59,
+     -59,   228,   -59,   230,   -59,   232,   -59,   233,   113,   -59,
+     113,   234,   -59,   -59,   227,   227,   242,   242,   242,   200,
+     208,   209,   210,   213,   214,   216,   220,   221,   222,   223,
+     -59,   -59,   113,   -59,   -59,   -59,   -59,   224,   -59
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -698,9 +698,9 @@ static const yytype_int8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -61,   -61,   -31,   245,   -61,   -61,   -22,   -61,   -61,   -61,
-     -60,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,   -61,
-     -61,   -33,   -61,   124
+     -59,   -59,   -31,   257,   -59,   -59,   -22,   -59,   -59,   -59,
+     -58,   -59,   -59,   -59,   -59,   -59,   -59,   -59,   -59,   -59,
+     -59,   -33,   -59,   135
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -716,64 +716,64 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      57,    67,    89,    71,     1,    90,     8,    59,    75,   102,
-      58,    60,    66,   105,    66,   103,   115,   -65,    89,    22,
-     -65,    90,    63,   158,   -65,     9,   141,   142,    87,   143,
-     144,   141,   142,   145,   143,   144,   159,    91,   145,    66,
-      66,    37,    72,   116,    23,    73,    10,    89,    37,   -65,
-      90,   104,   -65,   100,   114,    37,   127,   128,     3,    24,
-     129,     4,    15,    25,    47,   148,    31,    66,    66,   139,
-     130,   130,   130,   130,   130,   130,   146,    31,    26,   149,
-     104,   164,   165,   166,   167,   168,    48,     5,    -4,   114,
-      32,    33,    34,    -4,    35,    27,    29,    36,    11,    12,
-      13,    32,    33,    34,    -4,    35,    -4,    77,    36,    31,
-      28,    30,   143,   144,    14,    37,   145,    -4,    78,   104,
-     104,   104,   104,   104,    31,    49,    37,   173,   150,   174,
-      50,    -4,    51,    32,    33,    34,    37,    35,   -65,   152,
-      36,   -65,    53,   151,    54,   118,   119,   120,    32,    33,
-      34,   187,    35,    55,   153,    36,   154,    61,    37,   111,
-      61,   121,    62,   112,    -4,   113,    64,    65,    63,    64,
-      65,   155,   156,    37,    56,   -80,   -80,   -80,   -80,   -80,
-     -80,    61,    70,   111,    80,    89,    74,   157,    90,   113,
-      64,    65,   126,   141,   142,    76,   143,   144,    37,    81,
-     145,    37,   163,    92,    93,    94,    95,    96,    97,   -79,
-     -79,   -79,   -79,   -79,   -79,   101,   131,   132,   133,   134,
-     135,   136,    37,    17,    18,    19,    20,    21,    98,    99,
-      82,    83,    84,    85,    86,   137,   117,   122,   123,   124,
-     125,   138,   147,    90,   160,   169,   170,   171,   162,   172,
-     175,   145,    16,   182,   161,   180,   181,   183,   184,   185,
-     186,     0,   176,   177,   178,   179,   188
+      57,    67,    59,    71,     1,    63,    31,    23,    75,     8,
+      58,    60,    66,    70,    66,   105,   141,   142,   115,   143,
+     144,     9,    24,   145,    89,    10,    25,    90,    87,    15,
+      32,    33,    34,    -4,    35,    22,    37,    36,    37,    66,
+      66,    26,   102,   116,    89,    47,    -4,    90,   103,     3,
+      89,   104,     4,    90,   114,    37,   127,   128,   -65,    91,
+     129,   -65,    98,    99,    48,   -65,   146,    66,    66,   139,
+     130,   130,   130,   130,   130,   130,   137,    31,     5,   100,
+     104,    37,   149,   164,   165,   166,   167,   168,    49,   114,
+     -65,   141,   142,   -65,   143,   144,    27,    29,   145,    -4,
+     150,    32,    33,    34,    -4,    35,    31,    77,    36,   152,
+      72,    28,    30,    73,    31,   151,    50,    -4,    78,   104,
+     104,   104,   104,   104,   153,   148,    37,   173,    -4,   174,
+      32,    33,    34,   -65,    35,    51,   -65,    36,    32,    33,
+      34,    53,    35,    54,    55,    36,    11,    12,    13,    56,
+      61,   187,   111,   154,    -4,    37,   112,    37,   113,    64,
+      65,    74,    14,    37,   118,   119,   120,    76,   155,   101,
+     -80,   -80,   -80,   -80,   -80,   -80,    61,   156,    62,    61,
+     121,   111,   158,   138,    63,    64,    65,   113,    64,    65,
+      80,    37,   157,   141,   142,   159,   143,   144,    89,    81,
+     145,    90,   163,    82,    83,   126,    92,    93,    94,    95,
+      96,    97,    17,    18,    19,    20,    21,    37,    84,    85,
+      37,   -79,   -79,   -79,   -79,   -79,   -79,   131,   132,   133,
+     134,   135,   136,   143,   144,    86,   117,   145,   122,   123,
+     124,   125,   147,    90,   161,   169,   160,   170,   162,   171,
+     172,   175,   145,   176,   180,   181,   182,   183,   184,   185,
+     186,   177,   178,   179,    16,   188
 };
 
-static const yytype_int16 yycheck[] =
+static const yytype_uint8 yycheck[] =
 {
-      31,    34,     5,    36,    20,     8,     0,    16,    39,    11,
-      32,    33,    34,    73,    36,    17,    76,     5,     5,    38,
-       8,     8,    17,    28,    12,    50,     3,     4,    61,     6,
-       7,     3,     4,    10,     6,     7,    41,    40,    10,    61,
-      62,    50,    49,    76,    37,    52,    50,     5,    50,    37,
-       8,    73,    40,    40,    76,    50,    89,    90,    21,    52,
-      91,    24,    22,    37,    37,    37,     1,    89,    90,   100,
-      92,    93,    94,    95,    96,    97,    53,     1,    52,    37,
-     102,   141,   142,   143,   144,   145,    37,    50,    23,   111,
-      25,    26,    27,    28,    29,    37,    37,    32,    34,    35,
-      36,    25,    26,    27,    28,    29,    41,    39,    32,     1,
-      52,    52,     6,     7,    50,    50,    10,    41,    50,   141,
-     142,   143,   144,   145,     1,    37,    50,   158,    37,   160,
-      37,    23,    37,    25,    26,    27,    50,    29,     5,    37,
-      32,     8,    17,    52,    17,    34,    35,    36,    25,    26,
-      27,   182,    29,    17,    52,    32,    37,     9,    50,    11,
-       9,    50,    11,    15,    41,    17,    18,    19,    17,    18,
-      19,    52,    37,    50,    17,    42,    43,    44,    45,    46,
-      47,     9,    50,    11,    53,     5,    23,    52,     8,    17,
-      18,    19,    12,     3,     4,    33,     6,     7,    50,    53,
-      10,    50,    12,    42,    43,    44,    45,    46,    47,    42,
-      43,    44,    45,    46,    47,    50,    92,    93,    94,    95,
-      96,    97,    50,    15,    16,    17,    18,    19,    30,    31,
-      53,    53,    37,    37,    37,    50,    37,    37,    37,    37,
-      37,    17,    37,     8,    40,    17,    17,    17,    41,    17,
-      17,    10,     7,    40,    48,    41,    41,    37,    37,    37,
-      37,    -1,    53,    53,    53,    53,    41
+      31,    34,    16,    36,    20,    17,     1,    37,    39,     0,
+      32,    33,    34,    35,    36,    73,     3,     4,    76,     6,
+       7,    50,    52,    10,     5,    50,    37,     8,    61,    22,
+      25,    26,    27,    28,    29,    38,    50,    32,    50,    61,
+      62,    52,    11,    76,     5,    37,    41,     8,    17,    21,
+       5,    73,    24,     8,    76,    50,    89,    90,     5,    40,
+      91,     8,    30,    31,    37,    12,    53,    89,    90,   100,
+      92,    93,    94,    95,    96,    97,    98,     1,    50,    40,
+     102,    50,    37,   141,   142,   143,   144,   145,    37,   111,
+      37,     3,     4,    40,     6,     7,    37,    37,    10,    23,
+      37,    25,    26,    27,    28,    29,     1,    39,    32,    37,
+      49,    52,    52,    52,     1,    52,    37,    41,    50,   141,
+     142,   143,   144,   145,    52,    37,    50,   158,    23,   160,
+      25,    26,    27,     5,    29,    37,     8,    32,    25,    26,
+      27,    17,    29,    17,    17,    32,    34,    35,    36,    17,
+       9,   182,    11,    37,    41,    50,    15,    50,    17,    18,
+      19,    23,    50,    50,    34,    35,    36,    33,    52,    50,
+      42,    43,    44,    45,    46,    47,     9,    37,    11,     9,
+      50,    11,    28,    17,    17,    18,    19,    17,    18,    19,
+      53,    50,    52,     3,     4,    41,     6,     7,     5,    53,
+      10,     8,    12,    53,    53,    12,    42,    43,    44,    45,
+      46,    47,    15,    16,    17,    18,    19,    50,    37,    37,
+      50,    42,    43,    44,    45,    46,    47,    92,    93,    94,
+      95,    96,    97,     6,     7,    37,    37,    10,    37,    37,
+      37,    37,    37,     8,    48,    17,    40,    17,    41,    17,
+      17,    17,    10,    53,    41,    41,    40,    37,    37,    37,
+      37,    53,    53,    53,     7,    41
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -787,13 +787,13 @@ static const yytype_int8 yystos[] =
       59,    60,    70,    71,    72,    73,    74,    37,    37,    37,
       37,    37,    62,    17,    17,    17,    17,    56,    60,    16,
       60,     9,    11,    17,    18,    19,    60,    75,    76,    77,
-      50,    75,    49,    52,    23,    56,    33,    39,    50,    63,
+      60,    75,    49,    52,    23,    56,    33,    39,    50,    63,
       53,    53,    53,    53,    37,    37,    37,    75,    75,     5,
        8,    40,    42,    43,    44,    45,    46,    47,    30,    31,
       40,    50,    11,    17,    60,    64,    65,    66,    67,    68,
       69,    11,    15,    17,    60,    64,    75,    37,    34,    35,
       36,    50,    37,    37,    37,    37,    12,    75,    75,    56,
-      60,    77,    77,    77,    77,    77,    77,    50,    17,    56,
+      60,    77,    77,    77,    77,    77,    77,    60,    17,    56,
       64,     3,     4,     6,     7,    10,    53,    37,    37,    37,
       37,    52,    37,    52,    37,    52,    37,    52,    28,    41,
       40,    48,    41,    12,    64,    64,    64,    64,    64,    17,
@@ -1585,7 +1585,7 @@ yyreduce:
                                                                          {                    
                         if((yyvsp[-3].varId) != NULL) {
                             if((yyvsp[-3].varId)->type == ENTIER){
-                                printf("Type correct: %s\n", (yyvsp[-3].varId)->nom);
+                                printf("Type de %s correct:  %s\n", (yyvsp[-3].varId)->nom, typeOf((yyvsp[-3].varId)->type));
 
                                 char nm[20];
                                 strcpy(nm, (yyvsp[-3].varId)->nom);
@@ -1616,18 +1616,23 @@ yyreduce:
   case 15:
 #line 198 "parser.y"
                                                            {
+                   
                         if((yyvsp[-3].varId) != NULL) {
+                           
                             if((yyvsp[-3].varId)->type == BOOLEEN){
-                            printf("Type correct: %s\n", (yyvsp[-3].varId)->nom);
+                              
+                            printf("Type de %s correct: %s\n", (yyvsp[-3].varId)->nom, typeOf((yyvsp[-3].varId)->type));
 
-                                char nm[20];
-                                strcpy(nm, (yyvsp[-3].varId)->nom);
-                                strcpy(quad[ind][0],"=");
-                               char exp[20]; 
+                                char nomm[20];
+                                strcpy(nomm, (yyvsp[-3].varId)->nom);
+                                
+                                char exp[20]; 
                                 strcpy(exp, (yyvsp[-1].text));
+                                
+                                strcpy(quad[ind][0],"=");
                                 strcpy(quad[ind][1],exp);
                                 strcpy(quad[ind][2]," ");
-                                strcpy(quad[ind][3],nm);
+                                strcpy(quad[ind][3],nomm);
                                 ind++;
                              }
                             else {
@@ -1641,19 +1646,19 @@ yyreduce:
                             exit(1);
                         }
                 }
-#line 1645 "parser.tab.c"
+#line 1650 "parser.tab.c"
     break;
 
   case 16:
-#line 225 "parser.y"
+#line 230 "parser.y"
                                                               {
                     if((yyvsp[-3].varId) != NULL) {
                             if((yyvsp[-3].varId)->type == CARACTERE){
-                            printf("Type correct: %s\n", (yyvsp[-3].varId)->nom);
+                            printf("Type de %s correct: %s\n", (yyvsp[-3].varId)->nom, typeOf((yyvsp[-3].varId)->type));
                             char nom[20];
                                 strcpy(nom, (yyvsp[-3].varId)->nom);
-                                char f[20] ;
-                                strcpy(f, (yyvsp[-1].CHARACTER));
+                                char f[20]=" " ;
+                                strcpy(f, (yyvsp[-1].text));
                                 strcpy(quad[ind][0],"=");
                                 strcpy(quad[ind][1],f);
                                 strcpy(quad[ind][2]," ");
@@ -1671,154 +1676,154 @@ yyreduce:
                             exit(1);
                         }
                 }
-#line 1675 "parser.tab.c"
+#line 1680 "parser.tab.c"
     break;
 
   case 17:
-#line 252 "parser.y"
+#line 257 "parser.y"
                 {
                         Identifiant *m = rechercherVar(table, (yyvsp[0].text));
                         
                         (yyval.varId) = m;
                             
                 }
-#line 1686 "parser.tab.c"
+#line 1691 "parser.tab.c"
     break;
 
   case 18:
-#line 259 "parser.y"
+#line 264 "parser.y"
                                                                     {
 			printf("Acces a un element  du tableau \n");
             Identifiant *q = rechercheElemTab(table, (yyvsp[-3].text));
 			(yyval.varId)= q;	
 		}
-#line 1696 "parser.tab.c"
+#line 1701 "parser.tab.c"
     break;
 
   case 19:
-#line 265 "parser.y"
+#line 270 "parser.y"
                                                 {
             char * nstr = strcat( strcat((yyvsp[-2].text), ":"), (yyvsp[0].text));
             (yyval.varId) = rechercherVar(table, nstr);
 		}
-#line 1705 "parser.tab.c"
+#line 1710 "parser.tab.c"
     break;
 
   case 20:
-#line 270 "parser.y"
+#line 275 "parser.y"
                                      {
    
             table->Entete_llc = declarerVar (table, (yyvsp[-2].text), ENTIER, PRIMITIF);
 			printf("Declaration dun entier\n");
 		}
-#line 1715 "parser.tab.c"
+#line 1720 "parser.tab.c"
     break;
 
   case 21:
-#line 276 "parser.y"
+#line 281 "parser.y"
                                       {
         
         table->Entete_llc  = declarerVar (table, (yyvsp[-2].text),BOOLEEN, PRIMITIF);
   
 			printf("Declaration dun booleen\n");
 		}
-#line 1726 "parser.tab.c"
+#line 1731 "parser.tab.c"
     break;
 
   case 22:
-#line 283 "parser.y"
+#line 288 "parser.y"
                                       {
           
             table->Entete_llc= declarerVar (table, (yyvsp[-2].text),CARACTERE, PRIMITIF);
             
 			printf("Declaration dun caractere\n");
 		}
-#line 1737 "parser.tab.c"
+#line 1742 "parser.tab.c"
     break;
 
   case 23:
-#line 290 "parser.y"
+#line 295 "parser.y"
                                                           {
             table->Entete_llc = declarerConstint (table, (yyvsp[-2].text), ENTIER, (yyvsp[-1].num)); 
 			printf("Declaration dune constante de type entier\n");
 		}
-#line 1746 "parser.tab.c"
+#line 1751 "parser.tab.c"
     break;
 
   case 24:
-#line 295 "parser.y"
+#line 300 "parser.y"
                                                         {
             table->Entete_llc = declarerConstint (table, (yyvsp[-2].text), BOOLEEN, 1);  
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1755 "parser.tab.c"
+#line 1760 "parser.tab.c"
     break;
 
   case 25:
-#line 300 "parser.y"
+#line 305 "parser.y"
                                                          {
              table->Entete_llc = declarerConstint (table, (yyvsp[-2].text), BOOLEEN, 0);
 			printf("Declaration dune constante de type booleen\n");
 		}
-#line 1764 "parser.tab.c"
+#line 1769 "parser.tab.c"
     break;
 
   case 26:
-#line 305 "parser.y"
+#line 310 "parser.y"
                                                         {
-            char medium[2] = {(yyvsp[-1].CHARACTER), '\0'};
+            char medium[2] = {(yyvsp[-1].text), '\0'};
              table->Entete_llc = declarerConst (table, (yyvsp[-2].text), CARACTERE,  medium); 
 			printf("Declaration dune constante de type caractere\n");
 		}
-#line 1774 "parser.tab.c"
+#line 1779 "parser.tab.c"
     break;
 
   case 27:
-#line 311 "parser.y"
+#line 316 "parser.y"
                                                 {
             table->Entete_llc = declarerConst (table, (yyvsp[-2].text), TEXT, (yyvsp[-1].text));
 			printf("Declaration dune constante de type texte \n");
 		}
-#line 1783 "parser.tab.c"
+#line 1788 "parser.tab.c"
     break;
 
   case 28:
-#line 316 "parser.y"
+#line 321 "parser.y"
                                                                       {
             table->Entete_llc = declarerTab(table, (yyvsp[-5].text), ENTIER, (yyvsp[-2].num));
 			printf("Declaration dun tableau de type entier et de taille %ld\n",(yyvsp[-2].num));
 		}
-#line 1792 "parser.tab.c"
+#line 1797 "parser.tab.c"
     break;
 
   case 29:
-#line 321 "parser.y"
+#line 326 "parser.y"
                                                                        {
 		    table->Entete_llc = declarerTab(table, (yyvsp[-5].text), BOOLEEN, (yyvsp[-2].num));
             printf("Declaration dun tableau de type booleen et de taille %ld\n",(yyvsp[-2].num));
 		}
-#line 1801 "parser.tab.c"
+#line 1806 "parser.tab.c"
     break;
 
   case 30:
-#line 326 "parser.y"
+#line 331 "parser.y"
                                                                        {
             table->Entete_llc = declarerTab(table, (yyvsp[-5].text), CARACTERE, (yyvsp[-2].num));
 			printf("Declaration dun tableau de type caractere et de taille %ld\n",(yyvsp[-2].num));
 		}
-#line 1810 "parser.tab.c"
+#line 1815 "parser.tab.c"
     break;
 
   case 31:
-#line 331 "parser.y"
+#line 336 "parser.y"
                                                                            {
 			printf("Declaration dun tableau de type structure %s et de taille %ld\n",(yyvsp[-4].text),(yyvsp[-2].num));
 		}
-#line 1818 "parser.tab.c"
+#line 1823 "parser.tab.c"
     break;
 
   case 32:
-#line 335 "parser.y"
+#line 340 "parser.y"
                                           {
             Structure * p = rechercherStructure(tableStruct, (yyvsp[-1].text));
             if (p != NULL) {
@@ -1835,11 +1840,11 @@ yyreduce:
 
 			printf("Declaration dune variable de type structure\n");
 		}
-#line 1839 "parser.tab.c"
+#line 1844 "parser.tab.c"
     break;
 
   case 33:
-#line 352 "parser.y"
+#line 357 "parser.y"
                                                                         {
             tableStruct->tete = declarerStructure(tableStruct, (yyvsp[-4].text));
 
@@ -1849,24 +1854,24 @@ yyreduce:
             champBuffer = NULL;
 			printf("Creation dune structure\n");
 		}
-#line 1853 "parser.tab.c"
+#line 1858 "parser.tab.c"
     break;
 
   case 34:
-#line 361 "parser.y"
+#line 366 "parser.y"
                       {}
-#line 1859 "parser.tab.c"
+#line 1864 "parser.tab.c"
     break;
 
   case 35:
-#line 363 "parser.y"
+#line 368 "parser.y"
                            {
 		}
-#line 1866 "parser.tab.c"
+#line 1871 "parser.tab.c"
     break;
 
   case 36:
-#line 367 "parser.y"
+#line 372 "parser.y"
                          {
         if(champBuffer == NULL){
             champBuffer = initialisationBuffer();
@@ -1874,135 +1879,135 @@ yyreduce:
         
         champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-2].text), ENTIER, 0);
     }
-#line 1878 "parser.tab.c"
+#line 1883 "parser.tab.c"
     break;
 
   case 37:
-#line 375 "parser.y"
+#line 380 "parser.y"
                           {
         if(champBuffer == NULL)
             champBuffer = initialisationBuffer();
         
         champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-2].text), BOOLEEN, 0);
     }
-#line 1889 "parser.tab.c"
+#line 1894 "parser.tab.c"
     break;
 
   case 38:
-#line 382 "parser.y"
+#line 387 "parser.y"
                           {
         if(champBuffer == NULL)
             champBuffer = initialisationBuffer();
         
         champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-2].text), CARACTERE, 0);
     }
-#line 1900 "parser.tab.c"
+#line 1905 "parser.tab.c"
     break;
 
   case 39:
-#line 389 "parser.y"
+#line 394 "parser.y"
                                                           {
         if(champBuffer == NULL)
             champBuffer = initialisationBuffer();
         
         champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
     }
-#line 1911 "parser.tab.c"
+#line 1916 "parser.tab.c"
     break;
 
   case 40:
-#line 396 "parser.y"
+#line 401 "parser.y"
                                                            {
         if(champBuffer == NULL)
             champBuffer = initialisationBuffer();
         
         champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
     }
-#line 1922 "parser.tab.c"
+#line 1927 "parser.tab.c"
     break;
 
   case 41:
-#line 403 "parser.y"
+#line 408 "parser.y"
                                                            {
         if(champBuffer == NULL)
             champBuffer = initialisationBuffer();
         
         champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
     }
-#line 1933 "parser.tab.c"
+#line 1938 "parser.tab.c"
     break;
 
   case 42:
-#line 410 "parser.y"
+#line 415 "parser.y"
                                                                {
         if(champBuffer == NULL)
             champBuffer = initialisationBuffer();
         
         champBuffer->tete = sauvegarderVariable(champBuffer, (yyvsp[-5].text), TABLEAU, (yyvsp[-2].num));
     }
-#line 1944 "parser.tab.c"
+#line 1949 "parser.tab.c"
     break;
 
   case 43:
-#line 417 "parser.y"
+#line 422 "parser.y"
                               {
     }
-#line 1951 "parser.tab.c"
+#line 1956 "parser.tab.c"
     break;
 
   case 44:
-#line 432 "parser.y"
+#line 437 "parser.y"
                 { 
         char numb[20];       
         sprintf(numb, "%ld", (yyvsp[0].num)); 
         //strcpy($$, numb);
          (yyval.text) = numb ;
         }
-#line 1962 "parser.tab.c"
+#line 1967 "parser.tab.c"
     break;
 
   case 45:
-#line 439 "parser.y"
+#line 444 "parser.y"
             { strcpy((yyval.text), (yyvsp[0].text));}
-#line 1968 "parser.tab.c"
+#line 1973 "parser.tab.c"
     break;
 
   case 46:
-#line 441 "parser.y"
+#line 446 "parser.y"
                  { strcpy((yyval.text), (yyvsp[0].text));}
-#line 1974 "parser.tab.c"
+#line 1979 "parser.tab.c"
     break;
 
   case 47:
-#line 443 "parser.y"
+#line 448 "parser.y"
                    { strcpy((yyval.text), (yyvsp[0].text));}
-#line 1980 "parser.tab.c"
+#line 1985 "parser.tab.c"
     break;
 
   case 48:
-#line 445 "parser.y"
+#line 450 "parser.y"
             { strcpy((yyval.text), (yyvsp[0].text));}
-#line 1986 "parser.tab.c"
+#line 1991 "parser.tab.c"
     break;
 
   case 49:
-#line 447 "parser.y"
+#line 452 "parser.y"
            { strcpy((yyval.text), (yyvsp[0].text));}
-#line 1992 "parser.tab.c"
+#line 1997 "parser.tab.c"
     break;
 
   case 50:
-#line 449 "parser.y"
+#line 454 "parser.y"
                                                       {
-        char cp[20];
-        strcpy(cp, (yyvsp[-1].text)); 
-       (yyval.text) = cp ;
+       
+        strcpy((yyval.text), (yyvsp[-1].text)); 
+      
         }
-#line 2002 "parser.tab.c"
+#line 2007 "parser.tab.c"
     break;
 
   case 51:
-#line 455 "parser.y"
+#line 460 "parser.y"
                   {
         if ((yyvsp[0].varId) != NULL) {
             if ((yyvsp[0].varId)->type != ENTIER) {
@@ -2015,16 +2020,16 @@ yyreduce:
               strcpy((yyval.text), no);
             }
         } else {
-            fprintf(stderr, "symbol non définit");
+            fprintf(stderr, "symbol non définit\n");
             exit(1);
         }
             
     }
-#line 2024 "parser.tab.c"
+#line 2029 "parser.tab.c"
     break;
 
   case 52:
-#line 474 "parser.y"
+#line 479 "parser.y"
                                                               {
         strcpy(quad[ind][0],"+");
         
@@ -2041,11 +2046,11 @@ yyreduce:
         strcpy(quad[ind][3],add);       
         ind++;
         }
-#line 2045 "parser.tab.c"
+#line 2050 "parser.tab.c"
     break;
 
   case 53:
-#line 491 "parser.y"
+#line 496 "parser.y"
                                                                  {
         char mm[20] = "T_sous";
         (yyval.text)=mm;
@@ -2059,11 +2064,11 @@ yyreduce:
         strcpy(quad[ind][3],mm);       
         ind++;
         }
-#line 2063 "parser.tab.c"
+#line 2068 "parser.tab.c"
     break;
 
   case 54:
-#line 505 "parser.y"
+#line 510 "parser.y"
                                                                {
         char mul[20] = "T_mult";
         (yyval.text)= mul;
@@ -2077,11 +2082,11 @@ yyreduce:
         strcpy(quad[ind][3],mul);       
         ind++;
         }
-#line 2081 "parser.tab.c"
+#line 2086 "parser.tab.c"
     break;
 
   case 55:
-#line 519 "parser.y"
+#line 524 "parser.y"
                                                                 {
         char d[20] = "T_div";
         (yyval.text)=d;
@@ -2097,11 +2102,11 @@ yyreduce:
         strcpy(quad[ind][3],d);       
         ind++;
         }
-#line 2101 "parser.tab.c"
+#line 2106 "parser.tab.c"
     break;
 
   case 56:
-#line 535 "parser.y"
+#line 540 "parser.y"
                                                               { 
         char dol[20] = "T_mod";
         (yyval.text)=dol;
@@ -2115,59 +2120,94 @@ yyreduce:
         strcpy(quad[ind][3],dol);       
         ind++;
         }
-#line 2119 "parser.tab.c"
+#line 2124 "parser.tab.c"
     break;
 
   case 57:
-#line 549 "parser.y"
+#line 554 "parser.y"
                                                    {
 
 }
-#line 2127 "parser.tab.c"
+#line 2132 "parser.tab.c"
     break;
 
   case 60:
-#line 557 "parser.y"
+#line 562 "parser.y"
                                                              {
                     
                 }
-#line 2135 "parser.tab.c"
+#line 2140 "parser.tab.c"
     break;
 
   case 61:
-#line 560 "parser.y"
-                                                                                                             {
-
+#line 565 "parser.y"
+                                                                                                                  {
+                   
+                    if ((yyvsp[-7].varId) != NULL) {
+                        if ((yyvsp[-7].varId)->type != ENTIER) {
+                            fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: ENTIER \n", (yyvsp[-7].varId)->nom, typeOf((yyvsp[-7].varId)->type));
+                            exit(1);
+                        } 
+                        else {
+                        
+                        }
+                    } else {
+                        fprintf(stderr, "symbol non définit\n");
+                        exit(1);
+                    }
                 }
-#line 2143 "parser.tab.c"
+#line 2160 "parser.tab.c"
     break;
 
   case 62:
-#line 564 "parser.y"
-                                                                               {
-
+#line 581 "parser.y"
+                                                                                         {
+                    if ((yyvsp[-5].varId) != NULL) {
+                        if ((yyvsp[-5].varId)->type != ENTIER) {
+                            fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: ENTIER \n", (yyvsp[-5].varId)->nom, typeOf((yyvsp[-5].varId)->type));
+                            exit(1);
+                        } 
+                        else {
+                        
+                        }
+                    } else {
+                        fprintf(stderr, "symbol non définit\n");
+                        exit(1);
+                    }
+                    if ((yyvsp[-3].varId) != NULL) {
+                        if ((yyvsp[-3].varId)->type != TABLEAU) {
+                            fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: TABLEAU \n", (yyvsp[-3].varId)->nom, typeOf((yyvsp[-3].varId)->type));
+                            exit(1);
+                        } 
+                        else {
+                        
+                        }
+                    } else {
+                        fprintf(stderr, "symbol non définit\n");
+                        exit(1);
+                    }
                 }
-#line 2151 "parser.tab.c"
+#line 2191 "parser.tab.c"
     break;
 
   case 63:
-#line 567 "parser.y"
+#line 607 "parser.y"
                                                             {
 
                 }
-#line 2159 "parser.tab.c"
+#line 2199 "parser.tab.c"
     break;
 
   case 64:
-#line 570 "parser.y"
+#line 610 "parser.y"
                                                                                   {
                     
                 }
-#line 2167 "parser.tab.c"
+#line 2207 "parser.tab.c"
     break;
 
   case 65:
-#line 575 "parser.y"
+#line 615 "parser.y"
                   { 
         if ((yyvsp[0].varId) != NULL) {
             if ((yyvsp[0].varId)->type != BOOLEEN) {
@@ -2175,111 +2215,239 @@ yyreduce:
                 exit(1);
             } 
             else {
-             char exp[20];
-             strcpy(exp, (yyvsp[0].varId)->nom);
-             (yyval.text) = exp;
+             char no[20]=" ";
+               strcpy(no, (yyvsp[0].varId)->nom);
+              strcpy((yyval.text), no);
             }
         } else {
-            fprintf(stderr, "symbol non définit");
+            fprintf(stderr, "symbol non définit\n");
             exit(1);
         }
     }
-#line 2188 "parser.tab.c"
+#line 2228 "parser.tab.c"
     break;
 
   case 66:
-#line 591 "parser.y"
-                  {//$$ = $1;
+#line 631 "parser.y"
+                  {
+        strcpy((yyval.text), (yyvsp[0].text));
     }
-#line 2195 "parser.tab.c"
+#line 2236 "parser.tab.c"
     break;
 
   case 67:
-#line 593 "parser.y"
-                  {// $$=0;
+#line 634 "parser.y"
+                  {
+        char fals[2]=" 0";
+       // strcpy(fals,"0");
+       strcpy((yyval.text),fals);
     }
-#line 2202 "parser.tab.c"
+#line 2246 "parser.tab.c"
     break;
 
   case 68:
-#line 595 "parser.y"
-                  { //$$=1; 
+#line 639 "parser.y"
+                  { 
+        char tru[2]=" 1";
+       // strcpy(tru,"1");
+        strcpy((yyval.text),tru);
     }
-#line 2209 "parser.tab.c"
+#line 2256 "parser.tab.c"
     break;
 
   case 69:
-#line 597 "parser.y"
-                                        { //$$=$2;
+#line 644 "parser.y"
+                                        { 
+        strcpy((yyval.text), (yyvsp[-1].text));
     }
-#line 2216 "parser.tab.c"
+#line 2264 "parser.tab.c"
     break;
 
   case 70:
-#line 599 "parser.y"
-                        {// $$=!$2;
+#line 647 "parser.y"
+                        { 
+        
+        char not[20] = "T_not";
+        (yyval.text)=not;
+        char b1[20];
+        strcpy(b1, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],"not");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2]," ");
+        strcpy(quad[ind][3],not);       
+        ind++;
+       
     }
-#line 2223 "parser.tab.c"
+#line 2283 "parser.tab.c"
     break;
 
   case 71:
-#line 601 "parser.y"
-                                {// $$=($1)&&($3);
+#line 661 "parser.y"
+                                {
+        char and[20] = "T_and";
+        (yyval.text)=and;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],"and");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],and);       
+        ind++;
      }
-#line 2230 "parser.tab.c"
+#line 2302 "parser.tab.c"
     break;
 
   case 72:
-#line 603 "parser.y"
-                                {// $$=($1)||($3); 
+#line 675 "parser.y"
+                                {
+        char or[20] = "T_or";
+        (yyval.text)=or;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],"or");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
-#line 2237 "parser.tab.c"
+#line 2321 "parser.tab.c"
     break;
 
   case 73:
-#line 607 "parser.y"
+#line 691 "parser.y"
                                      {// $$=($1 == $3); 
+        char or[20] = "T_egal";
+        (yyval.text)=or;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],"==");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
-#line 2244 "parser.tab.c"
+#line 2340 "parser.tab.c"
     break;
 
   case 74:
-#line 609 "parser.y"
-                                       {// $$=($1 != $3); 
+#line 705 "parser.y"
+                                       {// $$=($1 != $3);
+        char or[20] = "T_diff";
+        (yyval.text)=or;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],"!=");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++; 
     }
-#line 2251 "parser.tab.c"
+#line 2359 "parser.tab.c"
     break;
 
   case 75:
-#line 611 "parser.y"
+#line 719 "parser.y"
                                       {// $$=($1 > $3); 
+        char or[20] = "T_sup";
+        (yyval.text)=or;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],">");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
-#line 2258 "parser.tab.c"
+#line 2378 "parser.tab.c"
     break;
 
   case 76:
-#line 613 "parser.y"
+#line 733 "parser.y"
                                           {// $$=($1 >= $3); 
+    char or[20] = "T_supeg";
+        (yyval.text)=or;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],">=");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
-#line 2265 "parser.tab.c"
+#line 2397 "parser.tab.c"
     break;
 
   case 77:
-#line 615 "parser.y"
+#line 747 "parser.y"
                                       {// $$=($1 < $3); 
+    char or[20] = "T_inf";
+        (yyval.text)=or;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],"<");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
-#line 2272 "parser.tab.c"
+#line 2416 "parser.tab.c"
     break;
 
   case 78:
-#line 617 "parser.y"
+#line 761 "parser.y"
                                           {// $$=($1 <= $3);
+        char or[20] = "T_infeg";
+        (yyval.text)=or;
+        char b1[20];
+        strcpy(b1, (yyvsp[-2].text));
+        char b2[20];
+        strcpy(b2, (yyvsp[0].text));
+
+        strcpy(quad[ind][0],"<=");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
      }
-#line 2279 "parser.tab.c"
+#line 2435 "parser.tab.c"
+    break;
+
+  case 79:
+#line 777 "parser.y"
+                {
+         char numb[20];       
+         sprintf(numb, "%d", (yyvsp[0].num)); 
+        //strcpy($$, numb);
+         (yyval.text) = numb ;
+        
+    }
+#line 2447 "parser.tab.c"
     break;
 
   case 80:
-#line 623 "parser.y"
+#line 785 "parser.y"
                   {
     if ((yyvsp[0].varId) != NULL) {
         if ((yyvsp[0].varId)->type != ENTIER) {
@@ -2289,18 +2457,18 @@ yyreduce:
         else {
             char nom[20];
                strcpy(nom, (yyvsp[0].varId)->nom);
-          (yyval.num) = nom;
+         strcpy((yyval.text), nom);
         }
     } else {
-        fprintf(stderr, "symbol non définit");
+        fprintf(stderr, "symbol non définit\n");
         exit(1);
     }
     }
-#line 2300 "parser.tab.c"
+#line 2468 "parser.tab.c"
     break;
 
 
-#line 2304 "parser.tab.c"
+#line 2472 "parser.tab.c"
 
       default: break;
     }
@@ -2532,7 +2700,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 642 "parser.y"
+#line 804 "parser.y"
 
 
 int main(int argc , char** argv) {

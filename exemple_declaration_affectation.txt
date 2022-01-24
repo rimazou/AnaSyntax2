@@ -5,6 +5,6 @@ z num.
 CONST c 7.
 START
 x <- 10.
-y <- 5.
 z <- ( x + 5 ) * 2 + y.
+for
 STOP

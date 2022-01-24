@@ -3,9 +3,9 @@ x num. y num. z num.
 a bool. b bool. c bool.
 START
 x <- 5.
-y <- x*2 + 10* x.
-z <- (y/x)*5 + x*y.
-a <- true .
+y <- x*2 + x*10.
+z <-  (y/x) * 5 + x*y.
+a <- false.
 b <- 5 > 10.
-c <- not b or a and a.
+c <- not b or (a and a).
 STOP

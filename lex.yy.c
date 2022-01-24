@@ -836,7 +836,7 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 28 "parser.l"
-{yylval.CHARACTER=yytext[0];  return TOKEN_CHAR;}
+{yylval.text=strdup(yytext[1]);  return TOKEN_CHAR;}
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
@@ -852,12 +852,12 @@ YY_RULE_SETUP
 case 6:
 YY_RULE_SETUP
 #line 35 "parser.l"
-{yylval.BOOLEAN=0; return TOKEN_FALSE;}
+{ return TOKEN_FALSE;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 36 "parser.l"
-{yylval.BOOLEAN=1; return TOKEN_TRUE;}
+{ return TOKEN_TRUE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP

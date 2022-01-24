@@ -25,15 +25,15 @@ everything .
 
 \*{2}{everything}* {}
 
-\'{everything}\' {yylval.CHARACTER=yytext[0];  return TOKEN_CHAR;}
+\'{everything}\' {yylval.text=strdup(yytext[1]);  return TOKEN_CHAR;}
 
 \"(\\.|[^"\\])*\" {yylval.text=strdup(yytext); return TOKEN_TEXT;} /*Text is a string*/
 
 
 {digit}+ {yylval.num=atoi(yytext); return TOKEN_NUMBER;}
 
-"false" {yylval.BOOLEAN=0; return TOKEN_FALSE;}
-"true"  {yylval.BOOLEAN=1; return TOKEN_TRUE;}
+"false" { return TOKEN_FALSE;}
+"true"  { return TOKEN_TRUE;}
 
 "DECLARE" {return TOKEN_DECLARE	;}
 "CONST"  {return TOKEN_CONST;}

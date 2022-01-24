@@ -65,8 +65,8 @@ void yyerror (char const *s);
 %type<text>     multiplication
 %type<text>     division
 %type<text>     ExpBool
-%type<BOOLEAN>     Comparaison
-%type<num>     comparable
+%type<text>     Comparaison
+%type<text>     comparable
 %type<text>     modulo
 
 
@@ -74,7 +74,7 @@ void yyerror (char const *s);
 
 %token          TOKEN_MULTICOM
 %token          TOKEN_COMMENT
-%token <CHARACTER>   TOKEN_CHAR
+%token <text>   TOKEN_CHAR
 %token <text>   TOKEN_TEXT
 %token <num>    TOKEN_NUMBER
 %token <BOOLEAN>   TOKEN_FALSE
@@ -169,7 +169,7 @@ instruction:    affectation{
 affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{                    
                         if($1 != NULL) {
                             if($1->type == ENTIER){
-                                printf("Type correct: %s\n", $1->nom);
+                                printf("Type de %s correct:  %s\n", $1->nom, typeOf($1->type));
 
                                 char nm[20];
                                 strcpy(nm, $1->nom);
@@ -196,18 +196,23 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                 }
                 |
                 variable_name TOKEN_ASSIGN ExpBool FININSTR{
+                   
                         if($1 != NULL) {
+                           
                             if($1->type == BOOLEEN){
-                            printf("Type correct: %s\n", $1->nom);
+                              
+                            printf("Type de %s correct: %s\n", $1->nom, typeOf($1->type));
 
-                                char nm[20];
-                                strcpy(nm, $1->nom);
-                                strcpy(quad[ind][0],"=");
+                                char nomm[20];
+                                strcpy(nomm, $1->nom);
+                                
                                 char exp[20]; 
                                 strcpy(exp, $3);
+                                
+                                strcpy(quad[ind][0],"=");
                                 strcpy(quad[ind][1],exp);
                                 strcpy(quad[ind][2]," ");
-                                strcpy(quad[ind][3],nm);
+                                strcpy(quad[ind][3],nomm);
                                 ind++;
                              }
                             else {
@@ -225,10 +230,10 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                 variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR{
                     if($1 != NULL) {
                             if($1->type == CARACTERE){
-                            printf("Type correct: %s\n", $1->nom);
+                            printf("Type de %s correct: %s\n", $1->nom, typeOf($1->type));
                             char nom[20];
                                 strcpy(nom, $1->nom);
-                                char f[20] ;
+                                char f[20]=" " ;
                                 strcpy(f, $3);
                                 strcpy(quad[ind][0],"=");
                                 strcpy(quad[ind][1],f);
@@ -447,9 +452,9 @@ expression_arithmetique:
     modulo { strcpy($$, $1);}
     |
     PARENTHESE_G expression_arithmetique PARENTHESE_D {
-        char cp[20];
-        strcpy(cp, $2); 
-       $$ = cp ;
+       
+        strcpy($$, $2); 
+      
         }
     |
     variable_name {
@@ -557,12 +562,47 @@ lecture:	TOKEN_READ variable_name FININSTR;
 while :         TOKEN_WHILE ExpBool TOKEN_BEGIN bloc_code END{
                     
                 };
-for :           TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END{
-
+for :           TOKEN_FOR variable_name TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUMBER TOKEN_BEGIN bloc_code END{
+                   
+                    if ($2 != NULL) {
+                        if ($2->type != ENTIER) {
+                            fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: ENTIER \n", $2->nom, typeOf($2->type));
+                            exit(1);
+                        } 
+                        else {
+                        
+                        }
+                    } else {
+                        fprintf(stderr, "symbol non définit\n");
+                        exit(1);
+                    }
                 }
                 |
-                TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code END {
-
+                TOKEN_FOR variable_name TOKEN_IN variable_name TOKEN_BEGIN bloc_code END {
+                    if ($2 != NULL) {
+                        if ($2->type != ENTIER) {
+                            fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: ENTIER \n", $2->nom, typeOf($2->type));
+                            exit(1);
+                        } 
+                        else {
+                        
+                        }
+                    } else {
+                        fprintf(stderr, "symbol non définit\n");
+                        exit(1);
+                    }
+                    if ($4 != NULL) {
+                        if ($4->type != TABLEAU) {
+                            fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: TABLEAU \n", $4->nom, typeOf($4->type));
+                            exit(1);
+                        } 
+                        else {
+                        
+                        }
+                    } else {
+                        fprintf(stderr, "symbol non définit\n");
+                        exit(1);
+                    }
                 };
 conditionnel :  TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code END {
 
@@ -579,50 +619,168 @@ ExpBool:
                 exit(1);
             } 
             else {
-             char exp[20];
-             strcpy(exp, $1->nom);
-             strcpy($$, exp);
+             char no[20]=" ";
+               strcpy(no, $1->nom);
+              strcpy($$, no);
             }
         } else {
             fprintf(stderr, "symbol non définit\n");
             exit(1);
         }
     } 
-    | Comparaison {strcpy($$, $1);
+    | Comparaison {
+        strcpy($$, $1);
     }
     | TOKEN_FALSE {
-        char fals[20]="false";
-       $$= fals;
+        char fals[2]=" 0";
+       // strcpy(fals,"0");
+       strcpy($$,fals);
     }
     | TOKEN_TRUE  { 
-        char tru[20]="true";
-        $$ = tru ;
+        char tru[2]=" 1";
+       // strcpy(tru,"1");
+        strcpy($$,tru);
     }
-    | PARENTHESE_G ExpBool PARENTHESE_D { strcpy($$, $2);
+    | PARENTHESE_G ExpBool PARENTHESE_D { 
+        strcpy($$, $2);
     }
-    | TOKEN_NOT ExpBool { strcpy($$, strcat("! ",$1));
+    | TOKEN_NOT ExpBool { 
+        
+        char not[20] = "T_not";
+        $$=not;
+        char b1[20];
+        strcpy(b1, $2);
+
+        strcpy(quad[ind][0],"not");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2]," ");
+        strcpy(quad[ind][3],not);       
+        ind++;
+       
     }
-    | ExpBool TOKEN_AND ExpBool {strcpy($$, strcat(strcat($1," && "),$3));
+    | ExpBool TOKEN_AND ExpBool {
+        char and[20] = "T_and";
+        $$=and;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],"and");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],and);       
+        ind++;
      }
-    | ExpBool TOKEN_OR ExpBool  {strcpy($$, strcat(strcat($1," || "),$3));
+    | ExpBool TOKEN_OR ExpBool  {
+        char or[20] = "T_or";
+        $$=or;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],"or");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
     ;
 Comparaison:
     comparable TOKEN_EGAL comparable {// $$=($1 == $3); 
+        char or[20] = "T_egal";
+        $$=or;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],"==");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
-    | comparable TOKEN_DIFF comparable {// $$=($1 != $3); 
+    | comparable TOKEN_DIFF comparable {// $$=($1 != $3);
+        char or[20] = "T_diff";
+        $$=or;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],"!=");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++; 
     }
     | comparable TOKEN_SUP comparable {// $$=($1 > $3); 
+        char or[20] = "T_sup";
+        $$=or;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],">");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
     | comparable TOKEN_SUPEGAL comparable {// $$=($1 >= $3); 
+    char or[20] = "T_supeg";
+        $$=or;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],">=");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
     | comparable TOKEN_INF comparable {// $$=($1 < $3); 
+    char or[20] = "T_inf";
+        $$=or;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],"<");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
     }
     | comparable TOKEN_INFEGAL comparable {// $$=($1 <= $3);
+        char or[20] = "T_infeg";
+        $$=or;
+        char b1[20];
+        strcpy(b1, $1);
+        char b2[20];
+        strcpy(b2, $3);
+
+        strcpy(quad[ind][0],"<=");
+        strcpy(quad[ind][1],b1);
+        strcpy(quad[ind][2],b2);
+        strcpy(quad[ind][3],or);       
+        ind++;
      }
     ;
 comparable:
-    TOKEN_NUMBER
+    TOKEN_NUMBER{
+         char numb[20];       
+         sprintf(numb, "%d", $1); 
+        //strcpy($$, numb);
+         $$ = numb ;
+        
+    }
     |
     variable_name {
     if ($1 != NULL) {
@@ -633,7 +791,7 @@ comparable:
         else {
             char nom[20];
                strcpy(nom, $1->nom);
-          $$ = nom;
+         strcpy($$, nom);
         }
     } else {
         fprintf(stderr, "symbol non définit\n");
