@@ -38,6 +38,7 @@ void AfficherTable(Identifiant* entete);
 Identifiant* rechercherVar(TableIds* table, char* nom);
 Identifiant* rechercheElemTab(TableIds* table, char* nom, int index);
 char* typeOf(typePossible type);
+void afficher(char table[100][4][25], int index);
 
 
 //Gestion des structures
