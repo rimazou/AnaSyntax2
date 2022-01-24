@@ -297,6 +297,18 @@ struct Champ* sauvegarderVariable(BufferLLC *buffer, char* nom, typePossible typ
     return variable;
 }
 
+
+void afficher(char table[100][4][25], int index){
+    printf("\n\t la matrice des quadruplets \n\n");
+    for (int i = 0; i < index; i++)
+    {
+        printf("%d \t[%s] [%s] [%s] [%s]\n",i,table[i][0],table[i][1],table[i][2],table[i][3]);
+        
+    }
+    
+}
+
+
 /*
 Identifiant* garbage (char nom[],typePossible type, Nature nature)
 {

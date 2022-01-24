@@ -14,7 +14,8 @@ Identifiant* q = NULL;
 bool erreurSyntax = false;
 extern unsigned int linenbr;
 extern bool erreurLexical;
-
+char quad[100][4][25];
+int ind;
 extern FILE * yyin ;
 int yylex(void);
 void yyerror (char const *s);
@@ -168,6 +169,12 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                             if($1->type == ENTIER){
                                 printf("Type correct: %s\n", $1->nom);
                                 sprintf($1->valeur, "%ld", $3);
+                                strcpy(quad[ind][0],"=");
+                                sprintf(quad[ind][1],"%ld",$3);
+                                strcpy(quad[ind][2]," ");
+                                strcpy(quad[ind][3],$1->nom);
+                                ind++;
+                                
                             }
                             else {
                                 fprintf(stderr, "Erreur, type attendu: %s, trouvé: ENTIER\n", typeOf($1->type));
@@ -413,15 +420,41 @@ expression_arithmetique:
     }
     ;
 addition:	
-    expression_arithmetique TOKEN_ADD expression_arithmetique {$$=$1+$3;};
+    expression_arithmetique TOKEN_ADD expression_arithmetique {
+        $$=$1+$3;
+        strcpy(quad[ind][0],"+");
+        sprintf(quad[ind][1],"%ld",$1);
+        sprintf(quad[ind][2],"%ld",$3);
+        sprintf(quad[ind][3],"%ld",$$);       
+        ind++;
+        };
 soustraction: 
-    expression_arithmetique TOKEN_SOUSTR expression_arithmetique {$$=$1-$3;};
+    expression_arithmetique TOKEN_SOUSTR expression_arithmetique {$$=$1-$3;strcpy(quad[ind][0],"-");
+        sprintf(quad[ind][1],"%ld",$1);
+        sprintf(quad[ind][2],"%ld",$3);
+        sprintf(quad[ind][3],"%ld",$$);       
+        ind++;};
 multiplication:	
-    expression_arithmetique TOKEN_MULT expression_arithmetique {$$=$1*$3;};
+    expression_arithmetique TOKEN_MULT expression_arithmetique {$$=$1*$3;
+    strcpy(quad[ind][0],"*");
+        sprintf(quad[ind][1],"%ld",$1);
+        sprintf(quad[ind][2],"%ld",$3);
+        sprintf(quad[ind][3],"%ld",$$);       
+        ind++;};
 division:	
-    expression_arithmetique TOKEN_DIVIS expression_arithmetique { $$=$1/$3;};
+    expression_arithmetique TOKEN_DIVIS expression_arithmetique { $$=$1/$3;
+    strcpy(quad[ind][0],"/");
+        sprintf(quad[ind][1],"%ld",$1);
+        sprintf(quad[ind][2],"%ld",$3);
+        sprintf(quad[ind][3],"%ld",$$);       
+        ind++;};
 modulo:	
-    expression_arithmetique TOKEN_MOD expression_arithmetique { $$=$1%$3; };
+    expression_arithmetique TOKEN_MOD expression_arithmetique { $$=$1%$3; 
+    strcpy(quad[ind][0],"%");
+        sprintf(quad[ind][1],"%ld",$1);
+        sprintf(quad[ind][2],"%ld",$3);
+        sprintf(quad[ind][3],"%ld",$$);       
+        ind++;};
 
 ecriture:	TOKEN_WRITE variable_name FININSTR {}
         |
@@ -503,12 +536,15 @@ int main(int argc , char** argv) {
     //initialisation des Tables des symboles et structures globales
     table = initialisation();
     tableStruct = initialisationTableStructures();
+    
+    ind =0 ;
 
     yyin= fopen (argv[1], "r");
     int result = yyparse();
     if(result == 0) {
         printf("\n********\n\t\tProgramme syntaxiquement correct\n********\n");
         AfficherTable(table->Entete_llc) ;
+        afficher(quad,ind);
     }
    
 }
