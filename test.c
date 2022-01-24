@@ -89,8 +89,12 @@ Identifiant* declarerTab(TableIds* table, char* nom, typePossible type, int tail
     //q et z c'est pour le parcour de llc
     for (int i = 1; i <= taille; i++)
     {
+        char n[25];
+        strcpy(n, nom);
+        char ind[5];
+        sprintf(ind, "%d", i);
         
-        //strcpy((q->nom),nom);
+        strcpy((q->nom),strcat(n,ind));
        // sprintf(q->nom, "%d", i);
         q->type = type ;
         if (type == TABLEAU || type == STRUCTURE)

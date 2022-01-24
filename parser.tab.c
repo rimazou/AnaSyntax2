@@ -588,11 +588,11 @@ static const yytype_int16 yyrline[] =
      151,   156,   160,   165,   169,   198,   225,   252,   259,   265,
      270,   276,   283,   290,   295,   300,   305,   311,   316,   321,
      326,   331,   335,   352,   361,   363,   367,   375,   382,   389,
-     396,   403,   410,   417,   434,   441,   443,   445,   447,   449,
-     451,   457,   476,   493,   507,   521,   536,   550,   552,   555,
-     556,   559,   563,   566,   569,   574,   589,   590,   591,   592,
-     593,   594,   595,   598,   599,   600,   601,   602,   603,   606,
-     608
+     396,   403,   410,   417,   432,   439,   441,   443,   445,   447,
+     449,   455,   474,   491,   505,   519,   535,   549,   553,   556,
+     557,   560,   564,   567,   570,   575,   591,   593,   595,   597,
+     599,   601,   603,   607,   609,   611,   613,   615,   617,   621,
+     623
 };
 #endif
 
@@ -1951,48 +1951,48 @@ yyreduce:
     break;
 
   case 44:
-#line 434 "parser.y"
+#line 432 "parser.y"
                 { 
         char numb[20];       
-        sprintf(numb, "%d", (yyvsp[0].num)); 
-        strcpy((yyval.text), numb);
-         
+        sprintf(numb, "%ld", (yyvsp[0].num)); 
+        //strcpy($$, numb);
+         (yyval.text) = numb ;
         }
 #line 1962 "parser.tab.c"
     break;
 
   case 45:
-#line 441 "parser.y"
-            { (yyval.text) = (yyvsp[0].text);}
+#line 439 "parser.y"
+            { strcpy((yyval.text), (yyvsp[0].text));}
 #line 1968 "parser.tab.c"
     break;
 
   case 46:
-#line 443 "parser.y"
-                 { (yyval.text)=(yyvsp[0].text);}
+#line 441 "parser.y"
+                 { strcpy((yyval.text), (yyvsp[0].text));}
 #line 1974 "parser.tab.c"
     break;
 
   case 47:
-#line 445 "parser.y"
-                   { (yyval.text)=(yyvsp[0].text);}
+#line 443 "parser.y"
+                   { strcpy((yyval.text), (yyvsp[0].text));}
 #line 1980 "parser.tab.c"
     break;
 
   case 48:
-#line 447 "parser.y"
-            { (yyval.text)=(yyvsp[0].text) ;}
+#line 445 "parser.y"
+            { strcpy((yyval.text), (yyvsp[0].text));}
 #line 1986 "parser.tab.c"
     break;
 
   case 49:
-#line 449 "parser.y"
-           { (yyval.text)=(yyvsp[0].text)}
+#line 447 "parser.y"
+           { strcpy((yyval.text), (yyvsp[0].text));}
 #line 1992 "parser.tab.c"
     break;
 
   case 50:
-#line 451 "parser.y"
+#line 449 "parser.y"
                                                       {
         char cp[20];
         strcpy(cp, (yyvsp[-1].text)); 
@@ -2002,7 +2002,7 @@ yyreduce:
     break;
 
   case 51:
-#line 457 "parser.y"
+#line 455 "parser.y"
                   {
         if ((yyvsp[0].varId) != NULL) {
             if ((yyvsp[0].varId)->type != ENTIER) {
@@ -2012,7 +2012,7 @@ yyreduce:
             else {
                char no[20]=" ";
                strcpy(no, (yyvsp[0].varId)->nom);
-               (yyval.text)=no;
+              strcpy((yyval.text), no);
             }
         } else {
             fprintf(stderr, "symbol non définit");
@@ -2024,9 +2024,9 @@ yyreduce:
     break;
 
   case 52:
-#line 476 "parser.y"
+#line 474 "parser.y"
                                                               {
-         strcpy(quad[ind][0],"+");
+        strcpy(quad[ind][0],"+");
         
         char c1[20];
         strcpy(c1, (yyvsp[-2].text));        
@@ -2045,7 +2045,7 @@ yyreduce:
     break;
 
   case 53:
-#line 493 "parser.y"
+#line 491 "parser.y"
                                                                  {
         char mm[20] = "T_sous";
         (yyval.text)=mm;
@@ -2063,7 +2063,7 @@ yyreduce:
     break;
 
   case 54:
-#line 507 "parser.y"
+#line 505 "parser.y"
                                                                {
         char mul[20] = "T_mult";
         (yyval.text)= mul;
@@ -2081,26 +2081,27 @@ yyreduce:
     break;
 
   case 55:
-#line 521 "parser.y"
+#line 519 "parser.y"
                                                                 {
         char d[20] = "T_div";
         (yyval.text)=d;
-        char c1[20] = (yyvsp[-2].text);
-        //strcpy(c1, $1); 
+        char c1[20];
+     
+        strcpy(c1, (yyvsp[-2].text)); 
         
         strcpy(quad[ind][0],"/");
         strcpy(quad[ind][1],c1);
-       char c2[20] = (yyvsp[0].text);
-        //strcpy(c2, $3); 
+       char c2[20];
+        strcpy(c2, (yyvsp[0].text)); 
         strcpy(quad[ind][2],c2);
         strcpy(quad[ind][3],d);       
         ind++;
         }
-#line 2100 "parser.tab.c"
+#line 2101 "parser.tab.c"
     break;
 
   case 56:
-#line 536 "parser.y"
+#line 535 "parser.y"
                                                               { 
         char dol[20] = "T_mod";
         (yyval.text)=dol;
@@ -2114,57 +2115,59 @@ yyreduce:
         strcpy(quad[ind][3],dol);       
         ind++;
         }
-#line 2118 "parser.tab.c"
+#line 2119 "parser.tab.c"
     break;
 
   case 57:
-#line 550 "parser.y"
-                                                   {}
-#line 2124 "parser.tab.c"
+#line 549 "parser.y"
+                                                   {
+
+}
+#line 2127 "parser.tab.c"
     break;
 
   case 60:
-#line 556 "parser.y"
+#line 557 "parser.y"
                                                              {
                     
                 }
-#line 2132 "parser.tab.c"
+#line 2135 "parser.tab.c"
     break;
 
   case 61:
-#line 559 "parser.y"
+#line 560 "parser.y"
                                                                                                              {
 
                 }
-#line 2140 "parser.tab.c"
+#line 2143 "parser.tab.c"
     break;
 
   case 62:
-#line 563 "parser.y"
+#line 564 "parser.y"
                                                                                {
 
                 }
-#line 2148 "parser.tab.c"
+#line 2151 "parser.tab.c"
     break;
 
   case 63:
-#line 566 "parser.y"
+#line 567 "parser.y"
                                                             {
 
                 }
-#line 2156 "parser.tab.c"
+#line 2159 "parser.tab.c"
     break;
 
   case 64:
-#line 569 "parser.y"
+#line 570 "parser.y"
                                                                                   {
                     
                 }
-#line 2164 "parser.tab.c"
+#line 2167 "parser.tab.c"
     break;
 
   case 65:
-#line 574 "parser.y"
+#line 575 "parser.y"
                   { 
         if ((yyvsp[0].varId) != NULL) {
             if ((yyvsp[0].varId)->type != BOOLEEN) {
@@ -2172,97 +2175,111 @@ yyreduce:
                 exit(1);
             } 
             else {
-          
-             (yyval.text) = (yyvsp[0].varId);
+             char exp[20];
+             strcpy(exp, (yyvsp[0].varId)->nom);
+             (yyval.text) = exp;
             }
         } else {
             fprintf(stderr, "symbol non définit");
             exit(1);
         }
     }
-#line 2184 "parser.tab.c"
+#line 2188 "parser.tab.c"
     break;
 
   case 66:
-#line 589 "parser.y"
-                  {(yyval.text) = (yyvsp[0].text);}
-#line 2190 "parser.tab.c"
+#line 591 "parser.y"
+                  {//$$ = $1;
+    }
+#line 2195 "parser.tab.c"
     break;
 
   case 67:
-#line 590 "parser.y"
-                  { (yyval.text)=0;}
-#line 2196 "parser.tab.c"
-    break;
-
-  case 68:
-#line 591 "parser.y"
-                  { (yyval.text)=1; }
+#line 593 "parser.y"
+                  {// $$=0;
+    }
 #line 2202 "parser.tab.c"
     break;
 
+  case 68:
+#line 595 "parser.y"
+                  { //$$=1; 
+    }
+#line 2209 "parser.tab.c"
+    break;
+
   case 69:
-#line 592 "parser.y"
-                                        { (yyval.text)=(yyvsp[-1].text);}
-#line 2208 "parser.tab.c"
+#line 597 "parser.y"
+                                        { //$$=$2;
+    }
+#line 2216 "parser.tab.c"
     break;
 
   case 70:
-#line 593 "parser.y"
-                        { (yyval.text)=!(yyvsp[0].text);}
-#line 2214 "parser.tab.c"
+#line 599 "parser.y"
+                        {// $$=!$2;
+    }
+#line 2223 "parser.tab.c"
     break;
 
   case 71:
-#line 594 "parser.y"
-                                { (yyval.text)=((yyvsp[-2].text))&&((yyvsp[0].text)); }
-#line 2220 "parser.tab.c"
+#line 601 "parser.y"
+                                {// $$=($1)&&($3);
+     }
+#line 2230 "parser.tab.c"
     break;
 
   case 72:
-#line 595 "parser.y"
-                                { (yyval.text)=((yyvsp[-2].text))||((yyvsp[0].text)); }
-#line 2226 "parser.tab.c"
+#line 603 "parser.y"
+                                {// $$=($1)||($3); 
+    }
+#line 2237 "parser.tab.c"
     break;
 
   case 73:
-#line 598 "parser.y"
-                                     { (yyval.text)=((yyvsp[-2].num) == (yyvsp[0].num)); }
-#line 2232 "parser.tab.c"
-    break;
-
-  case 74:
-#line 599 "parser.y"
-                                       { (yyval.text)=((yyvsp[-2].num) != (yyvsp[0].num)); }
-#line 2238 "parser.tab.c"
-    break;
-
-  case 75:
-#line 600 "parser.y"
-                                      { (yyval.text)=((yyvsp[-2].num) > (yyvsp[0].num)); }
+#line 607 "parser.y"
+                                     {// $$=($1 == $3); 
+    }
 #line 2244 "parser.tab.c"
     break;
 
+  case 74:
+#line 609 "parser.y"
+                                       {// $$=($1 != $3); 
+    }
+#line 2251 "parser.tab.c"
+    break;
+
+  case 75:
+#line 611 "parser.y"
+                                      {// $$=($1 > $3); 
+    }
+#line 2258 "parser.tab.c"
+    break;
+
   case 76:
-#line 601 "parser.y"
-                                          { (yyval.text)=((yyvsp[-2].num) >= (yyvsp[0].num)); }
-#line 2250 "parser.tab.c"
+#line 613 "parser.y"
+                                          {// $$=($1 >= $3); 
+    }
+#line 2265 "parser.tab.c"
     break;
 
   case 77:
-#line 602 "parser.y"
-                                      { (yyval.text)=((yyvsp[-2].num) < (yyvsp[0].num)); }
-#line 2256 "parser.tab.c"
+#line 615 "parser.y"
+                                      {// $$=($1 < $3); 
+    }
+#line 2272 "parser.tab.c"
     break;
 
   case 78:
-#line 603 "parser.y"
-                                          { (yyval.text)=((yyvsp[-2].num) <= (yyvsp[0].num)); }
-#line 2262 "parser.tab.c"
+#line 617 "parser.y"
+                                          {// $$=($1 <= $3);
+     }
+#line 2279 "parser.tab.c"
     break;
 
   case 80:
-#line 608 "parser.y"
+#line 623 "parser.y"
                   {
     if ((yyvsp[0].varId) != NULL) {
         if ((yyvsp[0].varId)->type != ENTIER) {
@@ -2279,11 +2296,11 @@ yyreduce:
         exit(1);
     }
     }
-#line 2283 "parser.tab.c"
+#line 2300 "parser.tab.c"
     break;
 
 
-#line 2287 "parser.tab.c"
+#line 2304 "parser.tab.c"
 
       default: break;
     }
@@ -2515,7 +2532,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 627 "parser.y"
+#line 642 "parser.y"
 
 
 int main(int argc , char** argv) {

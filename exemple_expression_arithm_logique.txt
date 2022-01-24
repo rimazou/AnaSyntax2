@@ -5,7 +5,7 @@ START
 x <- 5.
 y <- x*2 + 10* x.
 z <- (y/x)*5 + x*y.
-a <- true.
+a <- true .
 b <- 5 > 10.
 c <- not b or a and a.
 STOP

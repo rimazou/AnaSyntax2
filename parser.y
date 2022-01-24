@@ -65,7 +65,7 @@ void yyerror (char const *s);
 %type<text>     multiplication
 %type<text>     division
 %type<text>     ExpBool
-%type<text>     Comparaison
+%type<BOOLEAN>     Comparaison
 %type<num>     comparable
 %type<text>     modulo
 
@@ -203,7 +203,7 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                                 char nm[20];
                                 strcpy(nm, $1->nom);
                                 strcpy(quad[ind][0],"=");
-                               char exp[20]; 
+                                char exp[20]; 
                                 strcpy(exp, $3);
                                 strcpy(quad[ind][1],exp);
                                 strcpy(quad[ind][2]," ");
@@ -420,33 +420,31 @@ CHAMP:
     
 expression : 	expression_arithmetique
         {
-           { char c[20];
-            strcpy(c, $1); 
-            $$ = c ;
-            };
+           strcpy($$, $1);
+            
 		}
 		|
-		ExpBool{ char c1[20];
-        strcpy(c1, $1); 
-       $$ = c1 ;}
+		ExpBool{ 
+        strcpy($$, $1); 
+        };
 
 expression_arithmetique: 
     TOKEN_NUMBER{ 
         char numb[20];       
-        sprintf(numb, "%d", $1); 
-        strcpy($$, numb);
-         
+        sprintf(numb, "%ld", $1); 
+        //strcpy($$, numb);
+         $$ = numb ;
         }
     |
-    addition{ $$ = $1;}
+    addition{ strcpy($$, $1);}
     |
-    soustraction { $$=$1;}
+    soustraction { strcpy($$, $1);}
     |
-    multiplication { $$=$1;}
+    multiplication { strcpy($$, $1);}
     |
-    division{ $$=$1 ;}
+    division{ strcpy($$, $1);}
     |
-    modulo { $$=$1}
+    modulo { strcpy($$, $1);}
     |
     PARENTHESE_G expression_arithmetique PARENTHESE_D {
         char cp[20];
@@ -463,10 +461,10 @@ expression_arithmetique:
             else {
                char no[20]=" ";
                strcpy(no, $1->nom);
-               $$=no;
+              strcpy($$, no);
             }
         } else {
-            fprintf(stderr, "symbol non définit");
+            fprintf(stderr, "symbol non définit\n");
             exit(1);
         }
             
@@ -474,7 +472,7 @@ expression_arithmetique:
     ;
 addition:	
     expression_arithmetique TOKEN_ADD expression_arithmetique {
-         strcpy(quad[ind][0],"+");
+        strcpy(quad[ind][0],"+");
         
         char c1[20];
         strcpy(c1, $1);        
@@ -521,13 +519,14 @@ division:
     expression_arithmetique TOKEN_DIVIS expression_arithmetique {
         char d[20] = "T_div";
         $$=d;
-        char c1[20] = $1;
-        //strcpy(c1, $1); 
+        char c1[20];
+     
+        strcpy(c1, $1); 
         
         strcpy(quad[ind][0],"/");
         strcpy(quad[ind][1],c1);
-       char c2[20] = $3;
-        //strcpy(c2, $3); 
+       char c2[20];
+        strcpy(c2, $3); 
         strcpy(quad[ind][2],c2);
         strcpy(quad[ind][3],d);       
         ind++;
@@ -547,7 +546,9 @@ modulo:
         ind++;
         };
 
-ecriture:	TOKEN_WRITE variable_name FININSTR {}
+ecriture:	TOKEN_WRITE variable_name FININSTR {
+
+}
         |
         TOKEN_WRITE TOKEN_TEXT FININSTR
         ;
@@ -578,29 +579,47 @@ ExpBool:
                 exit(1);
             } 
             else {
-          
-             $$ = $1;
+             char exp[20];
+             strcpy(exp, $1->nom);
+             strcpy($$, exp);
             }
         } else {
-            fprintf(stderr, "symbol non définit");
+            fprintf(stderr, "symbol non définit\n");
             exit(1);
         }
     } 
-    | Comparaison {$$ = $1;}
-    | TOKEN_FALSE { $$=0;}
-    | TOKEN_TRUE  { $$=1; }
-    | PARENTHESE_G ExpBool PARENTHESE_D { $$=$2;}
-    | TOKEN_NOT ExpBool { $$=!$2;}
-    | ExpBool TOKEN_AND ExpBool { $$=($1)&&($3); }
-    | ExpBool TOKEN_OR ExpBool  { $$=($1)||($3); }
+    | Comparaison {strcpy($$, $1);
+    }
+    | TOKEN_FALSE {
+        char fals[20]="false";
+       $$= fals;
+    }
+    | TOKEN_TRUE  { 
+        char tru[20]="true";
+        $$ = tru ;
+    }
+    | PARENTHESE_G ExpBool PARENTHESE_D { strcpy($$, $2);
+    }
+    | TOKEN_NOT ExpBool { strcpy($$, strcat("! ",$1));
+    }
+    | ExpBool TOKEN_AND ExpBool {strcpy($$, strcat(strcat($1," && "),$3));
+     }
+    | ExpBool TOKEN_OR ExpBool  {strcpy($$, strcat(strcat($1," || "),$3));
+    }
     ;
 Comparaison:
-    comparable TOKEN_EGAL comparable { $$=($1 == $3); }
-    | comparable TOKEN_DIFF comparable { $$=($1 != $3); }
-    | comparable TOKEN_SUP comparable { $$=($1 > $3); }
-    | comparable TOKEN_SUPEGAL comparable { $$=($1 >= $3); }
-    | comparable TOKEN_INF comparable { $$=($1 < $3); }
-    | comparable TOKEN_INFEGAL comparable { $$=($1 <= $3); }
+    comparable TOKEN_EGAL comparable {// $$=($1 == $3); 
+    }
+    | comparable TOKEN_DIFF comparable {// $$=($1 != $3); 
+    }
+    | comparable TOKEN_SUP comparable {// $$=($1 > $3); 
+    }
+    | comparable TOKEN_SUPEGAL comparable {// $$=($1 >= $3); 
+    }
+    | comparable TOKEN_INF comparable {// $$=($1 < $3); 
+    }
+    | comparable TOKEN_INFEGAL comparable {// $$=($1 <= $3);
+     }
     ;
 comparable:
     TOKEN_NUMBER
@@ -617,7 +636,7 @@ comparable:
           $$ = nom;
         }
     } else {
-        fprintf(stderr, "symbol non définit");
+        fprintf(stderr, "symbol non définit\n");
         exit(1);
     }
     }

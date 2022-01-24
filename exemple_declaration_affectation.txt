@@ -2,6 +2,7 @@ DECLARE
 y num.
 x num.
 z num.
+CONST c 7.
 START
 x <- 10.
 y <- 5.
