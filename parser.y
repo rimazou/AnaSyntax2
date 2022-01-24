@@ -8,8 +8,8 @@ extern TableIds * table = NULL;
 extern TableStructures * tableStruct = NULL;
 extern BufferLLC* champBuffer = NULL;
 
-Identifiant* p = NULL;
-Identifiant* q = NULL;
+
+
 
 bool erreurSyntax = false;
 extern unsigned int linenbr;
@@ -55,18 +55,20 @@ void yyerror (char const *s);
 %type<text>     lecture
 %type<text>     ecriture
 %type<text>     conditionnel
-%type<num>     expression_arithmetique
+%type<text>     expression
+%type<text>     expression_arithmetique
 %type<text>     while
 %type<text>     for
 %type<varId>     variable_name
-%type<num>     addition
-%type<num>     soustraction
-%type<num>     multiplication
-%type<num>     division
-%type<BOOLEAN>     ExpBool
-%type<BOOLEAN>     Comparaison
+%type<text>     addition
+%type<text>     soustraction
+%type<text>     multiplication
+%type<text>     division
+%type<text>     ExpBool
+%type<text>     Comparaison
 %type<num>     comparable
-%type<num>     modulo
+%type<text>     modulo
+
 
 /* liste des tokens i.e. les terminaux */
 
@@ -168,11 +170,16 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                         if($1 != NULL) {
                             if($1->type == ENTIER){
                                 printf("Type correct: %s\n", $1->nom);
-                                sprintf($1->valeur, "%ld", $3);
+
+                                char nm[20];
+                                strcpy(nm, $1->nom);
+                                char exp[20]; 
+                                strcpy(exp, $3);
+
                                 strcpy(quad[ind][0],"=");
-                                sprintf(quad[ind][1],"%ld",$3);
+                                strcpy(quad[ind][1],exp);
                                 strcpy(quad[ind][2]," ");
-                                strcpy(quad[ind][3],$1->nom);
+                                strcpy(quad[ind][3],nm);
                                 ind++;
                                 
                             }
@@ -192,7 +199,16 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                         if($1 != NULL) {
                             if($1->type == BOOLEEN){
                             printf("Type correct: %s\n", $1->nom);
-                             sprintf($1->valeur, "%d", $3);
+
+                                char nm[20];
+                                strcpy(nm, $1->nom);
+                                strcpy(quad[ind][0],"=");
+                               char exp[20]; 
+                                strcpy(exp, $3);
+                                strcpy(quad[ind][1],exp);
+                                strcpy(quad[ind][2]," ");
+                                strcpy(quad[ind][3],nm);
+                                ind++;
                              }
                             else {
                                 fprintf(stderr, "Erreur dans, type attendu: %s, trouvé: BOOLEEN\n", typeOf($1->type));
@@ -205,10 +221,33 @@ affectation:  variable_name TOKEN_ASSIGN expression_arithmetique FININSTR{
                             exit(1);
                         }
                 }
-                |variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR
+                |
+                variable_name TOKEN_ASSIGN TOKEN_CHAR FININSTR{
+                    if($1 != NULL) {
+                            if($1->type == CARACTERE){
+                            printf("Type correct: %s\n", $1->nom);
+                            char nom[20];
+                                strcpy(nom, $1->nom);
+                                char f[20] ;
+                                strcpy(f, $3);
+                                strcpy(quad[ind][0],"=");
+                                strcpy(quad[ind][1],f);
+                                strcpy(quad[ind][2]," ");
+                                strcpy(quad[ind][3],nom);
+                                ind++;
+                             }
+                            else {
+                                fprintf(stderr, "Erreur dans, type attendu: %s, trouvé: CARACTERE\n", typeOf($1->type));
+                                exit(1);
+                            }
+                        }
+                        else {
+                            fprintf(stderr, "ERREUR: Identifiant non declare.");
+                            yyerror("Compilation interrompue");
+                            exit(1);
+                        }
+                }
                 ;
-
-
 variable_name:	
         TOKEN_ID{
                         Identifiant *m = rechercherVar(table, $1);
@@ -219,13 +258,13 @@ variable_name:
 		|
 		TOKEN_ID CROCHET_G expression_arithmetique CROCHET_D{
 			printf("Acces a un element  du tableau \n");
-            q = rechercheElemTab(table, $1, $3);
+            Identifiant *q = rechercheElemTab(table, $1);
 			$$= q;	
 		}
 		|
 		TOKEN_ID TOKEN_ACSTRUCT TOKEN_ID{
-            char * nom = strcat( strcat($1, ":"), $3);
-            $$ = rechercherVar(table, nom);
+            char * nstr = strcat( strcat($1, ":"), $3);
+            $$ = rechercherVar(table, nstr);
 		};
 
 DECLARE:	TOKEN_ID NUM FININSTR{
@@ -276,21 +315,21 @@ DECLARE:	TOKEN_ID NUM FININSTR{
 		|
 		TOKEN_ID NUM CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
             table->Entete_llc = declarerTab(table, $1, ENTIER, $4);
-			printf("Declaration dun tableau de type entier et de taille %d\n",$4);
+			printf("Declaration dun tableau de type entier et de taille %ld\n",$4);
 		}
 		|
 		TOKEN_ID BOOL CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
 		    table->Entete_llc = declarerTab(table, $1, BOOLEEN, $4);
-            printf("Declaration dun tableau de type booleen et de taille %d\n",$4);
+            printf("Declaration dun tableau de type booleen et de taille %ld\n",$4);
 		}
 		|
 		TOKEN_ID CHAR CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
             table->Entete_llc = declarerTab(table, $1, CARACTERE, $4);
-			printf("Declaration dun tableau de type caractere et de taille %d\n",$4);
+			printf("Declaration dun tableau de type caractere et de taille %ld\n",$4);
 		}
 		|
 		TOKEN_ID TOKEN_ID CROCHET_G TOKEN_NUMBER CROCHET_D FININSTR{
-			printf("Declaration dun tableau de type structure %s et de taille %d\n",$2,$4);
+			printf("Declaration dun tableau de type structure %s et de taille %ld\n",$2,$4);
 		}
 		|
 		TOKEN_ID TOKEN_ID FININSTR{
@@ -379,29 +418,41 @@ CHAMP:
     }
     ;
     
-expression : 	expression_arithmetique{
-
-		
+expression : 	expression_arithmetique
+        {
+           { char c[20];
+            strcpy(c, $1); 
+            $$ = c ;
+            };
 		}
 		|
-		ExpBool{
-		
-		}; 
+		ExpBool{ char c1[20];
+        strcpy(c1, $1); 
+       $$ = c1 ;}
 
 expression_arithmetique: 
-    TOKEN_NUMBER{ $$=$1;}
+    TOKEN_NUMBER{ 
+        char numb[20];       
+        sprintf(numb, "%d", $1); 
+        strcpy($$, numb);
+         
+        }
     |
-    addition
+    addition{ $$ = $1;}
     |
-    soustraction
+    soustraction { $$=$1;}
     |
-    multiplication
+    multiplication { $$=$1;}
     |
-    division
+    division{ $$=$1 ;}
     |
-    modulo
+    modulo { $$=$1}
     |
-    PARENTHESE_G expression_arithmetique PARENTHESE_D {$$=$2;}
+    PARENTHESE_G expression_arithmetique PARENTHESE_D {
+        char cp[20];
+        strcpy(cp, $2); 
+       $$ = cp ;
+        }
     |
     variable_name {
         if ($1 != NULL) {
@@ -410,7 +461,9 @@ expression_arithmetique:
                 exit(1);
             } 
             else {
-                $$= atoi($1->valeur);
+               char no[20]=" ";
+               strcpy(no, $1->nom);
+               $$=no;
             }
         } else {
             fprintf(stderr, "symbol non définit");
@@ -421,40 +474,78 @@ expression_arithmetique:
     ;
 addition:	
     expression_arithmetique TOKEN_ADD expression_arithmetique {
-        $$=$1+$3;
-        strcpy(quad[ind][0],"+");
-        sprintf(quad[ind][1],"%ld",$1);
-        sprintf(quad[ind][2],"%ld",$3);
-        sprintf(quad[ind][3],"%ld",$$);       
+         strcpy(quad[ind][0],"+");
+        
+        char c1[20];
+        strcpy(c1, $1);        
+        strcpy(quad[ind][1],c1);
+
+        char c2[20];
+        strcpy(c2, $3); 
+        strcpy(quad[ind][2],c2);
+
+        char add[20] = "T_add";
+        $$ = add;
+        strcpy(quad[ind][3],add);       
         ind++;
         };
 soustraction: 
-    expression_arithmetique TOKEN_SOUSTR expression_arithmetique {$$=$1-$3;strcpy(quad[ind][0],"-");
-        sprintf(quad[ind][1],"%ld",$1);
-        sprintf(quad[ind][2],"%ld",$3);
-        sprintf(quad[ind][3],"%ld",$$);       
-        ind++;};
+    expression_arithmetique TOKEN_SOUSTR expression_arithmetique {
+        char mm[20] = "T_sous";
+        $$=mm;
+        char cs1[20];
+        strcpy(cs1, $1); 
+        strcpy(quad[ind][0],"-");
+        strcpy(quad[ind][1],cs1);  
+        char cs2[20];
+        strcpy(cs2, $3); 
+        strcpy(quad[ind][2],cs2);
+        strcpy(quad[ind][3],mm);       
+        ind++;
+        };
 multiplication:	
-    expression_arithmetique TOKEN_MULT expression_arithmetique {$$=$1*$3;
-    strcpy(quad[ind][0],"*");
-        sprintf(quad[ind][1],"%ld",$1);
-        sprintf(quad[ind][2],"%ld",$3);
-        sprintf(quad[ind][3],"%ld",$$);       
-        ind++;};
+    expression_arithmetique TOKEN_MULT expression_arithmetique {
+        char mul[20] = "T_mult";
+        $$= mul;
+        char cm1[20];
+        strcpy(cm1, $1); 
+        strcpy(quad[ind][0],"*");
+        strcpy(quad[ind][1],cm1);
+        char cm2[20];
+        strcpy(cm2, $3); 
+        strcpy(quad[ind][2],cm2);
+        strcpy(quad[ind][3],mul);       
+        ind++;
+        };
 division:	
-    expression_arithmetique TOKEN_DIVIS expression_arithmetique { $$=$1/$3;
-    strcpy(quad[ind][0],"/");
-        sprintf(quad[ind][1],"%ld",$1);
-        sprintf(quad[ind][2],"%ld",$3);
-        sprintf(quad[ind][3],"%ld",$$);       
-        ind++;};
+    expression_arithmetique TOKEN_DIVIS expression_arithmetique {
+        char d[20] = "T_div";
+        $$=d;
+        char c1[20] = $1;
+        //strcpy(c1, $1); 
+        
+        strcpy(quad[ind][0],"/");
+        strcpy(quad[ind][1],c1);
+       char c2[20] = $3;
+        //strcpy(c2, $3); 
+        strcpy(quad[ind][2],c2);
+        strcpy(quad[ind][3],d);       
+        ind++;
+        };
 modulo:	
-    expression_arithmetique TOKEN_MOD expression_arithmetique { $$=$1%$3; 
-    strcpy(quad[ind][0],"%");
-        sprintf(quad[ind][1],"%ld",$1);
-        sprintf(quad[ind][2],"%ld",$3);
-        sprintf(quad[ind][3],"%ld",$$);       
-        ind++;};
+    expression_arithmetique TOKEN_MOD expression_arithmetique { 
+        char dol[20] = "T_mod";
+        $$=dol;
+        char c1[20];
+        strcpy(c1, $1); 
+        strcpy(quad[ind][0],"%");
+        strcpy(quad[ind][1],c1);
+        char c2[20];
+        strcpy(c2, $3); 
+        strcpy(quad[ind][2],c2);
+        strcpy(quad[ind][3],dol);       
+        ind++;
+        };
 
 ecriture:	TOKEN_WRITE variable_name FININSTR {}
         |
@@ -471,23 +562,24 @@ for :           TOKEN_FOR TOKEN_ID TOKEN_FROM TOKEN_NUMBER TOKEN_COMMA TOKEN_NUM
                 |
                 TOKEN_FOR TOKEN_ID TOKEN_IN TOKEN_ID TOKEN_BEGIN bloc_code END {
 
-                }
+                };
 conditionnel :  TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code END {
 
                 }
                 |TOKEN_IF ExpBool TOKEN_BEGIN  bloc_code TOKEN_ELSE  bloc_code END{
                     
-                }
+                };
 
 ExpBool:
     variable_name { 
         if ($1 != NULL) {
-            if ($1->type != ENTIER) {
-                fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: ENTIER \n", $1->nom, typeOf($1->type));
+            if ($1->type != BOOLEEN) {
+                fprintf(stderr, "Erreur de type : %s, son type est : %s, type attendu: BOOLEEN \n", $1->nom, typeOf($1->type));
                 exit(1);
             } 
             else {
-                $$= atoi($1->valeur);
+          
+             $$ = $1;
             }
         } else {
             fprintf(stderr, "symbol non définit");
@@ -520,7 +612,9 @@ comparable:
             exit(1);
         } 
         else {
-            $$= atoi($1->valeur);
+            char nom[20];
+               strcpy(nom, $1->nom);
+          $$ = nom;
         }
     } else {
         fprintf(stderr, "symbol non définit");
@@ -528,7 +622,7 @@ comparable:
     }
     }
     ;
-                              
+                            
                 
 %%
 
