@@ -1,23 +1,28 @@
-#PROJET COMP 20212022 SIL2
+# Mini-Compiler project
+A simple and elementary "pseudo"-compiler for a predefined programming language. Made using FLEX and Bison.
+The compiler does the following :
+- Lexical Parsing
+- Syntaxical Parsing
+- Semantic Parsing
+- Translation to quadruples
 
-##Equipe 
-	- Akli Hiba
-	- Benmoussat Mohammed Mouad
-	- Cherif Mounir
-	- Douaa Laib
-	- Zourane Rima
+The compiler does not generate any binary or executable.
 
-##Instructions
-	1.Traduire le fichier parser.l [flex parser.l]
-	2.Construire l'analyseur syntaxe avec Bison      [bison -d parser.y]
-3. Compiler avec gcc parser.tab.c lex.yy.c
-4.a Analyse en console Executer l'executable sans parametre              [.a.out]
-		afin de terminer l'écriture du programme il suffit d'inserer le caractère End Of File avec control+D sous Linux ou control+Z sous Windows.
-	4.b Analyse en fichier Faire passer le chemin de fichier comme argument  [.a.out code.txt]
-		e.g .a.out fichier_dans_le_meme_repertoire
-		e.g .a.out chemin_absolu_du_fichier
+## Collaborators :
+- Akli Hiba
+- Benmoussat Mohammed Mouad: hm_benmoussat@esi.dz
+- Cherif Mounir
+- Douaa Laib
+- Zourane Rima
+
+## Instructions
+1. Create the lexical parser using `flex parser.l`
+2. Compile the syntaxical parse using `bison -d parser.y`
+3. Compile everything using: `gcc parser.tab.c lex.yy.c`
+4. To make an analysis using the terminal run `./.a.out` whithout any parameters. Once you have entered your program type `ctrl+d` under linux to insert an EOF chracter (`ctrl+z` under windows).
+5. To analyse a program written in a source file, pass its path as an argument. Example:  `./a.out code.txt`
 
 
-P.S un fichier contenant un programme type est joint avec l'analyseur
+**Note**: There are many example files containing sample programs. Use them to understand the structure of the language.
 
-IMPORTANT : la sequence de fin de ligne du fichier d'entrée doit etre sous format LF (\n) et non CRLF
+**IMPORTANT** : The End Of Line character of the source file should be LF (\n) et not CRLF (\r\n).
